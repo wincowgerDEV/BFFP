@@ -8,6 +8,10 @@
 # User-specific files
 .Ruserdata
 
+
+# Desktop ini
+*.ini
+
 # Example code in package build process
 *-Ex.R
 
@@ -19,6 +23,7 @@
 
 # RStudio files
 .Rproj.user/
+*.Rproj
 
 # produced vignettes
 vignettes/*.html
