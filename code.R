@@ -52,6 +52,7 @@ joined <- safe_inner_join(brands, events %>%
 joined_clean <- joined %>%
     mutate(proportion = as.numeric(total_count) / as.numeric(event_total_count)) %>%
     filter(!is.na(proportion)) %>%
+    filter(!year %in% c(2001, 2012, 2017)) %>%
     inner_join(group_by(., submission_type, submission_id, year) %>%
                    summarise(sum = sum(proportion)) %>%
                    filter(sum == 1)) %>%
@@ -118,13 +119,46 @@ event_list <- joined_clean_3 %>%
 
 #skimr::skim(joined_clean_2)
 
+proportion_without_mean <- joined_clean_2 %>%
+    group_by(parent_company) %>%
+    summarize(total_company_sum = sum(company_sum)) %>%
+    ungroup() %>%
+    mutate(proportion_aggregated = total_company_sum/sum(total_company_sum))
+
+small_boot_parent_company_ag <- proportion_without_mean %>%
+    filter(proportion_aggregated > 0.01)
+
+sum(proportion_without_mean$proportion_aggregated)
+
 boot_parent_company <- joined_clean_3 %>%
     group_by(parent_company) %>% #need to add in zeros when parent company doesn't have any values. 
     summarize(high = BootMean(proportion)[2], mean = mean(proportion), low = BootMean(proportion)[1])
     
 small_boot_parent_company <- boot_parent_company %>%
-    filter(mean > 0.01)
+    slice_max(mean, n = 10)
+
+sum(boot_parent_company$mean)
     
 ggplot(small_boot_parent_company, aes(x = parent_company, y = mean)) +
     geom_point() +
-    geom_errorbar(aes(ymin=low, ymax=high)) 
+    geom_errorbar(aes(ymin=low, ymax=high)) + 
+    theme_classic()
+
+# Change through time for top 10. 
+
+top_change <-  joined_clean_3 %>%
+    filter(parent_company %in% small_boot_parent_company$parent_company) %>%
+    mutate(year = gsub(".{1,}_", "", event_id))
+
+
+boot_parent_company_top_year <- top_change %>%
+    group_by(parent_company, year) %>% #need to add in zeros when parent company doesn't have any values. 
+    summarize(high = BootMean(proportion)[2], mean = mean(proportion), low = BootMean(proportion)[1])
+
+
+ggplot(boot_parent_company_top_year, aes(x = year, y = mean, color = parent_company)) +
+    geom_point() +
+    geom_errorbar(aes(ymin=low, ymax=high)) +
+    scale_color_viridis_d() +
+    facet_wrap(.~parent_company) + 
+    theme_classic()
