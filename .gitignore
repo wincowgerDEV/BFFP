@@ -46,3 +46,4 @@ vignettes/*.pdf
 # Ignoring data until final ok
 *.csv
 *.txt
+*.xlsx
