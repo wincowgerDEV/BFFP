@@ -42,3 +42,7 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
+
+# Ignoring data until final ok
+*.csv
+*.txt
