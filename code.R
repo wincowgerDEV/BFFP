@@ -34,6 +34,14 @@ BootMean <- function(data) {
 
 #write.csv(event_scrub, "events_scrubbed.csv")
 
+#dat2018 <- read.csv("Forbes Global 2000 - 2018.csv") %>%
+#    mutate(year = 2018) %>%
+    
+dat2019 <- read.csv("Forbes Global 2000 - 2019.csv") %>%
+    mutate(parent_company = tolower(gsub("[[:punct:] ]+", "", Company)))
+#dat2020 <- read_xlsx("Forbes Global 2000  - 2020.xlsx")
+#dat2021 <- read_xlsx("Forbes Global 2000 - 2021.xlsx")
+
 events <- read.csv("events_scrubbed.csv", encoding = "UTF-8", #quote = "", comment.char = "\\",
                    row.names = NULL, 
                    stringsAsFactors = FALSE) 
@@ -161,4 +169,66 @@ ggplot(boot_parent_company_top_year, aes(x = year, y = mean, color = parent_comp
     geom_errorbar(aes(ymin=low, ymax=high)) +
     scale_color_viridis_d() +
     facet_wrap(.~parent_company) + 
+    theme_classic()
+
+
+#Profits analysis ----
+profit_join <- inner_join(boot_parent_company, dat2019)
+
+ggplot(profit_join, aes(x = mean, y = Profits, color = Sector)) +
+    geom_point() + 
+    scale_x_log10() + 
+    geom_smooth(method = "lm") + 
+    facet_wrap(.~Sector, scales = "free") +
+    theme_classic()
+
+ggplot(profit_join, aes(x = mean, y = Market.Value, color = Sector)) +
+    geom_point() + 
+    scale_x_log10() + 
+    geom_smooth(method = "lm") + 
+    facet_wrap(.~Sector, scales = "free") +
+    theme_classic()
+
+
+ggplot(profit_join, aes(x = mean, y = Revenue, color = Sector)) +
+    geom_point() + 
+    scale_x_log10() + 
+    geom_smooth(method = "lm") + 
+    facet_wrap(.~Sector, scales = "free") +
+    theme_classic()
+
+
+
+ggplot(profit_join, aes(x = mean, y = Assets, color = Sector)) +
+    geom_point() + 
+    scale_x_log10() + 
+    geom_smooth(method = "lm") + 
+    facet_wrap(.~Sector, scales = "free") +
+    theme_classic()
+
+
+
+ggplot(profit_join, aes(x = mean, y = Rank, color = Sector)) +
+    geom_point() + 
+    scale_x_log10() + 
+    geom_smooth(method = "lm") + 
+    facet_wrap(.~Sector, scales = "free") +
+    theme_classic()
+
+
+consumer_only_market.val <- profit_join %>%
+    filter(Sector == "Consumer Staples")
+
+#Pretty small amount, probably good for modeling that sector but not good for the overal 
+sum(consumer_only_market.val$mean)
+
+company_cumsum <- boot_parent_company %>%
+    arrange(desc(mean)) %>%
+    mutate(percent_smaller = 1- 1:nrow(.)/nrow(.)) %>%
+    mutate(rank = 1:nrow(.)) %>%
+    mutate(cumsum_mean = cumsum(mean))
+
+ggplot(company_cumsum) +
+    geom_line(aes(x = rank, y = cumsum_mean)) + 
+    scale_x_log10() + 
     theme_classic()
