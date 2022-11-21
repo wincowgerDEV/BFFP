@@ -1,3 +1,5 @@
+#Maybe we don't need this though if we can just use open refine to clear up some of the issues in the brand classes. 
+
 library(WikidataR)
 library(WikidataQueryServiceR)
 library(data.table)
