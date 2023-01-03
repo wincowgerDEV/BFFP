@@ -23,8 +23,26 @@ BootMean <- function(data) {
     return(quantile(mean, c(0.025,  0.975), na.rm = T))
 }
 
+#Brand Key
+brands <- read.csv("BrandsCombined_2022.csv")
+
+brand_key <- brands %>% 
+  mutate(brand_name = 
+           trimws(tolower(brand_name)),
+         parent_company = 
+           trimws(tolower(parent_company))) %>%
+  distinct(brand_name, parent_company)
+
+#test uniqueness. 
+length(unique(brand_key$brand_name))
+
+not_unique <- brand_key %>%
+  group_by(brand_name) %>%
+  summarise(count = n())
+  
+
 #Cleanup Events
-#events <- read.csv("BFFP Extract for Win - events.csv", encoding = "UTF-8", #quote = "", comment.char = "\\",
+#events <- read.csv("EventsCombined_2022.csv", encoding = "UTF-8", #quote = "", comment.char = "\\",
 #                   row.names = NULL, 
 #                   stringsAsFactors = FALSE)
 
