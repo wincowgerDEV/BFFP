@@ -95,33 +95,17 @@ nulls <- joined %>%
   mutate(brand_name = trimws(tolower(brand_name))) %>%
   mutate(item_description = trimws(tolower(item_description)))
 
-
 matched_nulls <- inner_join(nulls, good_key, by = "brand_name") %>%
-                  distinct(row_id, .keep_all = T) %>%
-                  mutate()
+                  distinct(row_id, .keep_all = T)
 
-#Phonetic
-good_key_ph <- joined %>%
-  distinct(brand_name, parent_company_orig, item_description, id, name) %>%
-  filter(name != "") %>%
-  mutate(brand_name_1 = brand_name) %>%
-  mutate(item_description_1 = item_description) %>%
-  mutate(brand_name = phonetic(brand_name)) %>%
-  mutate(item_description = phonetic(item_description))
-
-nulls_ph <- joined %>%
-  filter(parent_company_orig == "NULL") %>%
-  select(brand_name, row_id, item_description) %>%
-  mutate(brand_name_2 = brand_name) %>%
-  mutate(item_description_2 = item_description) %>%
-  mutate(brand_name = phonetic(brand_name)) %>%
-  mutate(item_description = phonetic(item_description)) 
-
-matched_nulls <- inner_join(nulls_ph, good_key_ph) %>%
-  distinct(row_id, .keep_all = T)
-
+matched_rows <- matched_nulls %>%
+  select(row_id, id, name) %>%
+  rename(null_id = id, null_name = name)
 
 joined_clean <- joined %>%
+    left_join(matched_rows) %>%
+    mutate(id = ifelse(!is.na(null_id), null_id, id)) %>%
+    mutate(name = ifelse(!is.na(null_name), null_name, name)) %>%
     mutate(proportion = as.numeric(total_count) / as.numeric(event_total_count)) %>%
     filter(!is.na(proportion)) %>%
     filter(!year %in% c(2001, 2012, 2017)) %>%
@@ -129,18 +113,20 @@ joined_clean <- joined %>%
                    summarise(sum = sum(proportion)) %>%
                    filter(sum == 1)) %>%
     mutate(event_id = paste0(submission_type, "_", submission_id, "_", year)) %>%
-    mutate(parent_company = ifelse(parent_company_orig == "NULL", brand_name, parent_company)) %>% #Use brand name if parent company is null.
-    mutate(parent_company = tolower(gsub("[[:punct:] ]+", "", parent_company))) 
-
+    mutate(name = ifelse(name == "" & parent_company_orig == "NULL", brand_name, name)) %>%
+    mutate(name = ifelse(name == "" & parent_company == "Unbranded", "Unbranded", name)) %>%
+    mutate(name = ifelse(name == "", parent_company_orig, name)) %>%
+    select(-file_name)
 
 #Unbranded metrics ----
 unbranded <- joined_clean %>%
-    filter(parent_company == "unbranded")
+    filter(name == "Unbranded")
 
 unbranded_clean <- unbranded %>%
-                        group_by(event_id, parent_company) %>%
+                        group_by(event_id, name) %>%
                         summarize(proportion = sum(proportion)) %>%
                         ungroup()
+
 mean(unbranded_clean$proportion)
 BootMean(unbranded_clean$proportion)
 hist(unbranded_clean$proportion)
@@ -159,12 +145,11 @@ hist(unbranded_clean$proportion)
 
 #Analyze global proportions. ----
 unique(joined_clean$event_id)
-unique(joined_clean$parent_company)
-
+unique(joined_clean$name)
 
 joined_clean_2 <- joined_clean %>%
-                    filter(parent_company != "unbranded") %>%
-                    group_by(event_id, parent_company) %>%
+                    filter(name != "Unbranded") %>%
+                    group_by(event_id, name) %>%
                     summarise(company_sum = sum(sum)) %>%
                     ungroup() %>%
                     group_by(event_id) %>%
@@ -172,10 +157,10 @@ joined_clean_2 <- joined_clean %>%
                     ungroup() %>%
                     mutate(proportion = company_sum/event_total_count_no_unbrand)
     
-proportion_grid <- expand.grid(event_id = unique(joined_clean_2$event_id), parent_company = unique(joined_clean_2$parent_company))
+proportion_grid <- expand.grid(event_id = unique(joined_clean_2$event_id), 
+                               name = unique(joined_clean_2$name))
 
-    
- joined_clean_3 <- right_join(joined_clean_2, proportion_grid) %>%
+joined_clean_3 <- right_join(joined_clean_2, proportion_grid) %>%
     mutate(proportion = ifelse(is.na(proportion), 0, proportion)) %>%
     ungroup()
     
@@ -190,26 +175,26 @@ event_list <- joined_clean_3 %>%
 #skimr::skim(joined_clean_2)
 
 proportion_without_mean <- joined_clean_2 %>%
-    group_by(parent_company) %>%
+    group_by(name) %>%
     summarize(total_company_sum = sum(company_sum)) %>%
     ungroup() %>%
     mutate(proportion_aggregated = total_company_sum/sum(total_company_sum))
 
-small_boot_parent_company_ag <- proportion_without_mean %>%
+small_boot_name_ag <- proportion_without_mean %>%
     filter(proportion_aggregated > 0.01)
 
 sum(proportion_without_mean$proportion_aggregated)
 
-boot_parent_company <- joined_clean_3 %>%
-    group_by(parent_company) %>% #need to add in zeros when parent company doesn't have any values. 
+boot_name <- joined_clean_3 %>%
+    group_by(name) %>% 
     summarize(high = BootMean(proportion)[2], mean = mean(proportion), low = BootMean(proportion)[1])
     
-small_boot_parent_company <- boot_parent_company %>%
+small_boot_name <- boot_name %>%
     slice_max(mean, n = 10)
 
-sum(boot_parent_company$mean)
+sum(boot_name$mean)
     
-ggplot(small_boot_parent_company, aes(x = parent_company, y = mean)) +
+ggplot(small_boot_name, aes(x = name, y = mean)) +
     geom_point() +
     geom_errorbar(aes(ymin=low, ymax=high)) + 
     theme_classic()
@@ -217,25 +202,25 @@ ggplot(small_boot_parent_company, aes(x = parent_company, y = mean)) +
 # Change through time for top 10. 
 
 top_change <-  joined_clean_3 %>%
-    filter(parent_company %in% small_boot_parent_company$parent_company) %>%
+    filter(name %in% small_boot_name$name) %>%
     mutate(year = gsub(".{1,}_", "", event_id))
 
 
-boot_parent_company_top_year <- top_change %>%
-    group_by(parent_company, year) %>% #need to add in zeros when parent company doesn't have any values. 
+boot_name_top_year <- top_change %>%
+    group_by(name, year) %>% 
     summarize(high = BootMean(proportion)[2], mean = mean(proportion), low = BootMean(proportion)[1])
 
 
-ggplot(boot_parent_company_top_year, aes(x = year, y = mean, color = parent_company)) +
+ggplot(boot_name_top_year, aes(x = year, y = mean, color = name)) +
     geom_point() +
     geom_errorbar(aes(ymin=low, ymax=high)) +
     scale_color_viridis_d() +
-    facet_wrap(.~parent_company) + 
+    facet_wrap(.~name) + 
     theme_classic()
 
 
 #Profits analysis ----
-profit_join <- inner_join(boot_parent_company, dat2019)
+profit_join <- inner_join(boot_name, dat2019)
 
 ggplot(profit_join, aes(x = mean, y = Profits, color = Sector)) +
     geom_point() + 
@@ -284,7 +269,7 @@ consumer_only_market.val <- profit_join %>%
 #Pretty small amount, probably good for modeling that sector but not good for the overal 
 sum(consumer_only_market.val$mean)
 
-company_cumsum <- boot_parent_company %>%
+company_cumsum <- boot_name %>%
     arrange(desc(mean)) %>%
     mutate(percent_smaller = 1- 1:nrow(.)/nrow(.)) %>%
     mutate(rank = 1:nrow(.)) %>%
