@@ -116,10 +116,16 @@ joined_clean <- joined %>%
     mutate(name = ifelse(name == "" & parent_company_orig == "NULL", brand_name, name)) %>%
     mutate(name = ifelse(name == "" & parent_company == "Unbranded", "Unbranded", name)) %>%
     mutate(name = ifelse(name == "", parent_company_orig, name)) %>%
-    select(-file_name)
+    select(-file_name) 
+
+raw_meta_search <- joined_clean %>%
+  select(brand_name, parent_company_orig, item_description, type_product, type_material, type_of_audit, country, year, name, id) %>%
+  distinct() %>%
+  filter(id == "" & name != "Unbranded")
 
 #Unbranded metrics ----
 unbranded <- joined_clean %>%
+    filter(event_total_count > 2) %>%
     filter(name == "Unbranded")
 
 unbranded_clean <- unbranded %>%
@@ -149,13 +155,14 @@ unique(joined_clean$name)
 
 joined_clean_2 <- joined_clean %>%
                     filter(name != "Unbranded") %>%
-                    group_by(event_id, name) %>%
+                    group_by(event_id, name, id, city, province, country, year, specifics_of_audit) %>%
                     summarise(company_sum = sum(sum)) %>%
                     ungroup() %>%
                     group_by(event_id) %>%
                     mutate(event_total_count_no_unbrand = sum(company_sum)) %>%
                     ungroup() %>%
-                    mutate(proportion = company_sum/event_total_count_no_unbrand)
+                    mutate(proportion = company_sum/event_total_count_no_unbrand) %>%
+                    filter(event_total_count_no_unbrand > 2)
     
 proportion_grid <- expand.grid(event_id = unique(joined_clean_2$event_id), 
                                name = unique(joined_clean_2$name))
@@ -168,6 +175,24 @@ event_list <- joined_clean_3 %>%
     group_by(event_id) %>%
     summarize(sum = sum(proportion))
 
+#Counts are log normally distributed meaning a few of the larger surveys could gobble up the smaller ones. 
+#Definitely a count bias per country. 
+joined_clean_2 %>%
+  distinct(event_id, event_total_count_no_unbrand, country) %>%
+  group_by(country) %>%
+  summarise(mean_count = mean(event_total_count_no_unbrand)) %>%
+  ggplot() +
+    geom_point(aes(x = mean_count, y = reorder(country, mean_count))) +
+    scale_x_log10() 
+
+#summary stats, some countries have more events than others which would rate them lower. 
+  joined_clean_3 %>%
+            distinct(event_id, country) %>%
+            group_by(country) %>%
+            summarise(count = n()) %>%
+        ggplot() +
+        geom_point(aes(x = count, y = reorder(country, count))) +
+        scale_x_log10() 
 
 #nrow(distinct(joined_clean, event_id, brand_name))
 #nrow(distinct(events, submission_type, submission_id, year))
@@ -190,14 +215,15 @@ boot_name <- joined_clean_3 %>%
     summarize(high = BootMean(proportion)[2], mean = mean(proportion), low = BootMean(proportion)[1])
     
 small_boot_name <- boot_name %>%
-    slice_max(mean, n = 10)
+    slice_max(mean, n = 20)
 
 sum(boot_name$mean)
     
-ggplot(small_boot_name, aes(x = name, y = mean)) +
+ggplot(small_boot_name, aes(y = reorder(name, mean), x = mean)) +
     geom_point() +
-    geom_errorbar(aes(ymin=low, ymax=high)) + 
-    theme_classic()
+    geom_errorbar(aes(xmin=low, xmax=high)) + 
+    theme_classic(base_size = 20) +
+    labs(x = "Proportion", y = "Company")
 
 # Change through time for top 10. 
 
