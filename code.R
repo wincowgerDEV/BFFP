@@ -8,6 +8,7 @@ library(readxl)
 library(stringr)
 library(ggplot2)
 library(stringdist)
+library(fuzzyjoin)
 
 #Functions ----
 BootMean <- function(data) {
@@ -66,15 +67,60 @@ events <- read.csv("events_scrubbed.csv", encoding = "UTF-8", #quote = "", comme
 
 skim_events <- skimr::skim(events)
 #brands <- read_xlsx("brands_2.xlsx")
-brands <- read.csv("BFFP Extract for Win - brands.csv", encoding = "UTF-8", #quote = "\\",#quote = "", 
+brands <- read.csv("BrandsCombined-2022_Refined.csv", encoding = "UTF-8", #quote = "\\",#quote = "", 
                # row.names = NULL, 
                 stringsAsFactors = FALSE)
 
-joined <- safe_inner_join(brands, events %>% 
-                              rename(event_total_count = total_count) %>%
-                              filter(type_of_audit == "Outdoor"), check = "~uymn")
+brands_plus <- read.csv("BrandsCombined_2022.csv", 
+                        encoding = "UTF-8", 
+                        stringsAsFactors = FALSE) %>%
+  select(row_id, parent_company) %>%
+  rename(parent_company_orig = parent_company) %>%
+  left_join(brands)
 
-    
+joined <- safe_inner_join(brands_plus, events %>% 
+                              rename(event_total_count = total_count) %>%
+                              filter(type_of_audit == "Outdoor"), check = "~uymn") 
+
+#Fix nulls
+good_key <- joined %>%
+  distinct(brand_name, parent_company_orig, item_description, id, name) %>%
+  filter(name != "") %>%
+  mutate(brand_name = trimws(tolower(brand_name))) %>%
+  mutate(item_description = trimws(tolower(item_description)))
+
+nulls <- joined %>%
+  filter(parent_company_orig == "NULL") %>%
+  select(brand_name, row_id, item_description) %>%
+  mutate(brand_name = trimws(tolower(brand_name))) %>%
+  mutate(item_description = trimws(tolower(item_description)))
+
+
+matched_nulls <- inner_join(nulls, good_key, by = "brand_name") %>%
+                  distinct(row_id, .keep_all = T) %>%
+                  mutate()
+
+#Phonetic
+good_key_ph <- joined %>%
+  distinct(brand_name, parent_company_orig, item_description, id, name) %>%
+  filter(name != "") %>%
+  mutate(brand_name_1 = brand_name) %>%
+  mutate(item_description_1 = item_description) %>%
+  mutate(brand_name = phonetic(brand_name)) %>%
+  mutate(item_description = phonetic(item_description))
+
+nulls_ph <- joined %>%
+  filter(parent_company_orig == "NULL") %>%
+  select(brand_name, row_id, item_description) %>%
+  mutate(brand_name_2 = brand_name) %>%
+  mutate(item_description_2 = item_description) %>%
+  mutate(brand_name = phonetic(brand_name)) %>%
+  mutate(item_description = phonetic(item_description)) 
+
+matched_nulls <- inner_join(nulls_ph, good_key_ph) %>%
+  distinct(row_id, .keep_all = T)
+
+
 joined_clean <- joined %>%
     mutate(proportion = as.numeric(total_count) / as.numeric(event_total_count)) %>%
     filter(!is.na(proportion)) %>%
@@ -83,11 +129,9 @@ joined_clean <- joined %>%
                    summarise(sum = sum(proportion)) %>%
                    filter(sum == 1)) %>%
     mutate(event_id = paste0(submission_type, "_", submission_id, "_", year)) %>%
-    mutate(parent_company = ifelse(parent_company == "NULL", brand_name, parent_company)) %>% #Use brand name if parent company is null.
+    mutate(parent_company = ifelse(parent_company_orig == "NULL", brand_name, parent_company)) %>% #Use brand name if parent company is null.
     mutate(parent_company = tolower(gsub("[[:punct:] ]+", "", parent_company))) 
 
-nulls <- joined_clean %>%
-    filter(parent_company == "null")
 
 #Unbranded metrics ----
 unbranded <- joined_clean %>%
