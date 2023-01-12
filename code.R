@@ -81,6 +81,7 @@ brands_plus <- read.csv("BrandsCombined_2022.csv",
 joined <- safe_inner_join(brands_plus, events %>% 
                               rename(event_total_count = total_count) %>%
                               filter(type_of_audit == "Outdoor"), check = "~uymn") 
+table(events$type_of_audit)
 
 #Fix nulls
 good_key <- joined %>%
@@ -98,6 +99,9 @@ nulls <- joined %>%
 matched_nulls <- inner_join(nulls, good_key, by = "brand_name") %>%
                   distinct(row_id, .keep_all = T)
 
+unmatched_nulls <- anti_join(nulls, matched_nulls)
+  
+  
 matched_rows <- matched_nulls %>%
   select(row_id, id, name) %>%
   rename(null_id = id, null_name = name)
@@ -117,6 +121,10 @@ joined_clean <- joined %>%
     mutate(name = ifelse(name == "" & parent_company == "Unbranded", "Unbranded", name)) %>%
     mutate(name = ifelse(name == "", parent_company_orig, name)) %>%
     select(-file_name) 
+
+str(joined_clean)
+
+write.csv(joined_clean, "joined_clean.csv")
 
 raw_meta_search <- joined_clean %>%
   select(brand_name, parent_company_orig, item_description, type_product, type_material, type_of_audit, country, year, name, id) %>%
@@ -171,6 +179,8 @@ joined_clean_3 <- right_join(joined_clean_2, proportion_grid) %>%
     mutate(proportion = ifelse(is.na(proportion), 0, proportion)) %>%
     ungroup()
     
+str(joined_clean_3)
+
 event_list <- joined_clean_3 %>%
     group_by(event_id) %>%
     summarize(sum = sum(proportion))
@@ -184,6 +194,15 @@ joined_clean_2 %>%
   ggplot() +
     geom_point(aes(x = mean_count, y = reorder(country, mean_count))) +
     scale_x_log10() 
+
+#Definitely a count bias per year. 
+joined_clean_2 %>%
+  distinct(event_id, event_total_count_no_unbrand, year) %>%
+  group_by(year) %>%
+  summarise(mean_count = mean(event_total_count_no_unbrand)) %>%
+  ggplot() +
+  geom_point(aes(x = mean_count, y = reorder(year, mean_count))) +
+  scale_x_log10() 
 
 #summary stats, some countries have more events than others which would rate them lower. 
   joined_clean_3 %>%
