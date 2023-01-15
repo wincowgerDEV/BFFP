@@ -84,11 +84,16 @@ joined <- safe_inner_join(brands_plus, events %>%
 table(events$type_of_audit)
 
 #Fix nulls
+
+
+null_leftover <- read.csv("null_leftovers.csv") %>%
+  filter(id != "")
+
 good_key <- joined %>%
-  distinct(brand_name, parent_company_orig, item_description, id, name) %>%
+  bind_rows(null_leftover) %>%
+  distinct(brand_name, id, name) %>%
   filter(name != "") %>%
-  mutate(brand_name = trimws(tolower(brand_name))) %>%
-  mutate(item_description = trimws(tolower(item_description)))
+  mutate(brand_name = trimws(tolower(brand_name)))
 
 nulls <- joined %>%
   filter(parent_company_orig == "NULL") %>%
@@ -100,8 +105,7 @@ matched_nulls <- inner_join(nulls, good_key, by = "brand_name") %>%
                   distinct(row_id, .keep_all = T)
 
 unmatched_nulls <- anti_join(nulls, matched_nulls)
-  
-  
+
 matched_rows <- matched_nulls %>%
   select(row_id, id, name) %>%
   rename(null_id = id, null_name = name)
@@ -120,7 +124,24 @@ joined_clean <- joined %>%
     mutate(name = ifelse(name == "" & parent_company_orig == "NULL", brand_name, name)) %>%
     mutate(name = ifelse(name == "" & parent_company == "Unbranded", "Unbranded", name)) %>%
     mutate(name = ifelse(name == "", parent_company_orig, name)) %>%
-    select(-file_name) 
+    select(-file_name)  %>%
+    filter(event_total_count > 2)
+
+null_leftover <- inner_join(unmatched_nulls, joined_clean)
+sum(as.numeric(null_leftover$total_count))/sum(as.numeric(joined_clean$total_count))
+length(unique(joined_clean$brand_name))
+length(unique(null_leftover$brand_name))
+
+write.csv(null_leftover, "null_leftover.csv")
+
+key_for_review <- joined_clean %>%
+  group_by(brand_name, name, id) %>%
+  summarise(sum = sum(as.numeric(total_count))) %>%
+  ungroup() %>%
+  filter(name != "Unbranded")
+
+#Proportion with ids
+sum(key_for_review$sum[key_for_review$id != ""])/sum(key_for_review$sum)
 
 str(joined_clean)
 
@@ -133,7 +154,6 @@ raw_meta_search <- joined_clean %>%
 
 #Unbranded metrics ----
 unbranded <- joined_clean %>%
-    filter(event_total_count > 2) %>%
     filter(name == "Unbranded")
 
 unbranded_clean <- unbranded %>%
@@ -169,9 +189,8 @@ joined_clean_2 <- joined_clean %>%
                     group_by(event_id) %>%
                     mutate(event_total_count_no_unbrand = sum(company_sum)) %>%
                     ungroup() %>%
-                    mutate(proportion = company_sum/event_total_count_no_unbrand) %>%
-                    filter(event_total_count_no_unbrand > 2)
-    
+                    mutate(proportion = company_sum/event_total_count_no_unbrand) 
+
 proportion_grid <- expand.grid(event_id = unique(joined_clean_2$event_id), 
                                name = unique(joined_clean_2$name))
 
