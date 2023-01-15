@@ -41,6 +41,37 @@ not_unique <- brand_key %>%
   group_by(brand_name) %>%
   summarise(count = n())
   
+brand_to_parent <- read.csv("key-for-review_2.csv")
+
+parent_id <- brand_to_parent %>%
+              distinct(new_name, id) %>%
+              filter(id != "") %>%
+              distinct(new_name, .keep_all = T)
+
+length(unique(parent_id$new_name))
+
+brand_to_parent_2 <- brand_to_parent %>%
+  left_join(parent_id, by = "new_name") %>%
+  distinct(brand_name, new_name, id.y)
+
+length(unique(brand_to_parent_2$brand_name))
+
+not_unique <- brand_to_parent_2 %>%
+  group_by(brand_name) %>%
+  summarise(count = n()) %>%
+  filter(count > 1) %>%
+  inner_join(brand_to_parent_2)
+
+has_id <- not_unique %>%
+  filter(!is.na(id.y))
+
+has_conflicting_ids <- has_id %>%
+  group_by(brand_name) %>%
+  summarise(count = n()) %>%
+  filter(count > 1)
+
+write.csv(not_unique, "not_unique_brands.csv")
+
 
 #Cleanup Events
 #events <- read.csv("EventsCombined_2022.csv", encoding = "UTF-8", #quote = "", comment.char = "\\",
@@ -139,6 +170,8 @@ key_for_review <- joined_clean %>%
   summarise(sum = sum(as.numeric(total_count))) %>%
   ungroup() %>%
   filter(name != "Unbranded")
+
+write.csv(key_for_review, "key_for_review.csv")
 
 #Proportion with ids
 sum(key_for_review$sum[key_for_review$id != ""])/sum(key_for_review$sum)
