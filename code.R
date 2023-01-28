@@ -24,54 +24,6 @@ BootMean <- function(data) {
     return(quantile(mean, c(0.025,  0.975), na.rm = T))
 }
 
-#Brand Key
-brands <- read.csv("BrandsCombined_2022.csv")
-
-brand_key <- brands %>% 
-  mutate(brand_name = 
-           trimws(tolower(brand_name)),
-         parent_company = 
-           trimws(tolower(parent_company))) %>%
-  distinct(brand_name, parent_company)
-
-#test uniqueness. 
-length(unique(brand_key$brand_name))
-
-not_unique <- brand_key %>%
-  group_by(brand_name) %>%
-  summarise(count = n())
-  
-brand_to_parent <- read.csv("key-for-review_2.csv")
-
-parent_id <- brand_to_parent %>%
-              distinct(new_name, id) %>%
-              filter(id != "") %>%
-              distinct(new_name, .keep_all = T)
-
-length(unique(parent_id$new_name))
-
-brand_to_parent_2 <- brand_to_parent %>%
-  left_join(parent_id, by = "new_name") %>%
-  distinct(brand_name, new_name, id.y)
-
-length(unique(brand_to_parent_2$brand_name))
-
-not_unique <- brand_to_parent_2 %>%
-  group_by(brand_name) %>%
-  summarise(count = n()) %>%
-  filter(count > 1) %>%
-  inner_join(brand_to_parent_2)
-
-has_id <- not_unique %>%
-  filter(!is.na(id.y))
-
-has_conflicting_ids <- has_id %>%
-  group_by(brand_name) %>%
-  summarise(count = n()) %>%
-  filter(count > 1)
-
-write.csv(not_unique, "not_unique_brands.csv")
-
 
 #Cleanup Events
 #events <- read.csv("EventsCombined_2022.csv", encoding = "UTF-8", #quote = "", comment.char = "\\",
@@ -98,53 +50,26 @@ events <- read.csv("events_scrubbed.csv", encoding = "UTF-8", #quote = "", comme
 
 skim_events <- skimr::skim(events)
 #brands <- read_xlsx("brands_2.xlsx")
-brands <- read.csv("BrandsCombined-2022_Refined.csv", encoding = "UTF-8", #quote = "\\",#quote = "", 
-               # row.names = NULL, 
-                stringsAsFactors = FALSE)
 
 brands_plus <- read.csv("BrandsCombined_2022.csv", 
                         encoding = "UTF-8", 
                         stringsAsFactors = FALSE) %>%
-  select(row_id, parent_company) %>%
-  rename(parent_company_orig = parent_company) %>%
-  left_join(brands)
+                mutate(brand_name = trimws(tolower(brand_name))) %>%
+                select(row_id, submission_type, submission_id, year, brand_name, parent_company, item_description, type_product, type_material, layer, total_count)
 
 joined <- safe_inner_join(brands_plus, events %>% 
                               rename(event_total_count = total_count) %>%
                               filter(type_of_audit == "Outdoor"), check = "~uymn") 
-table(events$type_of_audit)
 
-#Fix nulls
+brand_to_parent <- read.csv("cleanup_brand_to_parent.csv") %>%
+                      select(-X)
 
-
-null_leftover <- read.csv("null_leftovers.csv") %>%
-  filter(id != "")
-
-good_key <- joined %>%
-  bind_rows(null_leftover) %>%
-  distinct(brand_name, id, name) %>%
-  filter(name != "") %>%
-  mutate(brand_name = trimws(tolower(brand_name)))
-
-nulls <- joined %>%
-  filter(parent_company_orig == "NULL") %>%
-  select(brand_name, row_id, item_description) %>%
-  mutate(brand_name = trimws(tolower(brand_name))) %>%
-  mutate(item_description = trimws(tolower(item_description)))
-
-matched_nulls <- inner_join(nulls, good_key, by = "brand_name") %>%
-                  distinct(row_id, .keep_all = T)
-
-unmatched_nulls <- anti_join(nulls, matched_nulls)
-
-matched_rows <- matched_nulls %>%
-  select(row_id, id, name) %>%
-  rename(null_id = id, null_name = name)
+unjoined <- anti_join(brand_to_parent, joined, by = "brand_name")
 
 joined_clean <- joined %>%
-    left_join(matched_rows) %>%
-    mutate(id = ifelse(!is.na(null_id), null_id, id)) %>%
-    mutate(name = ifelse(!is.na(null_name), null_name, name)) %>%
+    left_join(brand_to_parent %>% select(brand_name, parent_company_name, id)) %>%
+    filter(as.numeric(event_total_count) > 2) %>%
+    filter(as.numeric(total_count) > 0) %>%
     mutate(proportion = as.numeric(total_count) / as.numeric(event_total_count)) %>%
     filter(!is.na(proportion)) %>%
     filter(!year %in% c(2001, 2012, 2017)) %>%
@@ -152,29 +77,10 @@ joined_clean <- joined %>%
                    summarise(sum = sum(proportion)) %>%
                    filter(sum == 1)) %>%
     mutate(event_id = paste0(submission_type, "_", submission_id, "_", year)) %>%
-    mutate(name = ifelse(name == "" & parent_company_orig == "NULL", brand_name, name)) %>%
-    mutate(name = ifelse(name == "" & parent_company == "Unbranded", "Unbranded", name)) %>%
-    mutate(name = ifelse(name == "", parent_company_orig, name)) %>%
-    select(-file_name)  %>%
-    filter(event_total_count > 2)
-
-null_leftover <- inner_join(unmatched_nulls, joined_clean)
-sum(as.numeric(null_leftover$total_count))/sum(as.numeric(joined_clean$total_count))
-length(unique(joined_clean$brand_name))
-length(unique(null_leftover$brand_name))
-
-write.csv(null_leftover, "null_leftover.csv")
-
-key_for_review <- joined_clean %>%
-  group_by(brand_name, name, id) %>%
-  summarise(sum = sum(as.numeric(total_count))) %>%
-  ungroup() %>%
-  filter(name != "Unbranded")
-
-write.csv(key_for_review, "key_for_review.csv")
+    select(-file_name) 
 
 #Proportion with ids
-sum(key_for_review$sum[key_for_review$id != ""])/sum(key_for_review$sum)
+sum(as.numeric(joined_clean$total_count)[joined_clean$id != ""], na.rm = T)/sum(as.numeric(joined_clean$total_count), na.rm = T)
 
 str(joined_clean)
 
@@ -376,3 +282,97 @@ ggplot(company_cumsum) +
     geom_line(aes(x = rank, y = cumsum_mean)) + 
     scale_x_log10() + 
     theme_classic()
+
+
+
+
+#Brand Key Creation -----
+brands <- read.csv("BrandsCombined_2022.csv")
+
+brand_key <- brands %>% 
+  mutate(brand_name = 
+           trimws(tolower(brand_name)),
+         parent_company = 
+           trimws(tolower(parent_company))) %>%
+  distinct(brand_name, parent_company)
+
+#test uniqueness. 
+length(unique(brand_key$brand_name))
+
+not_unique <- brand_key %>%
+  group_by(brand_name) %>%
+  summarise(count = n())
+
+brand_to_parent <- read.csv("key-for-review_2.csv")
+
+cleanup_brand_to_parent <- brand_to_parent %>%
+  group_by(brand_name) %>%
+  summarise(parent_company_name = toString(new_name), 
+            id = toString(id), 
+            sum = sum(sum)) %>%
+  left_join(joined_clean %>% select(brand_name, country)) %>%
+  group_by(brand_name, parent_company_name, id, sum) %>%
+  summarise(country = toString(country))
+
+sum(cleanup_brand_to_parent$sum[cleanup_brand_to_parent$id != ""])/sum(cleanup_brand_to_parent$sum)
+
+write.csv(cleanup_brand_to_parent, "cleanup_brand_to_parent.csv")
+
+parent_id <- brand_to_parent %>%
+  distinct(new_name, id) %>%
+  filter(id != "") %>%
+  distinct(new_name, .keep_all = T)
+
+length(unique(parent_id$new_name))
+
+brand_to_parent_2 <- brand_to_parent %>%
+  left_join(parent_id, by = "new_name") %>%
+  distinct(brand_name, new_name, id.y)
+
+#Test total accounted for. 
+length(unique(brand_to_parent_2$brand_name))
+
+sum(brand_to_parent_2$count)
+
+not_unique <- brand_to_parent_2 %>%
+  group_by(brand_name) %>%
+  summarise(count = n()) %>%
+  filter(count > 1) %>%
+  inner_join(brand_to_parent_2)
+
+has_id <- not_unique %>%
+  filter(!is.na(id.y))
+
+has_conflicting_ids <- has_id %>%
+  group_by(brand_name) %>%
+  summarise(count = n()) %>%
+  filter(count > 1) %>%
+  inner_join(has_id)
+
+#Need to fix this. 
+write.csv(has_conflicting_ids, "conflicting_ids.csv")
+
+null_leftover <- read.csv("null_leftovers.csv") %>%
+  filter(id != "")
+
+good_key <- joined %>%
+  bind_rows(null_leftover) %>%
+  distinct(brand_name, id, name) %>%
+  filter(name != "") %>%
+  mutate(brand_name = trimws(tolower(brand_name)))
+
+nulls <- joined %>%
+  filter(parent_company_orig == "NULL") %>%
+  select(brand_name, row_id, item_description) %>%
+  mutate(brand_name = trimws(tolower(brand_name))) %>%
+  mutate(item_description = trimws(tolower(item_description)))
+
+matched_nulls <- inner_join(nulls, good_key, by = "brand_name") %>%
+  distinct(row_id, .keep_all = T)
+
+unmatched_nulls <- anti_join(nulls, matched_nulls)
+
+matched_rows <- matched_nulls %>%
+  select(row_id, id, name) %>%
+  rename(null_id = id, null_name = name)
+
