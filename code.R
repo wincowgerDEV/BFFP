@@ -54,8 +54,9 @@ skim_events <- skimr::skim(events)
 brands_plus <- read.csv("BrandsCombined_2022.csv", 
                         encoding = "UTF-8", 
                         stringsAsFactors = FALSE) %>%
-                mutate(brand_name = trimws(tolower(brand_name))) %>%
-                select(row_id, submission_type, submission_id, year, brand_name, parent_company, item_description, type_product, type_material, layer, total_count)
+  mutate(brand_name = trimws(tolower(brand_name))) %>%
+  select(row_id, submission_type, submission_id, year, brand_name, parent_company, item_description, type_product, type_material, layer, total_count)
+
 
 joined <- safe_inner_join(brands_plus, events %>% 
                               rename(event_total_count = total_count) %>%
