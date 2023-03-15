@@ -9,6 +9,8 @@ library(stringr)
 library(ggplot2)
 library(stringdist)
 library(fuzzyjoin)
+library(WikidataR)
+
 
 #Functions ----
 BootMean <- function(data) {
@@ -87,18 +89,36 @@ str(joined_clean)
 
 write.csv(joined_clean, "joined_clean.csv")
 
-raw_meta_search <- joined_clean %>%
-  select(brand_name, parent_company_orig, item_description, type_product, type_material, type_of_audit, country, year, name, id) %>%
-  distinct() %>%
-  filter(id == "" & name != "Unbranded")
+#Data postprocessing workflow ----
+joined_clean <- read.csv("joined_clean.csv")
 
-#Unbranded metrics ----
-unbranded <- joined_clean %>%
-    filter(name == "Unbranded")
+brands_validated <- read.csv("brands_validated.csv") %>%
+  select(brand_name, parent_company_name, id, validated) %>%
+  distinct(brand_name, .keep_all = T) %>%
+  right_join(joined_clean %>% select(-id) %>% rename(parent_company_name_old = parent_company_name)) %>%
+  mutate(validated = ifelse(is.na(parent_company_name) & parent_company == "Unbranded", TRUE, validated)) %>%
+  mutate(parent_company_name = ifelse(is.na(parent_company_name) & parent_company == "Unbranded", "unbranded", parent_company_name)) %>%
+  mutate(parent_company_name = ifelse(is.na(parent_company_name), parent_company, parent_company_name)) %>%
+  mutate(validated = ifelse(is.na(validated), FALSE, validated)) %>%
+  mutate(parent_company_name = ifelse(parent_company_name == "NULL", brand_name, parent_company_name)) %>%
+  mutate(parent_company_name = trimws(tolower(parent_company_name))) %>%
+  mutate(id = ifelse(id == "" | is.na(id), parent_company_name, id))
+  
+raw_processed_data <- brands_validated %>%
+  select(-X.1, -row_id, -X, -parent_company_name_old)
+
+fwrite(raw_processed_data, "raw_processed_data.csv")
+
+# Data Analysis ----
+raw_processed_data <- fread("raw_processed_data.csv")
+
+## Unbranded metrics ----
+unbranded <- raw_processed_data %>%
+    filter(id == "unbranded")
 
 unbranded_clean <- unbranded %>%
-                        group_by(event_id, name) %>%
-                        summarize(proportion = sum(proportion)) %>%
+                        dplyr::group_by(event_id, id) %>%
+                        dplyr::summarize(proportion = sum(proportion)) %>%
                         ungroup()
 
 mean(unbranded_clean$proportion)
