@@ -26,6 +26,20 @@ BootMean <- function(data) {
     return(quantile(mean, c(0.025,  0.975), na.rm = T))
 }
 
+BootMean_prob <- function(data, prob) {
+  B <- 100 #Change to 10k for full run
+  mean <- numeric(B)
+  n = length(data)
+  
+  set.seed(3437)
+  for (i in 1:B) {
+    boot <- sample(1:n, size=n, prob = prob, replace = TRUE)
+    mean[i] <- mean(data[boot], na.rm = T)
+  }
+  return(quantile(mean, c(0.025,  0.975), na.rm = T))
+}
+
+
 
 #Cleanup Events
 #events <- read.csv("EventsCombined_2022.csv", encoding = "UTF-8", #quote = "", comment.char = "\\",
@@ -103,9 +117,15 @@ brands_validated <- read.csv("brands_validated.csv") %>%
   mutate(parent_company_name = ifelse(parent_company_name == "NULL", brand_name, parent_company_name)) %>%
   mutate(parent_company_name = trimws(tolower(parent_company_name))) %>%
   mutate(id = ifelse(id == "" | is.na(id), parent_company_name, id))
+
+test_mean_percent_valid <- brands_validated %>%
+  group_by(event_id, validated) %>%
+  summarise(sum_prop = sum(proportion)) %>%
+  group_by(validated) %>%
+  summarise(mean_prop = mean(sum_prop))
   
 raw_processed_data <- brands_validated %>%
-  select(-X.1, -row_id, -X, -parent_company_name_old)
+  select(-X.1, -row_id, -X, -parent_company_name_old, -parent_company)
 
 fwrite(raw_processed_data, "raw_processed_data.csv")
 
@@ -125,48 +145,51 @@ mean(unbranded_clean$proportion)
 BootMean(unbranded_clean$proportion)
 hist(unbranded_clean$proportion)
 
-# Advanced parent merges ----
-#parent_grid <- expand.grid(left = unique(joined_clean$parent_company), right = unique(joined_clean$parent_company))
-
-#parent_grid$simi <- stringsim(as.character(parent_grid$left), as.character(parent_grid$right))
-
-#similar <- parent_grid %>%
-#    filter(simi != 1 & simi > 0.8 & simi < 0.9) %>%
-#    arrange(desc(simi))
-
-#head(similar)
-#there is more information nested in other columns so need to be careful about deplicates and sum up wheever possible.  
-
 #Analyze global proportions. ----
-unique(joined_clean$event_id)
-unique(joined_clean$name)
+unique(raw_processed_data$event_id)
+unique(raw_processed_data$name)
 
-joined_clean_2 <- joined_clean %>%
-                    filter(name != "Unbranded") %>%
-                    group_by(event_id, name, id, city, province, country, year, specifics_of_audit) %>%
-                    summarise(company_sum = sum(sum)) %>%
+raw_processed_data_event_ag <- raw_processed_data %>%
+                    filter(id != "unbranded") %>%
+                    group_by(event_id, id, city, province, country, continent, year, specifics_of_audit) %>%
+                    summarise(company_sum = sum(total_count)) %>%
                     ungroup() %>%
                     group_by(event_id) %>%
                     mutate(event_total_count_no_unbrand = sum(company_sum)) %>%
                     ungroup() %>%
                     mutate(proportion = company_sum/event_total_count_no_unbrand) 
 
-proportion_grid <- expand.grid(event_id = unique(joined_clean_2$event_id), 
-                               name = unique(joined_clean_2$name))
+fwrite(raw_processed_data_event_ag, "C:/Users/winco/OneDrive/Documents/BFFP/global_brand_data/raw_processed_data_event_ag.csv")
+event_list <- raw_processed_data_event_ag %>%
+  distinct(event_id, city, province, country, continent, year, specifics_of_audit, event_total_count_no_unbrand)
+fwrite(event_list, "C:/Users/winco/OneDrive/Documents/BFFP/global_brand_data/event_list.csv")
 
-joined_clean_3 <- right_join(joined_clean_2, proportion_grid) %>%
+sum(event_list$event_total_count_no_unbrand)
+
+raw_prop_id_event <- raw_processed_data_event_ag %>%
+  select(event_id, id,  proportion)
+
+fwrite(raw_prop_id_event, "C:/Users/winco/OneDrive/Documents/BFFP/global_brand_data/raw_prop_id_event.csv")
+
+proportion_grid <- expand.grid(event_id = unique(raw_processed_data_event_ag$event_id), 
+                               id = unique(raw_processed_data_event_ag$id))
+
+raw_processed_data_event_ag_2 <- right_join(event_list, proportion_grid) %>%
+    left_join(raw_prop_id_event) %>%
     mutate(proportion = ifelse(is.na(proportion), 0, proportion)) %>%
     ungroup()
-    
-str(joined_clean_3)
+  
+fwrite(raw_processed_data_event_ag_2, "C:/Users/winco/OneDrive/Documents/BFFP/global_brand_data/raw_processed_data_event_ag_2.csv")
 
-event_list <- joined_clean_3 %>%
-    group_by(event_id) %>%
-    summarize(sum = sum(proportion))
+brand_company_id <- raw_processed_data %>%
+  distinct(brand_name, parent_company_name, id) %>%
+  distinct(id, .keep_all = T)
+
+fwrite(brand_company_id, "C:/Users/winco/OneDrive/Documents/BFFP/global_brand_data/brand_company_id.csv")
 
 #Counts are log normally distributed meaning a few of the larger surveys could gobble up the smaller ones. 
 #Definitely a count bias per country. 
-joined_clean_2 %>%
+raw_processed_data_event_ag %>%
   distinct(event_id, event_total_count_no_unbrand, country) %>%
   group_by(country) %>%
   summarise(mean_count = mean(event_total_count_no_unbrand)) %>%
@@ -174,8 +197,8 @@ joined_clean_2 %>%
     geom_point(aes(x = mean_count, y = reorder(country, mean_count))) +
     scale_x_log10() 
 
-#Definitely a count bias per year. 
-joined_clean_2 %>%
+#possibly a count bias per year. 
+raw_processed_data_event_ag %>%
   distinct(event_id, event_total_count_no_unbrand, year) %>%
   group_by(year) %>%
   summarise(mean_count = mean(event_total_count_no_unbrand)) %>%
@@ -184,7 +207,7 @@ joined_clean_2 %>%
   scale_x_log10() 
 
 #summary stats, some countries have more events than others which would rate them lower. 
-  joined_clean_3 %>%
+raw_processed_data_event_ag_2 %>%
             distinct(event_id, country) %>%
             group_by(country) %>%
             summarise(count = n()) %>%
@@ -197,8 +220,8 @@ joined_clean_2 %>%
 
 #skimr::skim(joined_clean_2)
 
-proportion_without_mean <- joined_clean_2 %>%
-    group_by(name) %>%
+proportion_without_mean <- raw_processed_data_event_ag %>%
+    group_by(id) %>%
     summarize(total_company_sum = sum(company_sum)) %>%
     ungroup() %>%
     mutate(proportion_aggregated = total_company_sum/sum(total_company_sum))
@@ -208,26 +231,78 @@ small_boot_name_ag <- proportion_without_mean %>%
 
 sum(proportion_without_mean$proportion_aggregated)
 
-boot_name <- joined_clean_3 %>%
-    group_by(name) %>% 
+boot_name <- raw_processed_data_event_ag_2 %>%
+    group_by(id) %>% 
     summarize(high = BootMean(proportion)[2], mean = mean(proportion), low = BootMean(proportion)[1])
     
 small_boot_name <- boot_name %>%
-    slice_max(mean, n = 20)
+    slice_max(mean, n = 20) %>%
+    left_join(brand_company_id)
 
 sum(boot_name$mean)
     
-ggplot(small_boot_name, aes(y = reorder(name, mean), x = mean)) +
+boot_name_sorted <- boot_name %>%
+  mutate(rank = nrow(.) - rank(mean) + 1) %>%
+  arrange(desc(mean)) %>%
+  mutate(cumulative = cumsum(mean))
+
+ggplot(boot_name_sorted) +
+  geom_line(aes(y = cumulative, x = rank)) +
+  scale_x_log10()
+
+#Returns decrease exponentially for including more companies. 
+
+ggplot(small_boot_name, aes(y = reorder(parent_company_name, mean), x = mean)) +
+  geom_point() +
+  geom_errorbar(aes(xmin=low, xmax=high)) + 
+  theme_classic(base_size = 20) +
+  labs(x = "Proportion", y = "Company")
+
+ggplot(small_boot_name, aes(y = reorder(id, mean), x = mean)) +
     geom_point() +
     geom_errorbar(aes(xmin=low, xmax=high)) + 
     theme_classic(base_size = 20) +
     labs(x = "Proportion", y = "Company")
+
+#Country population boot ----
+
+#Is this necessary? basically produces the result, complicates the analysis, and there is already decent spatial coverage. 
+table(event_list$continent)
+table(event_list$year)
+
+population_data_2019 <- read.csv("country_population_data/API_SP.POP.TOTL_DS2_en_csv_v2_4902028_WC.csv")
+
+unique(raw_processed_data_event_ag_2$country)[!unique(raw_processed_data_event_ag_2$country) %in% unique(population_data_2019$Country.Name)]
+
+population_weighted_data <- raw_processed_data_event_ag_2 %>%
+  mutate(country = ifelse(country == "mexico", "Mexico", country),
+         country = ifelse(country == "United Kingdom", "United Kingdom of Great Britain & Northern Ireland", country)) %>%
+  inner_join(population_data_2019, by = c("country" = "Country.Name")) %>%
+  weights()
+
+length(unique(population_weighted_data$event_id))
+
+boot_name_pop_weighted <- population_weighted_data %>%
+  group_by(id) %>% 
+  summarize(high = BootMean_prob(proportion, prob = X2019)[2], mean = mean(proportion), low = BootMean_prob(proportion, prob = X2019)[1])
+
+
+small_boot_name <- boot_name_pop_weighted %>%
+  slice_max(high, n = 20) %>%
+  left_join(brand_company_id)
+
+ggplot(small_boot_name, aes(y = reorder(parent_company_name, high), x = high)) +
+  #geom_point() +
+  geom_errorbar(aes(xmin=low, xmax=high)) + 
+  theme_classic(base_size = 20) +
+  labs(x = "Proportion", y = "Company")
 
 # Change through time for top 10. 
 
 top_change <-  joined_clean_3 %>%
     filter(name %in% small_boot_name$name) %>%
     mutate(year = gsub(".{1,}_", "", event_id))
+
 
 
 boot_name_top_year <- top_change %>%
@@ -303,6 +378,16 @@ ggplot(company_cumsum) +
     geom_line(aes(x = rank, y = cumsum_mean)) + 
     scale_x_log10() + 
     theme_classic()
+
+
+
+
+
+
+
+
+
+
 
 
 
