@@ -1,3 +1,4 @@
+
 #Libraries ----
 
 library(safejoin)
@@ -10,6 +11,9 @@ library(ggplot2)
 library(stringdist)
 library(fuzzyjoin)
 library(WikidataR)
+library(tidygeocoder)
+library(mapview)
+library(sf)  
 
 
 #Functions ----
@@ -73,7 +77,6 @@ brands_plus <- read.csv("BrandsCombined_2022.csv",
   mutate(brand_name = trimws(tolower(brand_name))) %>%
   select(row_id, submission_type, submission_id, year, brand_name, parent_company, item_description, type_product, type_material, layer, total_count)
 
-
 joined <- safe_inner_join(brands_plus, events %>% 
                               rename(event_total_count = total_count) %>%
                               filter(type_of_audit == "Outdoor"), check = "~uymn") 
@@ -116,21 +119,159 @@ brands_validated <- read.csv("brands_validated.csv") %>%
   mutate(validated = ifelse(is.na(validated), FALSE, validated)) %>%
   mutate(parent_company_name = ifelse(parent_company_name == "NULL", brand_name, parent_company_name)) %>%
   mutate(parent_company_name = trimws(tolower(parent_company_name))) %>%
-  mutate(id = ifelse(id == "" | is.na(id), parent_company_name, id))
+  mutate(id = ifelse(id == "" | is.na(id), parent_company_name, id)) %>%
+  mutate(country = ifelse(country == "mexico", "Mexico", country),
+         country = ifelse(country == "United Kingdom", "United Kingdom of Great Britain & Northern Ireland", country)) %>%
+  mutate_at(c("brand_name", 
+                  "parent_company_name", 
+                  "id", 
+                  "validated", 
+                  "item_description", 
+                  "type_product", 
+                  "type_material", 
+                  "layer", 
+                  "is_trained", 
+                  "city", 
+                  "province", 
+                  "country", 
+                  "continent", 
+                  "type_of_audit", 
+                  'specifics_of_audit', 
+                  "parent_company_name_old"), ~ trimws(tolower(.))) %>%
+  mutate(type_product = case_when(
+    type_product == "pp"  ~  "null",     
+    type_product == "fg"  ~  "fishing gear",       
+    type_product == "pc"  ~  "personal care",       
+    type_product == "hp"  ~  "household products",       
+    type_product == "sm"  ~  "smoking materials",       
+    type_product == "pm"  ~  "packaging materials",       
+    type_product == "fp"  ~  "food packaging",       
+    type_product == "o"  ~  "other",       
+    TRUE  ~ type_product)) %>% 
+  mutate(type_material = case_when(
+    type_material == "fp"  ~  "null",     
+    type_material == "ml"  ~  "null",     
+    type_material == "sl"  ~  "null",     
+    TRUE  ~ type_material)) %>%
+  mutate(layer = case_when(
+    layer == "ml"  ~  "multi-layer",     
+    layer == "sl"  ~  "single-layer",     
+    layer == "o"  ~  "null",
+    TRUE  ~ layer)) %>%
+  mutate(is_trained = ifelse(is_trained == "rojaki", "null", is_trained)) %>%
+  mutate(time_spent = case_when(
+    time_spent < 0  ~  "null",     
+    TRUE  ~ time_spent)) %>%
+  mutate(specifics_of_audit = case_when(
+    specifics_of_audit %in% c("brand audit",
+                              "litter clean-up"
+                              )  ~  "null",   
+    specifics_of_audit %in% c("city / park / land", 
+                              "city / park / other land", 
+                              "city/park/land",
+                              "land",
+                              "city",
+                              "landfill",
+                              "market",
+                              "tradisional market",
+                              "school",
+                              "school / office",
+                              "school / office / institution",
+                              "school/office",
+                              "school/office (home)",
+                              "mountain areas",
+                              "office",
+                              "park",
+                              "openspace")  ~  "inland",     
+    specifics_of_audit %in% c("coast / shoreline",
+                              "coast/shoreline",
+                              "coast / ocean / estuary",
+                              "ocean")  ~  "coastal", 
+    specifics_of_audit %in% c("lake", 
+                              "river")  ~  "freshwater", 
+    specifics_of_audit %in% c("ocean / river / lake", 
+                              "ocean/river/lake",
+                              "shoreline / river / lake"
+                              )  ~  "other", 
+    TRUE  ~ specifics_of_audit))
+  
+table(brands_validated$layer)
+table(brands_validated$is_trained)
+table(brands_validated$type_material)
+table(brands_validated$type_product)
+table(brands_validated$validated)
+table(brands_validated$start_of_audit)
+table(brands_validated$end_of_audit)
+table(brands_validated$time_spent)
+table(brands_validated$continent)
+table(brands_validated$country)
+table(brands_validated$specifics_of_audit)
+table(brands_validated$end_of_audit)
+
+wikidata_ids <- brands_validated %>%
+  distinct(id) %>%
+  filter(grepl("q(\\d{2,})", id) & !grepl("http", id)) #%>%
+
+for(row in 143:nrow(wikidata_ids)){
+  print(row)
+  try(
+    wikidata_ids[row, "name"] <- paste(vapply(unlist(str_extract_all(wikidata_ids[row, "id"], "q(\\d{2,})")), function(x) {trimws(tolower(WikidataR::find_item(x)[[1]]$label))}, FUN.VALUE = character(1)), collapse = ", "),
+    silent = T
+  )
+}  
+
+wikidata_ids2 <- wikidata_ids %>%
+  mutate(name = ifelse(is.na(name), id, name))
+
+fwrite(wikidata_ids2, "C:/Users/winco/OneDrive/Documents/BFFP/global_brand_data/wikidata_ids2.csv")
+
+wikidata_ids2 <- fread("C:/Users/winco/OneDrive/Documents/BFFP/global_brand_data/wikidata_ids2.csv")
+valid_all <- expand.grid(event_id = unique(brands_validated$event_id), validated = unique(brands_validated$validated))
 
 test_mean_percent_valid <- brands_validated %>%
+  right_join(valid_all) %>%
+  mutate(proportion = ifelse(is.na(proportion), 0, proportion)) %>%
   group_by(event_id, validated) %>%
   summarise(sum_prop = sum(proportion)) %>%
   group_by(validated) %>%
   summarise(mean_prop = mean(sum_prop))
   
-raw_processed_data <- brands_validated %>%
-  select(-X.1, -row_id, -X, -parent_company_name_old, -parent_company)
+sum(test_mean_percent_valid$mean_prop)
 
-fwrite(raw_processed_data, "raw_processed_data.csv")
+locations_to_code <- brands_validated %>%
+  distinct(city, province, country, continent) %>%
+  mutate(across(everything(), ~gsub("null", "", .x))) %>%
+  geocode(city = city, state = province, country = country, method = 'osm', lat = latitude_specific, long = longitude_specific) %>%
+  geocode(country = country, method = 'osm', lat = latitude_country, long = longitude_country)  
+
+locations_to_code <- locations_to_code %>%
+  geocode(state = province, country = country, method = 'osm', lat = latitude_state, long = longitude_state)
+  
+fwrite(locations_to_code, "C:/Users/winco/OneDrive/Documents/BFFP/global_brand_data/locations_to_code.csv")
+
+locations_to_code <- fread("C:/Users/winco/OneDrive/Documents/BFFP/global_brand_data/locations_to_code.csv")
+
+raw_processed_data <- brands_validated %>%
+  left_join(locations_to_code) %>%
+  mutate(longitude_most_specific = ifelse(!is.na(longitude_specific), longitude_specific, ifelse(!is.na(longitude_state), longitude_state, longitude_country))) %>%
+  mutate(latitude_most_specific = ifelse(!is.na(latitude_specific), latitude_specific, ifelse(!is.na(latitude_state), latitude_state, latitude_country))) %>%
+  left_join(wikidata_ids2) %>%
+  mutate(parent_company_name = ifelse(!is.na(name), name, parent_company_name)) %>%
+  select(-row_id, -X, -parent_company_name_old, -parent_company, -name)
+
+summary(raw_processed_data$latitude_most_specific) #Still 21k NAs
+
+Samples_Map <- raw_processed_data %>%
+  distinct(longitude_most_specific, latitude_most_specific, event_id) %>%
+  filter(!is.na(longitude_most_specific) & !is.na(latitude_most_specific)) %>% 
+  st_as_sf(coords = c("longitude_most_specific", "latitude_most_specific"), crs = 4326, remove = FALSE)
+
+mapview(Samples_Map,  legend = FALSE)
+
+fwrite(raw_processed_data, "C:/Users/winco/OneDrive/Documents/BFFP/global_brand_data/raw_processed_data.csv")
 
 # Data Analysis ----
-raw_processed_data <- fread("raw_processed_data.csv")
+raw_processed_data <- fread("C:/Users/winco/OneDrive/Documents/BFFP/global_brand_data/raw_processed_data.csv")
 
 ## Unbranded metrics ----
 unbranded <- raw_processed_data %>%
@@ -160,8 +301,10 @@ raw_processed_data_event_ag <- raw_processed_data %>%
                     mutate(proportion = company_sum/event_total_count_no_unbrand) 
 
 fwrite(raw_processed_data_event_ag, "C:/Users/winco/OneDrive/Documents/BFFP/global_brand_data/raw_processed_data_event_ag.csv")
+
 event_list <- raw_processed_data_event_ag %>%
   distinct(event_id, city, province, country, continent, year, specifics_of_audit, event_total_count_no_unbrand)
+
 fwrite(event_list, "C:/Users/winco/OneDrive/Documents/BFFP/global_brand_data/event_list.csv")
 
 sum(event_list$event_total_count_no_unbrand)
@@ -195,7 +338,9 @@ raw_processed_data_event_ag %>%
   summarise(mean_count = mean(event_total_count_no_unbrand)) %>%
   ggplot() +
     geom_point(aes(x = mean_count, y = reorder(country, mean_count))) +
-    scale_x_log10() 
+  scale_x_log10() +
+  theme_bw(base_size = 10) +
+  labs(x = "Mean Event Count", y = "Country")
 
 #possibly a count bias per year. 
 raw_processed_data_event_ag %>%
@@ -203,8 +348,22 @@ raw_processed_data_event_ag %>%
   group_by(year) %>%
   summarise(mean_count = mean(event_total_count_no_unbrand)) %>%
   ggplot() +
-  geom_point(aes(x = mean_count, y = reorder(year, mean_count))) +
-  scale_x_log10() 
+  geom_point(aes(y = mean_count, x = year), size = 4) +
+  scale_x_log10() +
+  theme_bw(base_size = 15) +
+  labs(y = "Mean Event Count", x = "Year")
+
+
+#possibly a count bias per year. 
+raw_processed_data_event_ag %>%
+  distinct(event_id, year) %>%
+  group_by(year) %>%
+  summarise(count = n()) %>%
+  ggplot() +
+  geom_point(aes(y = count, x = year), size = 4) +
+  scale_x_log10() +
+  theme_bw(base_size = 15) +
+  labs(y = "Number of Events", x = "Year")
 
 #summary stats, some countries have more events than others which would rate them lower. 
 raw_processed_data_event_ag_2 %>%
@@ -213,7 +372,9 @@ raw_processed_data_event_ag_2 %>%
             summarise(count = n()) %>%
         ggplot() +
         geom_point(aes(x = count, y = reorder(country, count))) +
-        scale_x_log10() 
+        scale_x_log10() +
+        theme_bw(base_size = 10) +
+        labs(y = "Country", x = "Number of Events")
 
 #nrow(distinct(joined_clean, event_id, brand_name))
 #nrow(distinct(events, submission_type, submission_id, year))
@@ -247,22 +408,57 @@ boot_name_sorted <- boot_name %>%
   mutate(cumulative = cumsum(mean))
 
 ggplot(boot_name_sorted) +
-  geom_line(aes(y = cumulative, x = rank)) +
-  scale_x_log10()
+  geom_line(aes(y = cumulative, x = rank), linewidth = 3) +
+  scale_x_log10() + 
+  theme_classic(base_size = 20) +
+  labs(x = "Number of Companies", y = "Cumulative Percent Contribution")
+
+fwrite(boot_name, "C:/Users/winco/OneDrive/Documents/BFFP/global_brand_data/brand_name.csv")
 
 #Returns decrease exponentially for including more companies. 
-
 ggplot(small_boot_name, aes(y = reorder(parent_company_name, mean), x = mean)) +
   geom_point() +
   geom_errorbar(aes(xmin=low, xmax=high)) + 
   theme_classic(base_size = 20) +
   labs(x = "Proportion", y = "Company")
 
-ggplot(small_boot_name, aes(y = reorder(id, mean), x = mean)) +
-    geom_point() +
-    geom_errorbar(aes(xmin=low, xmax=high)) + 
-    theme_classic(base_size = 20) +
-    labs(x = "Proportion", y = "Company")
+# Correlation Elen ----
+elen_data <- fread("G:/My Drive/MooreInstitute/Projects/Break Free From Plastic/data/Brand_progress/2022-Progress-Report-Data-Sheet-Final2_WC.csv") %>%
+  mutate(ID = tolower(ID)) %>%
+  inner_join(boot_name, by = c("ID" = "id")) %>%
+  mutate(mass = as.numeric(gsub(",", "", `2021 total weight of new packaging (metric tonnes)`))) 
+
+ggplot(elen_data %>%
+         bind_rows(mutate(., `Sector (EMF input)` = "All")), aes(x = mass, y = mean, color = `Sector (EMF input)`, label = "Company name")) +
+  geom_point() +
+  scale_x_log10() +
+  scale_y_log10() +
+  theme_classic(base_size = 15) +
+  theme(legend.position = "none") +
+  geom_smooth(method = "lm") +
+  facet_grid(.~ `Sector (EMF input)`)
+
+library(ggrepel)
+
+ggplot(elen_data, aes(x = mass, y = mean)) +
+  geom_point(aes(x = mass, y = mean)) +
+  geom_text( aes(x = mass, y = mean, label = `Company name`), hjust = 0) +
+  #geom_label_repel(aes(x = mass, y = mean, label = `Company name`), max.overlaps = 100) +
+  scale_x_log10() +
+  scale_y_log10() +
+  labs(x = "Mass", y = "Mean")#+
+  #theme_classic(base_size = 15) #+
+  #theme(legend.position = "none") +
+  #geom_smooth(method = "lm") +
+  #coord_fixed() 
+
+hist(log10(elen_data$mean))
+hist(log10(elen_data$mass))
+full_model = lm(log10(mean)~log10(mass), data = elen_data)
+summary(full_model)
+
+fwrite(elen_data, "C:/Users/winco/OneDrive/Documents/BFFP/global_brand_data/elen_data.csv")
+#Interpretation https://kenbenoit.net/assets/courses/ME104/logmodels2.pdf
 
 #Country population boot ----
 
@@ -275,10 +471,7 @@ population_data_2019 <- read.csv("country_population_data/API_SP.POP.TOTL_DS2_en
 unique(raw_processed_data_event_ag_2$country)[!unique(raw_processed_data_event_ag_2$country) %in% unique(population_data_2019$Country.Name)]
 
 population_weighted_data <- raw_processed_data_event_ag_2 %>%
-  mutate(country = ifelse(country == "mexico", "Mexico", country),
-         country = ifelse(country == "United Kingdom", "United Kingdom of Great Britain & Northern Ireland", country)) %>%
-  inner_join(population_data_2019, by = c("country" = "Country.Name")) %>%
-  weights()
+  inner_join(population_data_2019, by = c("country" = "Country.Name")) 
 
 length(unique(population_weighted_data$event_id))
 

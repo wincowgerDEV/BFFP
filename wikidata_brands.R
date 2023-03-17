@@ -8,6 +8,12 @@ values <- unlist(str_extract_all("Q54078Q5433101", "Q[:digit:]*"))
 test <- paste(vapply(unlist(str_extract_all("Q5433101", "Q[:digit:]*")), function(x) {trimws(tolower(WikidataR::get_item(x)[[1]]$label))}, FUN.VALUE = character(1)), collapse = ", ")
 trimws(tolower(test[[1]]$label))
 test <- WikidataR::get_item("Q5433101", language = "en")[[1]]$label
+
+paste(vapply(unlist(str_extract_all("q3295867q2509523", "q(\\d{2,})")), function(x) {trimws(tolower(WikidataR::find_item(x)[[1]]$label))}, FUN.VALUE = character(1)), collapse = ", ")
+
+test <- WikidataR::find_item("q3295867", language = "en")[[1]]$label
+
+test
 test$labels$en$value
 find_item("Paracetamol")
 find_property("medical condition treated")
