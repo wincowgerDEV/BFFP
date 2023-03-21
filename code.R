@@ -95,7 +95,7 @@ joined_clean <- joined %>%
     filter(!year %in% c(2001, 2012, 2017)) %>%
     inner_join(group_by(., submission_type, submission_id, year) %>%
                    summarise(sum = sum(proportion)) %>%
-                   filter(sum == 1)) %>%
+                   filter(round(sum, 3) == 1)) %>%
     mutate(event_id = paste0(submission_type, "_", submission_id, "_", year)) %>%
     select(-file_name) 
 
@@ -104,7 +104,7 @@ sum(as.numeric(joined_clean$total_count)[joined_clean$id != ""], na.rm = T)/sum(
 
 str(joined_clean)
 
-write.csv(joined_clean, "joined_clean.csv")
+fwrite(joined_clean, "joined_clean.csv")
 
 #Data postprocessing workflow ----
 joined_clean <- read.csv("joined_clean.csv")
@@ -212,13 +212,13 @@ wikidata_ids <- brands_validated %>%
   distinct(id) %>%
   filter(grepl("q(\\d{2,})", id) & !grepl("http", id)) #%>%
 
-for(row in 143:nrow(wikidata_ids)){
-  print(row)
-  try(
-    wikidata_ids[row, "name"] <- paste(vapply(unlist(str_extract_all(wikidata_ids[row, "id"], "q(\\d{2,})")), function(x) {trimws(tolower(WikidataR::find_item(x)[[1]]$label))}, FUN.VALUE = character(1)), collapse = ", "),
-    silent = T
-  )
-}  
+#for(row in 143:nrow(wikidata_ids)){
+#  print(row)
+#  try(
+#    wikidata_ids[row, "name"] <- paste(vapply(unlist(str_extract_all(wikidata_ids[row, "id"], "q(\\d{2,})")), function(x) {trimws(tolower(WikidataR::find_item(x)[[1]]$label))}, FUN.VALUE = character(1)), collapse = ", "),
+#    silent = T
+#  )
+#}  
 
 wikidata_ids2 <- wikidata_ids %>%
   mutate(name = ifelse(is.na(name), id, name))
@@ -252,14 +252,29 @@ fwrite(locations_to_code, "C:/Users/winco/OneDrive/Documents/BFFP/global_brand_d
 locations_to_code <- fread("C:/Users/winco/OneDrive/Documents/BFFP/global_brand_data/locations_to_code.csv")
 
 raw_processed_data <- brands_validated %>%
+  mutate(volunteer = as.integer(volunteer)) %>%
+  mutate(across(city:continent, ~gsub("null", "", .x))) %>%
   left_join(locations_to_code) %>%
   mutate(longitude_most_specific = ifelse(!is.na(longitude_specific), longitude_specific, ifelse(!is.na(longitude_state), longitude_state, longitude_country))) %>%
   mutate(latitude_most_specific = ifelse(!is.na(latitude_specific), latitude_specific, ifelse(!is.na(latitude_state), latitude_state, latitude_country))) %>%
+  mutate(location_specificity = case_when(
+    latitude_most_specific == latitude_specific & longitude_most_specific == longitude_specific  ~  "city",     
+    latitude_most_specific == latitude_state & longitude_most_specific == longitude_state  ~  "state",     
+    latitude_most_specific == latitude_country & longitude_most_specific == longitude_country ~  "country",     
+    TRUE  ~ "other")) %>%
   left_join(wikidata_ids2) %>%
   mutate(parent_company_name = ifelse(!is.na(name), name, parent_company_name)) %>%
-  select(-row_id, -X, -parent_company_name_old, -parent_company, -name)
+  mutate(start_of_audit = as.Date(start_of_audit, format = "%m/%d/%Y")) %>%
+  mutate(end_of_audit = as.Date(end_of_audit, format = "%m/%d/%Y")) %>%
+  mutate(time_spent = as.numeric(time_spent)) %>%
+  mutate(time_spent = ifelse(time_spent == 0, NA, time_spent)) %>%
+  select(-row_id, -X, -sum, -parent_company_name_old, -parent_company, -name, -latitude_specific, -longitude_specific, -latitude_country, -longitude_country, -latitude_state, -longitude_state) %>%
+  group_by(across(c(everything(), -total_count, -proportion))) %>%
+  summarise(total_count = sum(total_count)) %>%
+  ungroup() %>%
+  mutate(proportion = total_count/event_total_count)
 
-summary(raw_processed_data$latitude_most_specific) #Still 21k NAs
+summary(raw_processed_data$latitude_most_specific) #Still 4k NAs
 
 Samples_Map <- raw_processed_data %>%
   distinct(longitude_most_specific, latitude_most_specific, event_id) %>%
@@ -268,7 +283,102 @@ Samples_Map <- raw_processed_data %>%
 
 mapview(Samples_Map,  legend = FALSE)
 
+# Validate raw data ----
+sum(is.na(raw_processed_data$brand_name)) == 0 #No NA brand names
+sum(is.na(raw_processed_data$parent_company_name)) == 0 #No NA parent_company names
+sum(is.na(raw_processed_data$id)) == 0 #No NA IDs
+
+event_sum_1 <- raw_processed_data %>%
+  group_by(event_id) %>%
+  summarise(proportion_sum = sum(proportion)) %>%
+  ungroup() %>%
+  mutate(is_one = round(proportion_sum, 3) == 1) #Check that proportions add up to 1. 
+
+all(event_sum_1$is_one)
+
+all(unique(raw_processed_data$validated) %in% c("attempted", "true", "false")) #Only allowed values for validated. 
+
+all(unique(raw_processed_data$submission_type) %in% c("Excel Template Old",
+                                                  "Excel Template 2020",
+                                                  "Excel Template 2021",
+                                                  "123Forms Old",
+                                                  "123Forms New",
+                                                  "Trashblitz New",
+                                                  "ThirdParty 2022",
+                                                  "ThirdParty 2020")) #Check to make sure no new weird types. 
+
+all(raw_processed_data$year > 2017 & raw_processed_data$year < 2023) #Valid years
+
+all(unique(raw_processed_data$type_material) %in% c("pet",
+                                                "o",
+                                                "pvc",
+                                                "hdpe",
+                                                "pp",
+                                                "null",
+                                                "ldpe",
+                                                "ps"))
+
+all(unique(raw_processed_data$layer) %in% c("single-layer",
+                                        "null",
+                                        "multi-layer",
+                                        "unsure"))
+
+all(raw_processed_data$total_count > 0)
+
+all(unique(raw_processed_data$is_trained) %in% c("null", "no", "yes"))
+
+all((raw_processed_data$time_spent > 0 & raw_processed_data$time_spent < 1500) | is.na(raw_processed_data$time_spent))
+
+unique(raw_processed_data$type_of_audit) == "outdoor" 
+
+all(unique(raw_processed_data$specifics_of_audit) %in% c("inland",
+                                                   "coastal",
+                                                   "null",
+                                                   "freshwater",
+                                                   "other"))
+
+all(raw_processed_data$event_total_count >= raw_processed_data$total_count)
+
+!any(is.na(raw_processed_data$event_total_count))
+
+!any(is.na(raw_processed_data$total_count))
+
+!any(is.na(raw_processed_data$proportion))
+
+nrow(distinct(raw_processed_data)) == nrow(raw_processed_data)
+
+# Type checks
+is.character(raw_processed_data$brand_name)
+is.character(raw_processed_data$parent_company_name)
+is.character(raw_processed_data$id)
+is.character(raw_processed_data$validated)
+is.character(raw_processed_data$submission_type)
+is.integer(raw_processed_data$submission_id)
+is.integer(raw_processed_data$year)
+is.character(raw_processed_data$item_description)
+is.character(raw_processed_data$type_material)
+is.integer(raw_processed_data$total_count)
+is.integer(raw_processed_data$name_of_lead)
+is.character(raw_processed_data$is_trained)
+is.integer(raw_processed_data$organization)
+is.integer(raw_processed_data$volunteer)
+is.character(raw_processed_data$is_trained)
+inherits(raw_processed_data$start_of_audit, "Date")
+inherits(raw_processed_data$end_of_audit, "Date")
+is.numeric(raw_processed_data$time_spent)
+is.character(raw_processed_data$city)
+is.character(raw_processed_data$country)
+is.character(raw_processed_data$province)
+is.character(raw_processed_data$continent)
+is.character(raw_processed_data$type_of_audit)
+is.character(raw_processed_data$specifics_of_audit)
+is.integer(raw_processed_data$event_total_count)
+is.numeric(raw_processed_data$proportion)
+is.character(raw_processed_data$event_id)
+
+#Write after validation
 fwrite(raw_processed_data, "C:/Users/winco/OneDrive/Documents/BFFP/global_brand_data/raw_processed_data.csv")
+
 
 # Data Analysis ----
 raw_processed_data <- fread("C:/Users/winco/OneDrive/Documents/BFFP/global_brand_data/raw_processed_data.csv")
@@ -415,6 +525,7 @@ ggplot(boot_name_sorted) +
 
 fwrite(boot_name, "C:/Users/winco/OneDrive/Documents/BFFP/global_brand_data/brand_name.csv")
 
+boot_name <- fread("C:/Users/winco/OneDrive/Documents/BFFP/global_brand_data/brand_name.csv")
 #Returns decrease exponentially for including more companies. 
 ggplot(small_boot_name, aes(y = reorder(parent_company_name, mean), x = mean)) +
   geom_point() +
@@ -438,19 +549,19 @@ ggplot(elen_data %>%
   geom_smooth(method = "lm") +
   facet_grid(.~ `Sector (EMF input)`)
 
-library(ggrepel)
+#library(ggrepel)
 
 ggplot(elen_data, aes(x = mass, y = mean)) +
-  geom_point(aes(x = mass, y = mean)) +
-  geom_text( aes(x = mass, y = mean, label = `Company name`), hjust = 0) +
+  geom_point() +
+  #geom_text( aes(x = mass, y = mean, label = `Company name`), hjust = 0) +
   #geom_label_repel(aes(x = mass, y = mean, label = `Company name`), max.overlaps = 100) +
   scale_x_log10() +
   scale_y_log10() +
-  labs(x = "Mass", y = "Mean")#+
-  #theme_classic(base_size = 15) #+
+  labs(x = "2021 Total Plastic Weight Produced (metric tonnes)", y = "Mean Proportion of Total Branded Waste") +
+  theme_classic(base_size = 15) +
   #theme(legend.position = "none") +
-  #geom_smooth(method = "lm") +
-  #coord_fixed() 
+  geom_smooth(method = "lm") +
+  coord_fixed() 
 
 hist(log10(elen_data$mean))
 hist(log10(elen_data$mass))
