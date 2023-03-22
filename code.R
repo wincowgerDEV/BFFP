@@ -68,7 +68,7 @@ events <- read.csv("events_scrubbed.csv", encoding = "UTF-8", #quote = "", comme
                    row.names = NULL, 
                    stringsAsFactors = FALSE) 
 
-skim_events <- skimr::skim(events)
+#skim_events <- skimr::skim(events)
 #brands <- read_xlsx("brands_2.xlsx")
 
 brands_plus <- read.csv("BrandsCombined_2022.csv", 
@@ -220,8 +220,8 @@ wikidata_ids <- brands_validated %>%
 #  )
 #}  
 
-wikidata_ids2 <- wikidata_ids %>%
-  mutate(name = ifelse(is.na(name), id, name))
+#wikidata_ids2 <- wikidata_ids %>%
+#  mutate(name = ifelse(is.na(name), id, name))
 
 fwrite(wikidata_ids2, "C:/Users/winco/OneDrive/Documents/BFFP/global_brand_data/wikidata_ids2.csv")
 
@@ -238,16 +238,16 @@ test_mean_percent_valid <- brands_validated %>%
   
 sum(test_mean_percent_valid$mean_prop)
 
-locations_to_code <- brands_validated %>%
-  distinct(city, province, country, continent) %>%
-  mutate(across(everything(), ~gsub("null", "", .x))) %>%
-  geocode(city = city, state = province, country = country, method = 'osm', lat = latitude_specific, long = longitude_specific) %>%
-  geocode(country = country, method = 'osm', lat = latitude_country, long = longitude_country)  
+#locations_to_code <- brands_validated %>%
+#  distinct(city, province, country, continent) %>%
+#  mutate(across(everything(), ~gsub("null", "", .x))) %>%
+#  geocode(city = city, state = province, country = country, method = 'osm', lat = latitude_specific, long = longitude_specific) %>%
+#  geocode(country = country, method = 'osm', lat = latitude_country, long = longitude_country)  
 
-locations_to_code <- locations_to_code %>%
-  geocode(state = province, country = country, method = 'osm', lat = latitude_state, long = longitude_state)
+#locations_to_code <- locations_to_code %>%
+#  geocode(state = province, country = country, method = 'osm', lat = latitude_state, long = longitude_state)
   
-fwrite(locations_to_code, "C:/Users/winco/OneDrive/Documents/BFFP/global_brand_data/locations_to_code.csv")
+#fwrite(locations_to_code, "C:/Users/winco/OneDrive/Documents/BFFP/global_brand_data/locations_to_code.csv")
 
 locations_to_code <- fread("C:/Users/winco/OneDrive/Documents/BFFP/global_brand_data/locations_to_code.csv")
 
@@ -309,6 +309,15 @@ all(unique(raw_processed_data$submission_type) %in% c("Excel Template Old",
 
 all(raw_processed_data$year > 2017 & raw_processed_data$year < 2023) #Valid years
 
+all(unique(raw_processed_data$type_product) %in% c("null",
+                                               "other",
+                                               "food packaging",
+                                               "household products",
+                                               "smoking materials",
+                                               "personal care",
+                                               "fishing gear",
+                                               "packaging materials"))
+
 all(unique(raw_processed_data$type_material) %in% c("pet",
                                                 "o",
                                                 "pvc",
@@ -337,15 +346,28 @@ all(unique(raw_processed_data$specifics_of_audit) %in% c("inland",
                                                    "freshwater",
                                                    "other"))
 
+all(unique(raw_processed_data$is_trained) %in% c("yes",
+                                                 "null",
+                                                 "no"))
+
 all(raw_processed_data$event_total_count >= raw_processed_data$total_count)
 
 !any(is.na(raw_processed_data$event_total_count))
+
+all(raw_processed_data$event_total_count > 0)
 
 !any(is.na(raw_processed_data$total_count))
 
 !any(is.na(raw_processed_data$proportion))
 
 nrow(distinct(raw_processed_data)) == nrow(raw_processed_data)
+
+all(raw_processed_data$longitude_most_specific >= -180 & raw_processed_data$longitude_most_specific <= 180 | is.na(raw_processed_data$longitude_most_specific))
+all(raw_processed_data$latitude_most_specific >= -90 & raw_processed_data$latitude_most_specific <= 90 | is.na(raw_processed_data$longitude_most_specific))
+
+all(unique(raw_processed_data$location_specificity) %in% c("city",    "country", "state",   "other"))
+
+all(raw_processed_data$proportion > 0 & raw_processed_data$proportion <= 1)
 
 # Type checks
 is.character(raw_processed_data$brand_name)
@@ -375,13 +397,24 @@ is.character(raw_processed_data$specifics_of_audit)
 is.integer(raw_processed_data$event_total_count)
 is.numeric(raw_processed_data$proportion)
 is.character(raw_processed_data$event_id)
+is.numeric(raw_processed_data$longitude_most_specific)
+is.numeric(raw_processed_data$latitude_most_specific)
+is.character(raw_processed_data$location_specificity)
 
 #Write after validation
 fwrite(raw_processed_data, "C:/Users/winco/OneDrive/Documents/BFFP/global_brand_data/raw_processed_data.csv")
 
+#New york
+
+new_york <- raw_processed_data %>%
+  filter(province == "new york" | city == "new york")
+
+fwrite(new_york, "C:/Users/winco/OneDrive/Documents/BFFP/global_brand_data/new_york.csv")
 
 # Data Analysis ----
 raw_processed_data <- fread("C:/Users/winco/OneDrive/Documents/BFFP/global_brand_data/raw_processed_data.csv")
+
+
 
 ## Unbranded metrics ----
 unbranded <- raw_processed_data %>%
@@ -572,7 +605,6 @@ fwrite(elen_data, "C:/Users/winco/OneDrive/Documents/BFFP/global_brand_data/elen
 #Interpretation https://kenbenoit.net/assets/courses/ME104/logmodels2.pdf
 
 #Country population boot ----
-
 #Is this necessary? basically produces the result, complicates the analysis, and there is already decent spatial coverage. 
 table(event_list$continent)
 table(event_list$year)
