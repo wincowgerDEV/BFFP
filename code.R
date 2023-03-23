@@ -272,7 +272,8 @@ raw_processed_data <- brands_validated %>%
   group_by(across(c(everything(), -total_count, -proportion))) %>%
   summarise(total_count = sum(total_count)) %>%
   ungroup() %>%
-  mutate(proportion = total_count/event_total_count)
+  mutate(proportion = total_count/event_total_count) %>%
+  mutate_if(is.character, ~ifelse(.x == "null" | .x == "", NA, .x))
 
 summary(raw_processed_data$latitude_most_specific) #Still 4k NAs
 
@@ -284,9 +285,12 @@ Samples_Map <- raw_processed_data %>%
 mapview(Samples_Map,  legend = FALSE)
 
 # Validate raw data ----
-sum(is.na(raw_processed_data$brand_name)) == 0 #No NA brand names
 sum(is.na(raw_processed_data$parent_company_name)) == 0 #No NA parent_company names
 sum(is.na(raw_processed_data$id)) == 0 #No NA IDs
+
+!any(raw_processed_data$id == "null")
+!any(raw_processed_data$id == "NULL")
+!any(raw_processed_data$id == "")
 
 event_sum_1 <- raw_processed_data %>%
   group_by(event_id) %>%
@@ -309,32 +313,30 @@ all(unique(raw_processed_data$submission_type) %in% c("Excel Template Old",
 
 all(raw_processed_data$year > 2017 & raw_processed_data$year < 2023) #Valid years
 
-all(unique(raw_processed_data$type_product) %in% c("null",
+all(unique(raw_processed_data$type_product) %in% c(
                                                "other",
                                                "food packaging",
                                                "household products",
                                                "smoking materials",
                                                "personal care",
                                                "fishing gear",
-                                               "packaging materials"))
+                                               "packaging materials")| is.na(unique(raw_processed_data$type_product))) 
 
 all(unique(raw_processed_data$type_material) %in% c("pet",
                                                 "o",
                                                 "pvc",
                                                 "hdpe",
                                                 "pp",
-                                                "null",
                                                 "ldpe",
-                                                "ps"))
+                                                "ps") | is.na(unique(raw_processed_data$type_material)))
 
 all(unique(raw_processed_data$layer) %in% c("single-layer",
-                                        "null",
                                         "multi-layer",
-                                        "unsure"))
+                                        "unsure") | is.na(unique(raw_processed_data$layer)))
 
 all(raw_processed_data$total_count > 0)
 
-all(unique(raw_processed_data$is_trained) %in% c("null", "no", "yes"))
+all(unique(raw_processed_data$is_trained) %in% c("no", "yes") | is.na(unique(raw_processed_data$is_trained)))
 
 all((raw_processed_data$time_spent > 0 & raw_processed_data$time_spent < 1500) | is.na(raw_processed_data$time_spent))
 
@@ -342,13 +344,10 @@ unique(raw_processed_data$type_of_audit) == "outdoor"
 
 all(unique(raw_processed_data$specifics_of_audit) %in% c("inland",
                                                    "coastal",
-                                                   "null",
                                                    "freshwater",
-                                                   "other"))
+                                                   "other") | is.na(unique(raw_processed_data$specifics_of_audit)))
 
-all(unique(raw_processed_data$is_trained) %in% c("yes",
-                                                 "null",
-                                                 "no"))
+all(unique(raw_processed_data$is_trained) %in% c("yes","no") | is.na(unique(raw_processed_data$is_trained)))
 
 all(raw_processed_data$event_total_count >= raw_processed_data$total_count)
 
@@ -414,7 +413,7 @@ fwrite(new_york, "C:/Users/winco/OneDrive/Documents/BFFP/global_brand_data/new_y
 # Data Analysis ----
 raw_processed_data <- fread("C:/Users/winco/OneDrive/Documents/BFFP/global_brand_data/raw_processed_data.csv")
 
-
+unique(raw_processed_data$volunteer)
 
 ## Unbranded metrics ----
 unbranded <- raw_processed_data %>%
