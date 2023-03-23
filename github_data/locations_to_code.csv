@@ -1,0 +1,1006 @@
+city,province,country,continent,latitude_specific,longitude_specific,latitude_country,longitude_country,latitude_state,longitude_state
+gboko,"",nigeria,africa,7.3179,8.9951,9.6000359,7.9999721,9.6000359,7.9999721
+adikpo,"",nigeria,africa,6.887886,9.235472,9.6000359,7.9999721,9.6000359,7.9999721
+washington,d.c.,united states of america,north america,38.8950368,-77.0365427,39.7837304,-100.445882,38.89384735,-76.9880428191095
+foz do arelho,"",portugal,europe,39.4329582,-9.2173901,39.6621648,-8.1353519,39.6621648,-8.1353519
+wollongong,"",australia,oceania / australia,-34.4278083,150.893054,-24.7761086,134.755,-24.7761086,134.755
+allendale,mi,united states of america,north america,42.9722455,-85.9536535,39.7837304,-100.445882,43.6211955,-84.6824346
+melbourne,"",australia,oceania / australia,-37.8142176,144.9631608,-24.7761086,134.755,-24.7761086,134.755
+austin,tx,united states of america,north america,30.2711286,-97.7436995,39.7837304,-100.445882,31.2638905,-98.5456116
+vancouver,wa,united states of america,north america,45.6306954,-122.6744557,39.7837304,-100.445882,47.2868352,-120.212613
+cape town,"",south africa,africa,-33.928992,18.417396,-28.8166236,24.991639,-28.8166236,24.991639
+hot springs,sd,united states of america,north america,43.431646,-103.474363,39.7837304,-100.445882,44.6471761,-100.348761
+driggs,id,united states of america,north america,43.7231753,-111.110887,39.7837304,-100.445882,43.6447642,-114.015407
+lee's summit,mo,united states of america,north america,38.9107156,-94.3821295,39.7837304,-100.445882,38.7604815,-92.5617875
+brooklyn,"",united states of america,north america,40.6526006,-73.9497211,39.7837304,-100.445882,39.7837304,-100.445882
+wakulla county florida,"",united states of america,north america,,,39.7837304,-100.445882,39.7837304,-100.445882
+tacloban city,region viii,philippines,asia,11.2430274,125.0081402,12.7503486,122.7312101,,
+solothurn,solothurn,switzerland,europe,47.2081355,7.5384045,46.7985624,8.2319736,47.31874,7.6698284
+north lombok,west nusa tenggara,indonesia,asia,,,-2.4833826,117.8902853,-8.7892855,117.146169
+temerloh,"",indonesia,asia,,,-2.4833826,117.8902853,-2.4833826,117.8902853
+dumaguete,negros oriental,philippines,asia,9.3054777,123.3080446,12.7503486,122.7312101,9.75,123
+orlã©ans,centre val de loire,france,europe,,,46.603354,1.8883335,47.5490251,1.7324062
+badung,bali,indonesia,asia,,,-2.4833826,117.8902853,-8.3304977,115.0906401
+fiumicino,roma,italy,europe,41.7712145,12.2278855,42.6384261,12.674297,,
+tanjier,"",morocco,africa,,,31.1728205,-7.3362482,31.1728205,-7.3362482
+pulo nasi,aceh island,indonesia,asia,,,-2.4833826,117.8902853,,
+seoul,"",south korea,asia,37.5666791,126.9782914,36.638392,127.6961188,36.638392,127.6961188
+hong kong,"",hong kong,asia,,,,,,
+ljubljana,rudnik,slovenia,europe,,,46.1199444,14.8153333,,
+ljubljana,ã„å’rnuã„âe,slovenia,europe,,,46.1199444,14.8153333,,
+studenice,poljã„âane,slovenia,europe,,,46.1199444,14.8153333,,
+poljã„âane,"",slovenia,europe,,,46.1199444,14.8153333,46.1199444,14.8153333
+ptuj,"",slovenia,europe,46.4198096,15.8717378,46.1199444,14.8153333,46.1199444,14.8153333
+dar es salaam,ferry beach,tanzania,africa,,,-6.5247123,35.7878438,,
+dar es salaam,kijiji,tanzania,africa,,,-6.5247123,35.7878438,,
+dar es salaam,mikadii,tanzania,africa,,,-6.5247123,35.7878438,,
+dar es salaam,tuamoyo,tanzania,africa,,,-6.5247123,35.7878438,,
+pamplona,navarra,spain,europe,42.8182536,-1.6440304,39.3260685,-4.8379791,42.61254875,-1.83078767336175
+dar es salaam,mbezi mwisho,tanzania,africa,,,-6.5247123,35.7878438,,
+dar es salaam,shekilango,tanzania,africa,,,-6.5247123,35.7878438,,
+dar es salaam,gide river,tanzania,africa,,,-6.5247123,35.7878438,,
+barletta,"",italy,europe,41.3214976,16.2868696,42.6384261,12.674297,42.6384261,12.674297
+lagos,"",nigeria,africa,6.4550575,3.3941795,9.6000359,7.9999721,9.6000359,7.9999721
+plover cove,sai kung,hong kong,asia,,,,,,
+oiso,kanagawa,japan,asia,35.3177728,139.2895566,36.5748441,139.2394179,35.4342935,139.374753
+ciudadde mãƒâ£ã‚â©xico,"",mexico,north america,,,23.6585116,-102.0077097,23.6585116,-102.0077097
+palma de mallorca,balearic islands,spain,europe,39.5695818,2.6500745,39.3260685,-4.8379791,39.613432,2.88290269388236
+mombasa,coast,kenya,africa,,,1.4419683,38.4313975,,
+quang ngai,quang ngai,vietnam,asia,15.1190037,108.8095598,15.9266657,107.9650855,14.9635349,108.6642632
+porto,porto,portugal,europe,41.1494512,-8.6107884,39.6621648,-8.1353519,,
+lagoa de albufeira,sesimbra,portugal,europe,,,39.6621648,-8.1353519,,
+ciudadde mã©xico,"",mexico,north america,,,23.6585116,-102.0077097,23.6585116,-102.0077097
+benin,edo,nigeria,africa,6.3330586,5.6221058,9.6000359,7.9999721,6.6076575,5.9722713
+accra,greater accra region,ghana,africa,5.5571096,-0.2012376,8.0300284,-1.0800271,5.8101532,0.0995242
+copenhagen (oerestad blvd),zealand,denmark,europe,,,55.670249,10.3333283,,
+njombe town council,njombe,tanzania,africa,,,-6.5247123,35.7878438,-9.1210886,34.4316775
+ikeja,lagos,nigeria,africa,6.5960605,3.340787,9.6000359,7.9999721,6.5269033,3.5774005
+obowo lga  and okigwe lga,imo state/southeast,nigeria,africa,,,9.6000359,7.9999721,,
+chirstmas island indian ocean,wa,australia,oceania,,,-24.7761086,134.755,-25.2303005,121.0187246
+umuahia,southeast,nigeria,africa,,,9.6000359,7.9999721,,
+cotonou,"",benin,africa,6.3676953,2.4252507,9.5293472,2.2584408,9.5293472,2.2584408
+koh phi phi,krabi,thailand,asia,7.7522403,98.7766433666744,14.8971921,100.83273,8.1111653,99.1097298
+guayaquil,guayas,ecuador,south america,-2.1900563,-79.8868741,-1.3397668,-79.3666965,-2,-80
+quintana roo,mahahual,mexico,north america,,,23.6585116,-102.0077097,,
+colorado springs,"",united states of america,north america,38.8339578,-104.825348,39.7837304,-100.445882,39.7837304,-100.445882
+spiaggia pane e pomodoro (bari),"",italy,europe,,,42.6384261,12.674297,42.6384261,12.674297
+pozzuoli,"",italy,europe,40.822643,14.1219109,42.6384261,12.674297,42.6384261,12.674297
+arenella (palermo),"",italy,europe,,,42.6384261,12.674297,42.6384261,12.674297
+foce del brenta,sottomarina ( chioggia),italy,europe,,,42.6384261,12.674297,,
+tarej,island of cres,croatia,europe,,,45.3658443,15.6575209,,
+van nuys,ca,united states of america,north america,34.1866193,-118.4486675,39.7837304,-100.445882,36.7014631,-118.755997
+telaã…â¡ã„â€¡ica,"",croatia,europe,,,45.3658443,15.6575209,45.3658443,15.6575209
+vienna,"",austria,europe,48.2083537,16.3725042,47.59397,14.12456,47.59397,14.12456
+casablanca,"",morocco,africa,33.5950627,-7.6187768,31.1728205,-7.3362482,31.1728205,-7.3362482
+mirleft,"",morocco,africa,29.579707,-10.031733,31.1728205,-7.3362482,31.1728205,-7.3362482
+agadir,"",morocco,africa,30.4205162,-9.5838532,31.1728205,-7.3362482,31.1728205,-7.3362482
+moscow region,"",russian federation,europe,,,64.6863136,97.7453061,64.6863136,97.7453061
+tiznit,"",morocco,africa,29.698624,-9.7312815,31.1728205,-7.3362482,31.1728205,-7.3362482
+assilah,"",morocco,africa,35.461928,-6.036545,31.1728205,-7.3362482,31.1728205,-7.3362482
+boujdour,"",morocco,africa,26.1263378,-14.4836537,31.1728205,-7.3362482,31.1728205,-7.3362482
+nador,"",morocco,africa,35.1739922,-2.9281198,31.1728205,-7.3362482,31.1728205,-7.3362482
+tetouan,"",morocco,africa,35.570175,-5.3742776,31.1728205,-7.3362482,31.1728205,-7.3362482
+safi,"",morocco,africa,32.2650776,-9.23055403253066,31.1728205,-7.3362482,31.1728205,-7.3362482
+essaidia,"",morocco,africa,,,31.1728205,-7.3362482,31.1728205,-7.3362482
+el jadida,"",morocco,africa,33.2336952,-8.50042480074167,31.1728205,-7.3362482,31.1728205,-7.3362482
+tan tan,"",morocco,africa,28.437553,-11.098664,31.1728205,-7.3362482,31.1728205,-7.3362482
+m'diq fnideq,"",morocco,africa,,,31.1728205,-7.3362482,31.1728205,-7.3362482
+essaouira,"",morocco,africa,31.5118281,-9.7620903,31.1728205,-7.3362482,31.1728205,-7.3362482
+skhirat,"",morocco,africa,33.850672,-7.028026,31.1728205,-7.3362482,31.1728205,-7.3362482
+campeche,"",mexico,north america,19.8381215,-90.5198253,23.6585116,-102.0077097,23.6585116,-102.0077097
+chiapas,"",mexico,north america,16.383862,-91.8649031,23.6585116,-102.0077097,23.6585116,-102.0077097
+chihuahua,"",mexico,north america,28.6523808,-106.0902046,23.6585116,-102.0077097,23.6585116,-102.0077097
+coahuila da zaragova,"",mexico,north america,,,23.6585116,-102.0077097,23.6585116,-102.0077097
+estado de mexico,"",mexico,north america,18.9619137,-99.6411386,23.6585116,-102.0077097,23.6585116,-102.0077097
+guanjauto,"",mexico,north america,,,23.6585116,-102.0077097,23.6585116,-102.0077097
+michoacan de ocampo,"",mexico,north america,32.4647879,-115.3092148,23.6585116,-102.0077097,23.6585116,-102.0077097
+mexico city,"",mexico,north america,19.4326296,-99.1331785,23.6585116,-102.0077097,23.6585116,-102.0077097
+oaxaca,"",mexico,north america,17.0604663,-96.7253575,23.6585116,-102.0077097,23.6585116,-102.0077097
+san luis potosi,"",mexico,north america,22.1516472,-100.9763993,23.6585116,-102.0077097,23.6585116,-102.0077097
+quintana roo,"",mexico,north america,20.8691907,-88.6314657,23.6585116,-102.0077097,23.6585116,-102.0077097
+tampico tamaulips,"",mexico,north america,,,23.6585116,-102.0077097,23.6585116,-102.0077097
+veracruz puerto,"",mexico,north america,,,23.6585116,-102.0077097,23.6585116,-102.0077097
+ibadan,"",nigeria,africa,7.3777462,3.8972497,9.6000359,7.9999721,9.6000359,7.9999721
+fort collins,co,united states of america,north america,40.5508527,-105.0668085,39.7837304,-100.445882,38.7251776,-105.607716
+manila bay,"",philippines,asia,,,12.7503486,122.7312101,12.7503486,122.7312101
+prague,"",czech republic,europe,50.0874654,14.4212535,49.7439047,15.3381061,49.7439047,15.3381061
+charakas beach,south evoia,greece,europe,,,38.9953683,21.9877132,,
+malibu,california,united states of america,north america,34.035591,-118.689423,39.7837304,-100.445882,36.7014631,-118.755997
+madrid,"",spain,europe,40.4167047,-3.7035825,39.3260685,-4.8379791,39.3260685,-4.8379791
+dar es salaam,coco beach,tanzania,africa,,,-6.5247123,35.7878438,,
+innsbruck,tyrol,austria,europe,47.2654296,11.3927685,47.59397,14.12456,47.223193,11.5261028
+ain al mrayse,"",lebanon,asia,,,33.8750629,35.843409,33.8750629,35.843409
+avilãƒâ©s,asturias,spain,europe,,,39.3260685,-4.8379791,43.3133868,-5.94192
+shek o,"",hong kong,asia,,,,,,
+mombasa,"",kenya,africa,-4.05052,39.667169,1.4419683,38.4313975,1.4419683,38.4313975
+genova,"",italy,europe,44.40726,8.9338624,42.6384261,12.674297,42.6384261,12.674297
+quito,"",ecuador,south america,-0.2201641,-78.5123274,-1.3397668,-79.3666965,-1.3397668,-79.3666965
+ljubljana,"",slovenia,europe,46.0500268,14.5069289,46.1199444,14.8153333,46.1199444,14.8153333
+new york,ny,united states of america,north america,40.7127281,-74.0060152,39.7837304,-100.445882,43.1561681,-75.8449946
+mertasari beach,"",indonesia,asia,,,-2.4833826,117.8902853,-2.4833826,117.8902853
+trelawny,"",jamaica,north america,,,18.1850507,-77.3947693,18.1850507,-77.3947693
+houston,tx,united states of america,north america,29.7589382,-95.3676974,39.7837304,-100.445882,31.2638905,-98.5456116
+nairobi,"",kenya,africa,-1.2832533,36.8172449,1.4419683,38.4313975,1.4419683,38.4313975
+malibu beach,"",senegal,africa,,,14.4750607,-14.4529612,14.4750607,-14.4529612
+lastovo,sito,croatia,europe,,,45.3658443,15.6575209,,
+tijuana,"",mexico,north america,32.5317397,-117.0195295,23.6585116,-102.0077097,23.6585116,-102.0077097
+boulder,co,united states of america,north america,40.0154155,-105.270241,39.7837304,-100.445882,38.7251776,-105.607716
+owerri municipa,soutteast,nigeria,africa,,,9.6000359,7.9999721,,
+junk bay,cape d'aguilar,hong kong,asia,,,,,,
+aba,southeast,nigeria,africa,,,9.6000359,7.9999721,,
+kigali,nyarugenge,rwanda,africa,,,-1.9646631,30.0644358,,
+riga,daugavgriva beach,latvia,europe,,,56.8406494,24.7537645,,
+okigwe,southeast,nigeria,africa,,,9.6000359,7.9999721,,
+magetan,east java,indonesia,asia,-7.6560219,111.3281197,-2.4833826,117.8902853,-7.6977397,112.4914199
+rosario,"",argentina,south america,-32.9595004,-60.6615415,-34.9964963,-64.9672817,-34.9964963,-64.9672817
+ouagadougou,centre; dissin,burkina faso,africa,,,12.0753083,-1.6880314,,
+owerri,"",nigeria,africa,5.489736,7.0341973,9.6000359,7.9999721,9.6000359,7.9999721
+panglao,bohol,philippines,asia,9.5791851,123.7452642,12.7503486,122.7312101,9.833333,124.1615579
+owerri,north,nigeria,africa,5.3,7.3,9.6000359,7.9999721,,
+podgorica,"",montenegro,europe,42.4415238,19.2621081,42.9868853,19.5180992,42.9868853,19.5180992
+south pasadena,"",united states of america,north america,34.1133062,-118.1478291,39.7837304,-100.445882,39.7837304,-100.445882
+ã…â enã„âur & ljubljana,"",slovenia,europe,,,46.1199444,14.8153333,46.1199444,14.8153333
+eldoret,"",kenya,africa,0.5198329,35.2715481,1.4419683,38.4313975,1.4419683,38.4313975
+owerri southeast,"",nigeria,africa,,,9.6000359,7.9999721,9.6000359,7.9999721
+santa catarina morelos,"",mexico,north america,,,23.6585116,-102.0077097,23.6585116,-102.0077097
+logroãƒâ±o (la rioja),"",spain,europe,,,39.3260685,-4.8379791,39.3260685,-4.8379791
+huãƒâ©rcanos (la rioja),"",spain,europe,,,39.3260685,-4.8379791,39.3260685,-4.8379791
+little palm beach,sai kung,hong kong,asia,,,,,,
+kyiv,"",ukraine,europe,50.4500336,30.5241361,49.4871968,31.2718321,49.4871968,31.2718321
+benavente,"",portugal,europe,38.9826508,-8.8095788,39.6621648,-8.1353519,39.6621648,-8.1353519
+dodoma,"",tanzania,africa,-6.1791181,35.7468174,-6.5247123,35.7878438,-6.5247123,35.7878438
+lviv,"",ukraine,europe,49.841952,24.0315921,49.4871968,31.2718321,49.4871968,31.2718321
+matara,"",sri lanka,asia,5.947822,80.5482919,7.5554942,80.7137847,7.5554942,80.7137847
+eldoret,eldoret,kenya,africa,,,1.4419683,38.4313975,,
+12cities across china,"",china,asia,,,35.000074,104.999927,35.000074,104.999927
+ghar el melh,"",tunisia,africa,37.169684,10.1916612,33.8439408,9.400138,33.8439408,9.400138
+victora island,lagos,nigeria,"",,,9.6000359,7.9999721,6.5269033,3.5774005
+newcastle upon tyne,tyne & wear,united kingdom of great britain & northern ireland,europe,,,,,,
+nairobi,nairobi,kenya,africa,-1.2832533,36.8172449,1.4419683,38.4313975,-1.30325275,36.8263676855587
+eckernfã¶rde,schleswig-holstein,germany,europe,,,51.1638175,10.4478313,54.1853998,9.8220089
+several,"",slovenia,europe,,,46.1199444,14.8153333,46.1199444,14.8153333
+semkovo (belitsa town),blagoevgrad,bulgaria,europe,,,42.6073975,25.4856617,,
+palanga-laukå¾emä—,"",lithuania,europe,,,55.3500003,23.7499997,55.3500003,23.7499997
+bern,canton of bern,switzerland,europe,46.9482713,7.4514512,46.7985624,8.2319736,46.8382351,7.6004502
+sanur,bali,indonesia,asia,-8.6831728,115.2564626,-2.4833826,117.8902853,-8.3304977,115.0906401
+batubulan,bali,indonesia,asia,-8.6217995,115.2596751,-2.4833826,117.8902853,-8.3304977,115.0906401
+gianyar,bali,indonesia,asia,-8.5482357,115.326054015372,-2.4833826,117.8902853,-8.3304977,115.0906401
+karangasem,bali,indonesia,asia,-8.4464252,115.6135572,-2.4833826,117.8902853,-8.3304977,115.0906401
+ho chi minh,"",vietnam,asia,10.7764772,106.701938,15.9266657,107.9650855,15.9266657,107.9650855
+rama ix lake,"",thailand,asia,,,14.8971921,100.83273,14.8971921,100.83273
+jurien bay,"",australia,oceania,-30.3040478,115.0406027,-24.7761086,134.755,-24.7761086,134.755
+malabon,"",philippines,asia,14.6578504,120.9511261,12.7503486,122.7312101,12.7503486,122.7312101
+long beach,ca,united states of america,north america,33.7690164,-118.191604,39.7837304,-100.445882,36.7014631,-118.755997
+monterrey,nuevo leã³n,mexico,north america,,,23.6585116,-102.0077097,,
+monterey,nuevo leã³n,mexico,north america,,,23.6585116,-102.0077097,,
+san pedro garza garcã­a,nuevo leã³n,mexico,north america,,,23.6585116,-102.0077097,,
+monterrey,monterrey,mexico,north america,,,23.6585116,-102.0077097,,
+monterrey,san pedro,mexico,north america,,,23.6585116,-102.0077097,,
+columbus,ohio,united states of america,north america,39.9622601,-83.0007065,39.7837304,-100.445882,40.2253569,-82.6881395
+redmond,wa,united states of america,north america,47.6694141,-122.1238767,39.7837304,-100.445882,47.2868352,-120.212613
+labuan bajo,nusa tenggara timur,indonesia,asia,-8.4944201,119.8855688,-2.4833826,117.8902853,-8.5656787,120.6978581
+alpnach,obwalden,switzerland,europe,46.9411661,8.2736829,46.7985624,8.2319736,46.8613857,8.2067825
+winterthur,winterthur,switzerland,europe,47.4991723,8.7291498,46.7985624,8.2319736,,
+fribourg,fribourg,switzerland,europe,46.8055656,7.1612669,46.7985624,8.2319736,46.6789116,7.1027113
+vevey,waadt (vd),switzerland,europe,46.4602978,6.8418655,46.7985624,8.2319736,46.6356963,6.5320717
+belgrade,serbia,serbia,europe,44.8178131,20.4568974,44.1534121,20.55144,43.6642492,20.9906823679952
+vatra dornei,suceava,romania,europe,47.3469264,25.3557638,45.9852129,24.6859225,47.53265345,25.8345939174141
+lomã©,bã¨/maritime,togo,africa,,,8.7800265,1.0199765,,
+morelia,michoacan,mexico,north america,19.7027116,-101.1923818,23.6585116,-102.0077097,19.207098,-101.878113
+jos,plateau state,nigeria,africa,9.9175125,8.8979401,9.6000359,7.9999721,9.0583446,9.6826289
+spiez,bern,switzerland,europe,46.6919473,7.6774655,46.7985624,8.2319736,46.8382351,7.6004502
+zurich,uster,switzerland,europe,,,46.7985624,8.2319736,,
+boston spa,yorkshire,united kingdom of great britain & northern ireland,europe,,,,,,
+denver,co,united states of america,north america,39.7392364,-104.984862,39.7837304,-100.445882,38.7251776,-105.607716
+accra,greater accra,ghana,africa,5.5571096,-0.2012376,8.0300284,-1.0800271,5.8101532,0.0995242
+columbus,oh,united states of america,north america,39.9622601,-83.0007065,39.7837304,-100.445882,40.2253569,-82.6881395
+san pedro garza garcãƒâ­a,nuevo leãƒâ³n,mexico,north america,,,23.6585116,-102.0077097,,
+pensacola,bay islands/ roatan,honduras,north america,,,15.2572432,-86.0755145,,
+reef akr,bay islands/ roatan,honduras,north america,,,15.2572432,-86.0755145,,
+amherst,ma,united states of america,north america,42.3685658,-72.505714,39.7837304,-100.445882,42.3788774,-72.032366
+thrissur,kerala,india,asia,10.5256264,76.2132542,22.3511148,78.6677428,10.3528744,76.5120396
+sandy bay,bay islands/ roatan,honduras,north america,16.3327297,-86.5644553,15.2572432,-86.0755145,,
+mji mpya,moshi municipal,tanzania,africa,,,-6.5247123,35.7878438,,
+mbeya,mbeya mjini,tanzania,africa,,,-6.5247123,35.7878438,,
+mafia,kilwa,tanzania,africa,,,-6.5247123,35.7878438,,
+sharm el sheikh,south sinai,egypt,africa,27.8644422,34.295447,26.2540493,29.2675469,28.64495635,33.8711312956512
+sungai petani,kuala muda,malaysia,asia,5.6435195,100.4869513,4.5693754,102.2656823,,
+koh samui,surattani,thailand,asia,9.50139445,99.9956192732,14.8971921,100.83273,9.4674663,98.830042
+tabanan,bali,indonesia,asia,-8.5392306,115.1265683,-2.4833826,117.8902853,-8.3304977,115.0906401
+banua,bali,indonesia,asia,-8.3237967,115.2952572,-2.4833826,117.8902853,-8.3304977,115.0906401
+mas,gianyar,indonesia,asia,-8.5450345,115.2731894,-2.4833826,117.8902853,,
+semarapura,bali,indonesia,asia,-8.5352229,115.4037258,-2.4833826,117.8902853,-8.3304977,115.0906401
+banua,bangli,indonesia,asia,-8.3237967,115.2952572,-2.4833826,117.8902853,,
+west bay,bay islands/ roatan,honduras,north america,16.2751591,-86.5977278,15.2572432,-86.0755145,,
+el kram,tunis,tunisia,africa,,,33.8439408,9.400138,36.81776455,10.2126837229603
+caleta lenga,regiã³n del biobã­o,chile,south america,,,-31.7613365,-71.3187697,,
+tampa,fl,united states of america,north america,27.9477595,-82.458444,39.7837304,-100.445882,27.7567667,-81.4639835
+gammarth,tunis,tunisia,africa,36.9075307,10.293171812799,33.8439408,9.400138,36.81776455,10.2126837229603
+la goulette,tunis,tunisia,africa,36.8159278,10.3042378,33.8439408,9.400138,36.81776455,10.2126837229603
+mahahual,quintana roo,mexico,north america,18.7165847,-87.70787,23.6585116,-102.0077097,19.6666671,-88.5000001
+el manzah,tunis,tunisia,africa,,,33.8439408,9.400138,36.81776455,10.2126837229603
+mysore,karnataka,india,asia,12.3051828,76.6553609,22.3511148,78.6677428,14.5203896,75.7223521
+los alamitos,california,united states of america,north america,33.8038865,-118.0772433,39.7837304,-100.445882,36.7014631,-118.755997
+zembra island hawaria,nabeul,tunisia,africa,,,33.8439408,9.400138,36.72094655,10.7042075325581
+maresias,sãƒo paulo,brazil,south america,,,-10.3333333,-53.2,,
+los an,ca,united states of america,north america,,,39.7837304,-100.445882,36.7014631,-118.755997
+nairobi,githurai 45,kenya,africa,,,1.4419683,38.4313975,,
+waveland,ms,united states of america,north america,30.2889414,-89.379468,39.7837304,-100.445882,32.9715285,-89.7348497
+dehradun,uttarakhand,india,asia,30.3255646,78.0436813,22.3511148,78.6677428,30.0417376,79.089691
+abbotsham,devon,united kingdom of great britain & northern ireland,europe,,,,,,
+marseille,provence alpes cã´te d'azur,france,europe,,,46.603354,1.8883335,,
+dumaguete city,negros oriental,philippines,asia,9.3054777,123.3080446,12.7503486,122.7312101,9.75,123
+quito,pichincha,ecuador,south america,-0.2201641,-78.5123274,-1.3397668,-79.3666965,-0.0584893,-78.3284371
+milwaukee,wisconsin,united states of america,north america,43.0349931,-87.922497,39.7837304,-100.445882,44.4308975,-89.6884637
+pune,maharshtra,india,asia,,,22.3511148,78.6677428,,
+phayathai,bangkok,thailand,asia,,,14.8971921,100.83273,13.8245796,100.6224463
+ende,ntt,indonesia,asia,-8.8439147,121.647964,-2.4833826,117.8902853,-8.5656787,120.6978581
+denpasar,bali,indonesia,asia,-8.6524973,115.2191175,-2.4833826,117.8902853,-8.3304977,115.0906401
+"br. pengaji, payangan","gianyar,bali",indonesia,asia,,,-2.4833826,117.8902853,,
+hua hin,prachuap kiri khan,thailand,asia,12.5699326,99.9573437,14.8971921,100.83273,12.0432669,99.7487235
+lucerne,lucerne,switzerland,europe,47.0505452,8.3054682,46.7985624,8.2319736,47.0908207,8.1719611
+basel,basel-stadt,switzerland,europe,47.5581077,7.5878261,46.7985624,8.2319736,47.5579097,7.5927728
+ko sichang,chonburi,thailand,asia,13.152512,100.809354340951,14.8971921,100.83273,13.1857117,101.1210777
+mamuju,west sulawesi,indonesia,asia,-2.6756302,118.8847947,-2.4833826,117.8902853,-2.4974546,119.3918955
+gianyar,denpasar,indonesia,asia,,,-2.4833826,117.8902853,,
+tangerang selatan,banten,indonesia,asia,-6.3227016,106.7085737,-2.4833826,117.8902853,-6.4453801,106.1375586
+limassol,limassol,cyprus,europe,34.6852901,33.0332657,34.9823018,33.1451285,,
+ipoh,perak,malaysia,asia,4.5986817,101.0900236,4.5693754,102.2656823,4.812181,100.9797908
+mersing,johor,malaysia,asia,2.4298532,103.835494,4.5693754,102.2656823,2.0228821,103.3114564
+malang,east java,indonesia,asia,-7.9771206,112.6340291,-2.4833826,117.8902853,-7.6977397,112.4914199
+"dehradun,uttarkashi,tehri",uttarakhand,india,asia,,,22.3511148,78.6677428,30.0417376,79.089691
+city of san juan,ncr,philippines,asia,14.60474,121.0300488,12.7503486,122.7312101,,
+sã£o josã© dos pinhais,paranã¡,brazil,south america,,,-10.3333333,-53.2,-24.4842187,-51.8148872
+mumbai,maharashtra,india,asia,19.0785451,72.878176,22.3511148,78.6677428,18.9068356,75.6741579
+borok,vologda region,russian federation,europe,,,64.6863136,97.7453061,,
+rosario,santa fe,argentina,south america,-32.9595004,-60.6615415,-34.9964963,-64.9672817,-30.3154739,-61.1645076
+"","",kuwait,asia,29.2733964,47.4979476,29.2733964,47.4979476,29.2733964,47.4979476
+"hanle, leh",ladakh,india,asia,,,22.3511148,78.6677428,33.9456407,77.6568576
+quinatana roo,mahahual,mexico,north america,,,23.6585116,-102.0077097,,
+lagos,lagos,nigeria,africa,6.4550575,3.3941795,9.6000359,7.9999721,6.5269033,3.5774005
+florianã³polis,santa catarina,brazil,south america,,,-10.3333333,-53.2,-27.0628367,-51.114965
+san luis potosi,san luis potosi,mexico,north america,22.1516472,-100.9763993,23.6585116,-102.0077097,22.5000001,-100.4949145
+perth,wa,australia,oceania,-31.9558964,115.8605801,-24.7761086,134.755,-25.2303005,121.0187246
+sydney,nsw,australia,oceania,-33.8698439,151.2082848,-24.7761086,134.755,-31.8759835,147.2869493
+montenegro *multiple cities,"",montenegro,europe,,,42.9868853,19.5180992,42.9868853,19.5180992
+zurich,zurich,switzerland,europe,47.3744489,8.5410422,46.7985624,8.2319736,47.4133024,8.656394
+bangalore,karnataka,india,asia,12.9767936,77.590082,22.3511148,78.6677428,14.5203896,75.7223521
+sandy bay,"roatan, bay islands",honduras,north america,16.3327297,-86.5644553,15.2572432,-86.0755145,,
+65 sites across the indian himalayan regionâ ,indian mountain states,india,asia,,,22.3511148,78.6677428,,
+kampala city,central,uganda,africa,0.3177137,32.5813539,1.5333554,32.2166578,,
+west end,"roatan, bay islands",honduras,north america,16.3045002,-86.5931282,15.2572432,-86.0755145,,
+boulogne-billancourt,rã©gion ãžle-de-france,france,europe,,,46.603354,1.8883335,,
+istanbul,kadikkoy,turkey,europe,,,38.9597594,34.9249653,,
+our brand audit event will be spread along fidjrossã¨ beach in cotonou,littoral,benin,africa,,,9.5293472,2.2584408,6.3663195,2.4170608
+lome & kpalime,maritime / plateau,togo,africa,,,8.7800265,1.0199765,,
+conyers,georgia,united states of america,north america,33.6676103,-84.0176904,39.7837304,-100.445882,32.3293809,-83.1137366
+mankato,mn,united states of america,north america,44.1634663,-93.9993505,39.7837304,-100.445882,45.9896587,-94.6113288
+saint petersburg,"",russian federation,europe,59.938732,30.316229,64.6863136,97.7453061,64.6863136,97.7453061
+tiszaadony,"",hungary,europe,48.2251757,22.2905285,47.1817585,19.5060937,47.1817585,19.5060937
+foce delle saline,montesilvano (pe),italy,europe,,,42.6384261,12.674297,,
+vancouver,bc,canada,north america,49.2608724,-123.113952,61.0666922,-107.991707,55.001251,-125.002441
+ashland,or,united states of america,north america,42.1972487,-122.7153995,39.7837304,-100.445882,43.9792797,-120.737257
+san ramon,ca,united states of america,north america,37.7648021,-121.9544387,39.7837304,-100.445882,36.7014631,-118.755997
+brooklyn,ny,united states of america,north america,40.6526006,-73.9497211,39.7837304,-100.445882,43.1561681,-75.8449946
+blouberg,"",south africa,africa,-23.1388889,28.9986111,-28.8166236,24.991639,-28.8166236,24.991639
+jurmala,"",latvia,europe,56.9727164,23.7886979,56.8406494,24.7537645,56.8406494,24.7537645
+ho chi minh city,"",vietnam,asia,10.7764772,106.701938,15.9266657,107.9650855,15.9266657,107.9650855
+busan,"",south korea,asia,35.1799528,129.0752365,36.638392,127.6961188,36.638392,127.6961188
+lisbon,"",portugal,europe,38.7077507,-9.1365919,39.6621648,-8.1353519,39.6621648,-8.1353519
+portland,or,united states of america,north america,45.5202471,-122.674194,39.7837304,-100.445882,43.9792797,-120.737257
+arlington,va,united states of america,north america,38.8903961,-77.0841585,39.7837304,-100.445882,37.1232245,-78.4927721
+warrensburg,mo,united states of america,north america,38.7624373,-93.7409596,39.7837304,-100.445882,38.7604815,-92.5617875
+poultney,vt,united states of america,north america,43.5171364,-73.2363426,39.7837304,-100.445882,44.5990718,-72.5002608
+saltash,"",united kingdom of great britain & northern ireland,europe,,,,,,
+albany,ca,united states of america,north america,37.88687,-122.2977475,39.7837304,-100.445882,36.7014631,-118.755997
+berkeley,ca,united states of america,north america,37.8708393,-122.272863,39.7837304,-100.445882,36.7014631,-118.755997
+carroboro,nc,united states of america,north america,,,39.7837304,-100.445882,35.6729639,-79.0392919
+benglaru,"",india,asia,,,22.3511148,78.6677428,22.3511148,78.6677428
+murcia,"",spain,europe,37.9923795,-1.1305431,39.3260685,-4.8379791,39.3260685,-4.8379791
+east sussex,"",united kingdom of great britain & northern ireland,europe,,,,,,
+alexandria,va,united states of america,north america,38.8051095,-77.0470229,39.7837304,-100.445882,37.1232245,-78.4927721
+alevkayasi,"",cyprus,asia,,,34.9823018,33.1451285,34.9823018,33.1451285
+newport,or,united states of america,north america,44.636755,-124.053442,39.7837304,-100.445882,43.9792797,-120.737257
+pennant hills,"",australia,oceania / australia,-33.7384663,151.0716639,-24.7761086,134.755,-24.7761086,134.755
+herradura bay,"",chile,south america,,,-31.7613365,-71.3187697,-31.7613365,-71.3187697
+sinaloa,"",mexico,north america,15.8929593,-92.1286186,23.6585116,-102.0077097,23.6585116,-102.0077097
+zacatecas,"",mexico,north america,22.7753891,-102.5722706,23.6585116,-102.0077097,23.6585116,-102.0077097
+rouyn-noranda,"",canada,north america,48.2420524,-79.0205378,61.0666922,-107.991707,61.0666922,-107.991707
+terenure,dublin 6w,ireland,europe,53.3128146,-6.29043897875154,52.865196,-7.9794599,,
+bern,"",switzerland,europe,46.9482713,7.4514512,46.7985624,8.2319736,46.7985624,8.2319736
+ufa,bashkiria,russian federation,europe,,,64.6863136,97.7453061,,
+himmafushi,"",maldives,asia,4.3085207,73.5714154682326,3.7203503,73.2244152,3.7203503,73.2244152
+ubatuba. sãƒâ£o paulo,"",brazil,south america,,,-10.3333333,-53.2,-10.3333333,-53.2
+artãƒâ ,mallorca,spain,europe,,,39.3260685,-4.8379791,,
+chuk kok,sai kung,hong kong,asia,,,,,,
+ubatuba,sãƒâ£o paulo,brazil,south america,,,-10.3333333,-53.2,,
+st. petersburg,florida,united states of america,north america,27.7703796,-82.6695085,39.7837304,-100.445882,27.7567667,-81.4639835
+douala,"",cameroon,africa,4.0429408,9.706203,4.6125522,13.1535811,4.6125522,13.1535811
+yung shue ha village,lamma island,hong kong,asia,,,,,,
+vii,"",philippines,asia,,,12.7503486,122.7312101,12.7503486,122.7312101
+maria,region vii,philippines,asia,9.1962369,123.6551893,12.7503486,122.7312101,,
+siquijor,region vii,philippines,asia,9.2155864,123.5138212,12.7503486,122.7312101,,
+colombo,"",sri lanka,asia,6.9387469,79.8541134,7.5554942,80.7137847,7.5554942,80.7137847
+cotonou,littoral,benin,africa,6.3676953,2.4252507,9.5293472,2.2584408,6.3663195,2.4170608
+kyiv,kyiv region,ukraine,europe,,,49.4871968,31.2718321,,
+dar-es-salaam,dar-es-salaam,tanzania,africa,,,-6.5247123,35.7878438,-6.8160837,39.2803583
+newburyport,ma,united states of america,north america,42.8125913,-70.8772751,39.7837304,-100.445882,42.3788774,-72.032366
+kuwait city,"",kuwait,asia,29.3796532,47.9734174,29.2733964,47.4979476,29.2733964,47.4979476
+copenhagen canal,zealand,denmark,europe,,,55.670249,10.3333283,,
+provincetown,ma,united states of america,north america,42.0525612,-70.1858639,39.7837304,-100.445882,42.3788774,-72.032366
+lutsk,volyn,ukraine,europe,50.7450733,25.320078,49.4871968,31.2718321,51.5451167,24.6627893
+aarhus,jutland,denmark,europe,56.1496278,10.2134046,55.670249,10.3333283,56.23564835,9.23462502777801
+copenhagen canals,zealand,denmark,europe,,,55.670249,10.3333283,,
+boyarka,kyiv region,ukraine,europe,,,49.4871968,31.2718321,,
+"ouagadougou, tenkodogo, koudougou, dissin, banfora","centre,centre-est, centre-ouest, sud-ouest, cascadres",burkina faso,africa,,,12.0753083,-1.6880314,,
+taranto,puglia,italy,europe,40.4712427,17.2432278,42.6384261,12.674297,40.9842539,16.6210027
+ehime mbano,imo state,nigeria,africa,,,9.6000359,7.9999721,5.5859456,7.0669651
+nikopol,dnipropetrovsk region,ukraine,europe,,,49.4871968,31.2718321,,
+lviv,lviv region,ukraine,europe,,,49.4871968,31.2718321,,
+singapore,singapore,singapore,asia,1.2829435,103.8441517,1.357107,103.8194992,,
+zã¼rich,zã¼rich,switzerland,europe,,,46.7985624,8.2319736,,
+versoix,geneva,switzerland,europe,46.2767572,6.168958,46.7985624,8.2319736,46.2256509,6.1439209
+zaporozhye,"",ukraine,europe,47.8507859,35.1182867,49.4871968,31.2718321,49.4871968,31.2718321
+"christianshavn, copenhagen",zealand,denmark,europe,,,55.670249,10.3333283,,
+jyllinge,zealand,denmark,europe,55.7535209,12.1086079,55.670249,10.3333283,,
+jyllinge,"",denmark,europe,55.7535209,12.1086079,55.670249,10.3333283,55.670249,10.3333283
+"sundby, amager",zealand,denmark,europe,,,55.670249,10.3333283,,
+"herceg novi, kotor, tivat, bar, ulcinj, podgorica, niksic, berane, bijelo polje, pljevlja","10 beaches, a lake, and 6 rivers",montenegro,europe,,,42.9868853,19.5180992,,
+klitmoeller,jutland,denmark,europe,,,55.670249,10.3333283,56.23564835,9.23462502777801
+davao city,davao del sur,philippines,asia,7.0648306,125.6080623,12.7503486,122.7312101,6.6983658,125.3612135
+bangsan,chonburi,thailand,asia,,,14.8971921,100.83273,13.1857117,101.1210777
+chiang mai,chiang mai,thailand,asia,,,14.8971921,100.83273,18.6951714,98.4462684
+petaling jaya,ara damansara,malaysia,asia,,,4.5693754,102.2656823,,
+koh samed,rayong,thailand,asia,,,14.8971921,100.83273,12.7943716,101.3705344
+arusha,arusha,tanzania,africa,-3.3696827,36.6880794,-6.5247123,35.7878438,-2.7170632,35.6812537
+mwanza city,mwanza,tanzania,africa,,,-6.5247123,35.7878438,-2.90554195,33.1637093899205
+njombe town,njombe,tanzania,africa,,,-6.5247123,35.7878438,-9.1210886,34.4316775
+riga,riga,latvia,europe,56.9479326,24.1079726,56.8406494,24.7537645,,
+iringa town,iringa,tanzania,africa,,,-6.5247123,35.7878438,-7.7742718,35.4826339
+rye,east sussex,united kingdom of great britain & northern ireland,europe,,,,,,
+chambray,"",france,europe,49.0738447,1.3090566,46.603354,1.8883335,46.603354,1.8883335
+mariupol,donetsk oblast`,ukraine,europe,47.0957648,37.5499621,49.4871968,31.2718321,47.9212914,37.7809825
+cuernavaca (ahuatlã¡n),morelos,mexico,north america,,,23.6585116,-102.0077097,18.75,-99
+cuernavaca (lomas de la selva oriente),morelos,mexico,north america,,,23.6585116,-102.0077097,18.75,-99
+cuernavaca (acapatzingo),morelos,mexico,north america,,,23.6585116,-102.0077097,18.75,-99
+maresias,sã£o sebastiã£o,brazil,south america,,,-10.3333333,-53.2,,
+dhaka,"",bangladesh,asia,23.7644025,90.389015,24.4769288,90.2934413,24.4769288,90.2934413
+hosan-dong,daegu,korea,asia,,,36.638392,127.6961188,35.8713,128.6018
+seogwipo-si,jeju-do,korea,asia,33.2572971,126.515299,36.638392,127.6961188,33.4887737,126.4987083
+jochiwon-eup,sejong,korea,asia,36.601795,127.2944592,36.638392,127.6961188,36.4799999,127.289
+hillarys,wa,australia,oceania,-31.8097006,115.7487831,-24.7761086,134.755,-25.2303005,121.0187246
+moreton island,queensland,australia,oceania,-27.19264975,153.394317964255,-24.7761086,134.755,-22.1646782,144.5844903
+point walter swan river perth,wa,australia,oceania,,,-24.7761086,134.755,-25.2303005,121.0187246
+gboko,benue/north central,nigeria,africa,,,9.6000359,7.9999721,,
+iksan-si,jeollabuk-do,korea,asia,35.9479291,126.9578025,36.638392,127.6961188,35.8198999,127.109
+lviv,lviv,ukraine,europe,49.841952,24.0315921,49.4871968,31.2718321,49.6512234,23.8266948
+atambua,nusa tenggara timur,indonesia,asia,-9.1059581,124.888064,-2.4833826,117.8902853,-8.5656787,120.6978581
+larantuka,nusa tenggara timur/flores timur/larantuka,indonesia,asia,-8.3475809,122.9797229,-2.4833826,117.8902853,,
+manado,sulawesi utara,indonesia,asia,1.4900578,124.8408708,-2.4833826,117.8902853,0.6555692,124.090151
+mamuju,sulaawesi barat,indonesia,asia,,,-2.4833826,117.8902853,,
+lovina,bali,indonesia,asia,,,-2.4833826,117.8902853,-8.3304977,115.0906401
+larantuka,ntt,indonesia,asia,-8.3244317,122.9986828,-2.4833826,117.8902853,-8.5656787,120.6978581
+langkawi,kedah,malaysia,asia,6.3682606,99.7929850694237,4.5693754,102.2656823,5.8098265,100.6715035
+kota kinabalu,sabah,malaysia,asia,5.9780066,116.0728988,4.5693754,102.2656823,5.4257359,117.0326392
+tuaran,sabah,malaysia,asia,6.1762851,116.2328137,4.5693754,102.2656823,5.4257359,117.0326392
+cherating,pahang,malaysia,"",4.1265086,103.3924741,4.5693754,102.2656823,3.6168822,102.5994547
+hue city,hue province,vietnam,asia,16.4639321,107.5863388,15.9266657,107.9650855,,
+giao thuy,nam dinh,vietnam,asia,,,15.9266657,107.9650855,20.2712241,106.1629895
+general mariano alvarez,cavite,philippines,asia,14.2956484,121.0067732,12.7503486,122.7312101,14.2554073,120.8671503
+dalseo-gu,daegu,korea,asia,35.8297006,128.533094,36.638392,127.6961188,35.8713,128.6018
+northe shore,sã£o paulo,brazil,south america,,,-10.3333333,-53.2,,
+snellville,georgia,united states of america,north america,33.857328,-84.0199108,39.7837304,-100.445882,32.3293809,-83.1137366
+bogota,cundinamarca,colombia,south america,5.2084232,-74.7294473,4.099917,-72.9088133,5.0000086,-74.1666756
+turbo,antioquia,colombia,south america,8.0950848,-76.728545,4.099917,-72.9088133,7.0000085,-75.5000086
+taganga-santamarta,magdalena,colombia,south america,,,4.099917,-72.9088133,10.5808075,-74.0685669
+selangor,petaling jaya,malaysia,asia,,,4.5693754,102.2656823,,
+vanderbijlpark,gauteng,south africa,africa,-26.706891,27.836271,-28.8166236,24.991639,-25.9363439,28.0813105
+los angeles,ca,united states of america,north america,34.0536909,-118.242766,39.7837304,-100.445882,36.7014631,-118.755997
+monterrey,nuevo leãƒâ³n,mexico,north america,,,23.6585116,-102.0077097,,
+san pedro garza garcãƒâ­a,nuevo leon,mexico,north america,,,23.6585116,-102.0077097,26.2384363,-99.8873
+monterrey,nuevo leon,mexico,north america,25.6802019,-100.315258,23.6585116,-102.0077097,26.2384363,-99.8873
+ettadhamen city,ariana,tunisia,africa,,,33.8439408,9.400138,36.9685735,10.1219855063295
+carrigaline,cork,ireland,europe,52.08816865,-9.166308973794,52.865196,-7.9794599,,
+state-wide,north carolina,united states of america,north america,,,39.7837304,-100.445882,35.6729639,-79.0392919
+san francisco,california,united states of america,north america,37.7790262,-122.419906,39.7837304,-100.445882,36.7014631,-118.755997
+vittoria,ontario,canada,north america,42.7624226,-80.323385,61.0666922,-107.991707,50.000678,-86.000977
+hamburg,hamburg,germany,europe,53.5293836,9.9868308,51.1638175,10.4478313,53.550341,10.000654
+orange county,california,united states of america,north america,33.6703349,-117.7341141,39.7837304,-100.445882,36.7014631,-118.755997
+east nusa tenggara,"",indonesia,asia,,,-2.4833826,117.8902853,-2.4833826,117.8902853
+tavernier,florida,united states of america,north america,25.0115186,-80.5150608,39.7837304,-100.445882,27.7567667,-81.4639835
+kampala,east africa,uganda,africa,,,1.5333554,32.2166578,,
+mayaguez,mayaguez,puerto rico,north america,,,,,,
+woodside,california,united states of america,north america,37.4299388,-122.253855,39.7837304,-100.445882,36.7014631,-118.755997
+burnaby,british columbia,canada,north america,49.2433804,-122.972545,61.0666922,-107.991707,55.001251,-125.002441
+samut prakan,"",thailand,asia,13.5949359,100.5966146,14.8971921,100.83273,14.8971921,100.83273
+boussiã¨res,franche-comtã©,france,europe,,,46.603354,1.8883335,,
+rio de janeiro,duque de caxias,brazil,south america,,,-10.3333333,-53.2,,
+san pedro masahuat,la paz,el salvador,north america,13.5449831,-89.0370716,13.8000382,-88.9140683,,
+dar es salaam,goba center/ubungo/dar es salaam,tanzania,africa,,,-6.5247123,35.7878438,,
+"stige oe, odense",funen (fyn),denmark,europe,,,55.670249,10.3333283,,
+limassol,"",cyprus,europe,34.6852901,33.0332657,34.9823018,33.1451285,34.9823018,33.1451285
+cuernavaca,morelos,mexico,north america,18.9218274,-99.2342282,23.6585116,-102.0077097,18.75,-99
+"islands brygge, copenhagen","capital area, zealand",denmark,europe,,,55.670249,10.3333283,,
+dar es salaam,kigamboni,tanzania,africa,,,-6.5247123,35.7878438,,
+mwanza,"nyamagana, mirongo, mbugani, mabatini",tanzania,africa,,,-6.5247123,35.7878438,,
+njombe,"mngendele,njombe mjini, njombe",tanzania,africa,,,-6.5247123,35.7878438,,
+kagera.,"kagera, muleba,kibanga",tanzania,africa,,,-6.5247123,35.7878438,,
+simiyu,"kidinda dampo, simiyu, bariadi,",tanzania,africa,,,-6.5247123,35.7878438,,
+iringa mjini,"miyomboni,gangilonga",tanzania,africa,,,-6.5247123,35.7878438,,
+petitenget,badung,indonesia,asia,,,-2.4833826,117.8902853,,
+larantuka,nusa tenggara timur,indonesia,asia,-8.3244317,122.9986828,-2.4833826,117.8902853,-8.5656787,120.6978581
+pulau pangkor,perak,malaysia,asia,4.2273633,100.559077909918,4.5693754,102.2656823,4.812181,100.9797908
+manjung,perak,malaysia,asia,4.1912768,100.6592247,4.5693754,102.2656823,4.812181,100.9797908
+tumapel,malang,indonesia,asia,,,-2.4833826,117.8902853,,
+meggen,luzern,switzerland,europe,47.0470746,8.3733992,46.7985624,8.2319736,47.0908207,8.1719611
+scuol,graubã¼nden,switzerland,europe,,,46.7985624,8.2319736,,
+winterthur,zã¼rich,switzerland,europe,,,46.7985624,8.2319736,,
+bern,bern,switzerland,europe,46.9482713,7.4514512,46.7985624,8.2319736,46.8382351,7.6004502
+lembata,nusa tenggara timur,indonesia,asia,-8.37814435,123.544626589991,-2.4833826,117.8902853,-8.5656787,120.6978581
+changlun,kedah,malaysia,asia,6.4330675,100.4300739,4.5693754,102.2656823,5.8098265,100.6715035
+blahbatuh,gianyar,indonesia,asia,-8.561161,115.2994536,-2.4833826,117.8902853,,
+luzern,luzern,switzerland,europe,47.0505452,8.3054682,46.7985624,8.2319736,47.0908207,8.1719611
+puncak alam,selangor,malaysia,asia,,,4.5693754,102.2656823,3.2083304,101.304146
+amed,bali,indonesia,asia,-8.334584,115.6409359,-2.4833826,117.8902853,-8.3304977,115.0906401
+ubud,bali,indonesia,asia,-8.5068977,115.2622931,-2.4833826,117.8902853,-8.3304977,115.0906401
+singaraja,bali,indonesia,asia,-8.1133599,115.0839326,-2.4833826,117.8902853,-8.3304977,115.0906401
+candidasa,bali,indonesia,asia,-8.5097035,115.5715862,-2.4833826,117.8902853,-8.3304977,115.0906401
+baubau,sulawesi tenggara,indonesia,asia,-5.4620298,122.6057655,-2.4833826,117.8902853,-3.5491199,121.7279646
+"",saarland,germany,europe,49.3841872,6.9537369,51.1638175,10.4478313,49.3841872,6.9537369
+bangkrachao,samutprakan,thailand,asia,,,14.8971921,100.83273,13.6531651,100.8182578
+"nairobi, mombasa, nakuru,kisumu",kenya,kenya,africa,,,1.4419683,38.4313975,,
+waverly,missouri,united states of america,north america,39.2094637,-93.5177118,39.7837304,-100.445882,38.7604815,-92.5617875
+fremantle,western austalia,australia,oceania,,,-24.7761086,134.755,,
+podgorica,podgorica,montenegro,europe,42.4415238,19.2621081,42.9868853,19.5180992,,
+kampala,eastern,uganda,africa,1.2067001,34.2040242,1.5333554,32.2166578,,
+coorg,karnataka,india,asia,,,22.3511148,78.6677428,14.5203896,75.7223521
+logroã±o,la rioja,spain,europe,,,39.3260685,-4.8379791,42.3285528,-2.4674917
+ijuã­,rio grande do sul,brazil,south america,,,-10.3333333,-53.2,-29.8425284,-53.7680577
+"sylhet, mymensingh","",bangladesh,asia,,,24.4769288,90.2934413,24.4769288,90.2934413
+pune,maharashta,india,asia,,,22.3511148,78.6677428,,
+calbayog city,samar,philippines,asia,,,12.7503486,122.7312101,11.833333,125
+"davao, valencia, tagum, surallah, digos","(region xi, region x, region xii)",philippines,asia,,,12.7503486,122.7312101,,
+amsa- tã©touan,tanger-tã©touan-houciema,morocco,africa,,,31.1728205,-7.3362482,,
+badã©s- houciema,tanger-tã©touan-houciema,morocco,africa,,,31.1728205,-7.3362482,,
+los piratos- nador,eastern,morocco,africa,,,31.1728205,-7.3362482,,
+melia beach-saidia,eastern,morocco,africa,,,31.1728205,-7.3362482,,
+quaa asserass- tã©touan,tanger-tã©touan-houciema,morocco,africa,,,31.1728205,-7.3362482,,
+ras elma-saidia,eastern,morocco,africa,,,31.1728205,-7.3362482,,
+tibouda- nador,eastern,morocco,africa,,,31.1728205,-7.3362482,,
+nantes,pays de la loire,france,europe,47.2186371,-1.5541362,46.603354,1.8883335,47.6594864,-0.8186143
+vilnius,vilnius,lithuania,europe,54.6870458,25.2829111,55.3500003,23.7499997,54.82269205,25.2495340016795
+boyarka,kyiv,ukraine,europe,50.3356709,30.2847595,49.4871968,31.2718321,50.4500336,30.5241361
+kherson,kherson,ukraine,europe,46.6412644,32.625794,49.4871968,31.2718321,46.5421715,33.4079326
+liubotyn,kharkiv region,ukraine,europe,,,49.4871968,31.2718321,,
+zamboanguita,negros oriental,philippines,asia,9.1004649,123.1994244,12.7503486,122.7312101,9.75,123
+jayapura,papua,indonesia,asia,-2.5387539,140.7037389,-2.4833826,117.8902853,-2.4749149,138.08485
+kumasi,ashanti,ghana,africa,6.6985605,-1.6233086,8.0300284,-1.0800271,6.8003319,-1.5188142
+lusaka,state *,zambia,africa,,,-14.5189121,27.5589884,,
+tunis,tunis,tunisia,africa,36.8002068,10.1857757,33.8439408,9.400138,36.81776455,10.2126837229603
+chanthaburi/chonburi/samutprakarn,"",thailand,asia,,,14.8971921,100.83273,14.8971921,100.83273
+rio de janeiro,rio de janeiro,brazil,south america,-22.9110137,-43.2093727,-10.3333333,-53.2,-22.2752762,-42.419415
+besanã§on,franche-comtã©,france,europe,,,46.603354,1.8883335,,
+st. louis,missouri,united states of america,north america,38.6280278,-90.1910154,39.7837304,-100.445882,38.7604815,-92.5617875
+copenhagen (amager faelled),zealand,denmark,europe,,,55.670249,10.3333283,,
+"sango beach, teshie",greater accra,ghana,africa,,,8.0300284,-1.0800271,5.8101532,0.0995242
+temeke,dar es salaam,tanzania,africa,-6.8509725,39.256723,-6.5247123,35.7878438,-6.8160837,39.2803583
+korogwe,tanga,tanzania,africa,-5.1592095,38.4522634,-6.5247123,35.7878438,-5.202134,38.2275548
+kuta,bali,indonesia,asia,-8.7278354,115.1730049,-2.4833826,117.8902853,-8.3304977,115.0906401
+winterthur,zurich,switzerland,europe,47.4991723,8.7291498,46.7985624,8.2319736,47.4133024,8.656394
+ambon,maluku,indonesia,asia,-3.6959434,128.178785,-2.4833826,117.8902853,-3.118837,129.4207759
+wroclaw,dolny slask,poland,europe,,,52.215933,19.134422,,
+tämaki makaurau (auckland),auckland,new zealand,oceania,-36.852095,174.7631803,-41.5000831,172.8344077,-36.5412811,174.550610491441
+tunda island,banten,indonesia,asia,,,-2.4833826,117.8902853,-6.4453801,106.1375586
+seaside,ca,united states of america,north america,36.62593,-121.816938345695,39.7837304,-100.445882,36.7014631,-118.755997
+chihuahua,chihuahua,mexico,north america,28.6523808,-106.0902046,23.6585116,-102.0077097,28.5000001,-106.0000001
+pachuca,hidalgo,mexico,north america,20.1165413,-98.7413535,23.6585116,-102.0077097,20.5,-99
+alvarado,veracruz,mexico,north america,18.7711218,-95.7607957,23.6585116,-102.0077097,19.333333,-96.666667
+mexico city,mexico city,mexico,north america,,,23.6585116,-102.0077097,19.4326296,-99.1331785
+saltillo,coahuila,mexico,north america,25.4230425,-100.9927509,23.6585116,-102.0077097,27.3333331,-102.0000001
+bombas/bombinhas,santa catarina,brazil,south america,,,-10.3333333,-53.2,-27.0628367,-51.114965
+melbourne,vic,australia,oceania,-37.8142176,144.9631608,-24.7761086,134.755,-36.5986096,144.6780052
+chicago - pilsen (southwest of the loop),il,united states of america,north america,,,39.7837304,-100.445882,40.0796606,-89.4337288
+chicago - old town (central),il,united states of america,north america,,,39.7837304,-100.445882,40.0796606,-89.4337288
+chicago - calumet beach (southside of chicago),il,united states of america,north america,,,39.7837304,-100.445882,40.0796606,-89.4337288
+chicago - avondale (northwest of the city),il,united states of america,north america,,,39.7837304,-100.445882,40.0796606,-89.4337288
+sã£o carlos,sã£o paulo,brazil,south america,,,-10.3333333,-53.2,,
+tagbilaran city,bohol,philippines,asia,,,12.7503486,122.7312101,9.833333,124.1615579
+durban,kwa zulu natal,south africa,africa,,,-28.8166236,24.991639,,
+sochi,krasnodar region,russian federation,europe,43.5854823,39.723109,64.6863136,97.7453061,45.7684014,39.0261044
+sã£o sebastiã£o,maresias / sã£o paulo,brazil,south america,,,-10.3333333,-53.2,,
+san francisco,ca,united states of america,north america,37.7790262,-122.419906,39.7837304,-100.445882,36.7014631,-118.755997
+los angeles,califonia,united states of america,north america,,,39.7837304,-100.445882,,
+garapan,"saipan, northern mariana islands",united states minor outlying islands,north america,,,,,,
+washington,dc,united states of america,north america,38.8950368,-77.0365427,39.7837304,-100.445882,38.89384735,-76.9880428191095
+westchester,california,united states of america,north america,33.9597349,-118.400632,39.7837304,-100.445882,36.7014631,-118.755997
+alexandria,virginia,united states of america,north america,38.8051095,-77.0470229,39.7837304,-100.445882,37.1232245,-78.4927721
+coney island,"",united states of america,north america,40.57580705,-73.9921752747698,39.7837304,-100.445882,39.7837304,-100.445882
+santa croce mare (trieste),"",italy,europe,,,42.6384261,12.674297,42.6384261,12.674297
+ramlet el bayda,beirut,lebanon,asia,,,33.8750629,35.843409,33.88922645,35.5025585289523
+halifax,ns,canada,north america,44.648618,-63.5859487,61.0666922,-107.991707,45.1960403,-63.1653789
+montreal,qc,canada,north america,45.5031824,-73.5698065,61.0666922,-107.991707,52.4760892,-71.8258668
+toronto,on,canada,north america,43.6534817,-79.3839347,61.0666922,-107.991707,50.000678,-86.000977
+castleton-on-hudson,ny,united states of america,north america,42.5308134,-73.7553018,39.7837304,-100.445882,43.1561681,-75.8449946
+clearlake,ca,united states of america,north america,38.9582307,-122.626372,39.7837304,-100.445882,36.7014631,-118.755997
+henrico,va,united states of america,north america,37.4957023,-77.335257,39.7837304,-100.445882,37.1232245,-78.4927721
+new rochelle,ny,united states of america,north america,40.9115386,-73.7826363,39.7837304,-100.445882,43.1561681,-75.8449946
+hon gai commune,ha long city,vietnam,asia,,,15.9266657,107.9650855,,
+tofino,"",canada,north america,49.1529643,-125.9047083,61.0666922,-107.991707,61.0666922,-107.991707
+rogaã…â¡evci,"",slovenia,europe,,,46.1199444,14.8153333,46.1199444,14.8153333
+san diego,ca,united states of america,north america,32.7174202,-117.1627728,39.7837304,-100.445882,36.7014631,-118.755997
+dar es salaam,jangwani,tanzania,africa,,,-6.5247123,35.7878438,,
+dar es salaam,selander,tanzania,africa,,,-6.5247123,35.7878438,,
+dar es salaam,mlalakua,tanzania,africa,,,-6.5247123,35.7878438,,
+kuala lumpur,"",malaysia,asia,3.1516964,101.6942371,4.5693754,102.2656823,4.5693754,102.2656823
+salt lake city,u,united states of america,north america,,,39.7837304,-100.445882,,
+auroville,tamil nadu,india,asia,12.0054211,79.8110999,22.3511148,78.6677428,10.9094334,78.3665347
+tacloban city,region 8,philippines,asia,11.2430274,125.0081402,12.7503486,122.7312101,,
+chapel hill,north carolina,united states of america,north america,35.9131542,-79.05578,39.7837304,-100.445882,35.6729639,-79.0392919
+owerri,imo state,nigeria,africa,5.489736,7.0341973,9.6000359,7.9999721,5.5859456,7.0669651
+oguta,imo state,nigeria,africa,5.710435,6.809365,9.6000359,7.9999721,5.5859456,7.0669651
+owerri municipal,imo state,nigeria,africa,,,9.6000359,7.9999721,5.5859456,7.0669651
+roanoke,virginia,united states of america,north america,37.270973,-79.9414313,39.7837304,-100.445882,37.1232245,-78.4927721
+"davao, mati, bukidnon, socsksargen","10, 11 and 12",philippines,asia,,,12.7503486,122.7312101,,
+hua hin,prachuabkirikhan,thailand,asia,,,14.8971921,100.83273,,
+dar es salaam,kinondoni,tanzania,africa,,,-6.5247123,35.7878438,,
+hua hin,prachuapkhirikan,thailand,asia,,,14.8971921,100.83273,,
+ansan-si,gyeonggi-do,korea,asia,,,36.638392,127.6961188,37.2752,127.0095
+jeonju-si,jeollabuk-do,korea,asia,35.8237631,127.1472805,36.638392,127.6961188,35.8198999,127.109
+margate,kent,united kingdom of great britain & northern ireland,europe,,,,,,
+suwon-si,gyeonggi-do,korea,asia,37.2633325,127.0287472,36.638392,127.6961188,37.2752,127.0095
+sintok,kedah,malaysia,asia,6.449246,100.5014195,4.5693754,102.2656823,5.8098265,100.6715035
+malabon city,ncr,philippines,asia,,,12.7503486,122.7312101,,
+obinze,imo state,nigeria,africa,5.4101582,6.9584478,9.6000359,7.9999721,5.5859456,7.0669651
+ezinihitte mbiase,imo state,nigeria,africa,,,9.6000359,7.9999721,5.5859456,7.0669651
+mbeya,"",tanzania,africa,-8.906508,33.468672,-6.5247123,35.7878438,-6.5247123,35.7878438
+pagudpud,ilocos norte region 1,philippines,asia,18.5593916,120.7869782,12.7503486,122.7312101,,
+volketswil/uster,zurich,switzerland,europe,,,46.7985624,8.2319736,47.4133024,8.656394
+huntington,west virginia,united states of america,north america,38.4192496,-82.445154,39.7837304,-100.445882,38.4758406,-80.8408415
+camber,east sussex,united kingdom of great britain & northern ireland,europe,,,,,,
+odiongan,romblon,philippines,asia,12.3999329,121.9818506,12.7503486,122.7312101,12.5886411,122.1933517
+dahab,south sinai,egypt,africa,28.4963633,34.5145652,26.2540493,29.2675469,28.64495635,33.8711312956512
+sindangan,zamboanga del norte,philippines,asia,8.2343274,122.999338,12.7503486,122.7312101,8,122.666667
+dar es sallam,ilala,tanzania,africa,,,-6.5247123,35.7878438,,
+dar es salaam,sindo/kigamboni/dar es salaam,tanzania,africa,,,-6.5247123,35.7878438,,
+dar es salaam,ilala,tanzania,africa,,,-6.5247123,35.7878438,,
+"oesterbro, copenhagen","capital area, zealand",denmark,europe,,,55.670249,10.3333283,,
+shinyanga,iselamanagazi,tanzania,africa,,,-6.5247123,35.7878438,,
+mbeya,"iyela, kabwe, mbeya",tanzania,africa,,,-6.5247123,35.7878438,,
+ubungo,dar es salaaam,tanzania,africa,,,-6.5247123,35.7878438,,
+ilala,dar es salaam,tanzania,africa,-6.8294091,39.2628893,-6.5247123,35.7878438,-6.8160837,39.2803583
+"",bangkok,thailand,asia,13.8245796,100.6224463,14.8971921,100.83273,13.8245796,100.6224463
+tueng,chiang rai,thailand,asia,19.5759017,99.8242693,14.8971921,100.83273,19.7589517,99.6734592
+muang,rayong,thailand,asia,,,14.8971921,100.83273,12.7943716,101.3705344
+batumi,ajara,georgia,europe,41.6509502,41.6360085,41.6809707,44.0287382,41.67315085,41.9196652130038
+tallahassee,florida,united states of america,north america,30.4380832,-84.2809332,39.7837304,-100.445882,27.7567667,-81.4639835
+st petersburg,florida,united states of america,north america,27.7703796,-82.6695085,39.7837304,-100.445882,27.7567667,-81.4639835
+fairhaven,massachusetts,united states of america,north america,41.6376043,-70.9036487,39.7837304,-100.445882,42.3788774,-72.032366
+owerri,imo,nigeria,africa,5.489736,7.0341973,9.6000359,7.9999721,5.5859456,7.0669651
+"dhaka, mymensingh","",bangladesh,asia,,,24.4769288,90.2934413,24.4769288,90.2934413
+saint petersburg,fl,united states of america,north america,27.7703796,-82.6695085,39.7837304,-100.445882,27.7567667,-81.4639835
+varkala,kerala,india,asia,8.7342288,76.7257086,22.3511148,78.6677428,10.3528744,76.5120396
+wadenswil,zurich,switzerland,europe,47.2278988,8.6701365,46.7985624,8.2319736,47.4133024,8.656394
+davao city,region xi,philippines,asia,7.0648306,125.6080623,12.7503486,122.7312101,,
+mariupol,donetsk,ukraine,europe,47.0957648,37.5499621,49.4871968,31.2718321,47.9212914,37.7809825
+bexley,portsmouth,united kingdom of great britain & northern ireland,europe,,,,,,
+bangpli,samutprakarn,thailand,asia,,,14.8971921,100.83273,,
+pathio,chumphon,thailand,asia,10.7099672,99.3179462,14.8971921,100.83273,10.3782724,99.0077685
+pranburi,prachuap kiri khan,thailand,asia,,,14.8971921,100.83273,12.0432669,99.7487235
+ban krut,prachuap kiri khan,thailand,asia,11.3483037,99.5565927,14.8971921,100.83273,12.0432669,99.7487235
+eschenbach,lucerne,switzerland,europe,47.1330227,8.317969,46.7985624,8.2319736,47.0908207,8.1719611
+kobuleti,ajara,georgia,europe,41.8113601,41.7793202,41.6809707,44.0287382,41.67315085,41.9196652130038
+bangpu,samutprakarn,thailand,asia,,,14.8971921,100.83273,,
+muang,chumphon,thailand,asia,,,14.8971921,100.83273,10.3782724,99.0077685
+limassol / paphos,"",cyprus,europe,,,34.9823018,33.1451285,34.9823018,33.1451285
+warri,delta state,nigeria,africa,,,9.6000359,7.9999721,5.5273061,6.1784167
+chittagong,"",bangladesh,asia,22.3336887,91.8342162,24.4769288,90.2934413,24.4769288,90.2934413
+khulna,"",bangladesh,asia,22.8171664,89.563759,24.4769288,90.2934413,24.4769288,90.2934413
+chicago - hermosa (northwest of the city),il,united states of america,north america,,,39.7837304,-100.445882,40.0796606,-89.4337288
+"chicago - 40th ward, western & peterson (north of the city)",il,united states of america,north america,,,39.7837304,-100.445882,40.0796606,-89.4337288
+"ikorodu , lagos",lagos,nigeria,africa,,,9.6000359,7.9999721,6.5269033,3.5774005
+kigoma,kigoma,tanzania,africa,-4.8770915,29.649101,-6.5247123,35.7878438,-4.5126571,30.0050533
+bumthang,"",bhutan,asia,,,27.549511,90.5119273,27.549511,90.5119273
+duluth,mn,united states of america,north america,46.7729322,-92.1251218,39.7837304,-100.445882,45.9896587,-94.6113288
+pacific palisades,ca,united states of america,north america,34.0480643,-118.5264706,39.7837304,-100.445882,36.7014631,-118.755997
+manila city,"",philippines,asia,,,12.7503486,122.7312101,12.7503486,122.7312101
+manila,"",philippines,asia,14.5948914,120.9782618,12.7503486,122.7312101,12.7503486,122.7312101
+corbera de llobregat,barcelona,spain,europe,41.4166171,1.9338636,39.3260685,-4.8379791,,
+el perellã³,tarragona,spain,europe,,,39.3260685,-4.8379791,,
+koh jum,krabi,thailand,asia,7.81967595,98.9729283997932,14.8971921,100.83273,8.1111653,99.1097298
+london,london,united kingdom of great britain & northern ireland,europe,,,,,,
+na jomtien,pattaya,thailand,asia,,,14.8971921,100.83273,,
+luaunceston,tasmania,australia,oceania,,,-24.7761086,134.755,-42.035067,146.6366887
+fremantle,wa,australia,oceania,-32.0534086,115.7586172,-24.7761086,134.755,-25.2303005,121.0187246
+berkeley,california,united states of america,north america,37.8708393,-122.272863,39.7837304,-100.445882,36.7014631,-118.755997
+banting,selangor,malaysia,asia,,,4.5693754,102.2656823,3.2083304,101.304146
+two harbors catalina,ca,united states of america,north america,,,39.7837304,-100.445882,36.7014631,-118.755997
+astoria,ny,united states of america,north america,40.7720145,-73.9302673,39.7837304,-100.445882,43.1561681,-75.8449946
+kaizuka,osaka,japan,asia,34.432856,135.360043,36.5748441,139.2394179,34.661629,135.499926792455
+tucson,az,united states of america,north america,32.2228765,-110.9748477,39.7837304,-100.445882,34.395342,-111.763275
+stateline,nv,united states of america,north america,38.9667745,-119.944274581591,39.7837304,-100.445882,39.5158825,-116.8537227
+lafayette,louisiana,united states of america,north america,30.2043259,-92.0298813,39.7837304,-100.445882,30.8703881,-92.007126
+washington,district of columbia,united states of america,north america,38.8950368,-77.0365427,39.7837304,-100.445882,38.89384735,-76.9880428191095
+hua hin,"",thailand,asia,12.5699326,99.9573437,14.8971921,100.83273,14.8971921,100.83273
+kodiang,kedah,malaysia,asia,6.394604,100.3041483,4.5693754,102.2656823,5.8098265,100.6715035
+bukit ayer,perlis,malaysia,asia,,,4.5693754,102.2656823,6.4868392,100.2577623
+miami,florida,united states of america,north america,25.7741728,-80.19362,39.7837304,-100.445882,27.7567667,-81.4639835
+mooloolaba,"sunshine coast, queensland",australia,oceania,-26.6852565,153.113184866593,-24.7761086,134.755,,
+scarborough perth,wa,australia,oceania,,,-24.7761086,134.755,-25.2303005,121.0187246
+kerkennah,grimdi island,tunisia,africa,,,33.8439408,9.400138,,
+tunis,carthage,tunisia,africa,,,33.8439408,9.400138,,
+4/23/2022,bali,indonesia,asia,,,-2.4833826,117.8902853,-8.3304977,115.0906401
+pattaya,chonburi,thailand,asia,12.9366674,100.8864587,14.8971921,100.83273,13.1857117,101.1210777
+thasala,nakornsrithammarat,thailand,asia,,,14.8971921,100.83273,,
+diani,"kwale county, coast region",kenya,africa,,,1.4419683,38.4313975,,
+davao,davao del sur,philippines,asia,,,12.7503486,122.7312101,6.6983658,125.3612135
+fort collins,colorado,united states of america,north america,40.5508527,-105.0668085,39.7837304,-100.445882,38.7251776,-105.607716
+brownsville,tx,united states of america,north america,25.9140277,-97.4890879,39.7837304,-100.445882,31.2638905,-98.5456116
+plateau,plateau,nigeria,africa,,,9.6000359,7.9999721,9.0583446,9.6826289
+darjeeling,west bengal,india,asia,27.0377554,88.263176,22.3511148,78.6677428,22.9964948,87.6855882
+ghar el mehl,bizerte,tunisia,africa,,,33.8439408,9.400138,37.03543385,9.63932586146198
+durban,kwazulu-natal,south africa,africa,-29.861825,31.009909,-28.8166236,24.991639,-28.503833,30.8875009
+mbezi beach,"",tanzania,africa,,,-6.5247123,35.7878438,-6.5247123,35.7878438
+dar es salaam,ocean road,tanzania,africa,,,-6.5247123,35.7878438,,
+dar es salaam,kunduchi pwani,tanzania,africa,,,-6.5247123,35.7878438,,
+dar es salaam,kimara/ubungo,tanzania,africa,,,-6.5247123,35.7878438,,
+dar es salaam,gongo la mboto,tanzania,africa,,,-6.5247123,35.7878438,,
+morogoro town,morogoro,tanzania,africa,,,-6.5247123,35.7878438,-7.0842931,37.4232686
+dar es salaam,dar es salaam,tanzania,africa,,,-6.5247123,35.7878438,-6.8160837,39.2803583
+dar es salaam,temeke,tanzania,africa,,,-6.5247123,35.7878438,,
+dar es salaam,buza/temeke/dar es salaam,tanzania,africa,,,-6.5247123,35.7878438,,
+tanga,korogwe mji,tanzania,africa,,,-6.5247123,35.7878438,,
+rukwa,sumbawanga,tanzania,africa,,,-6.5247123,35.7878438,,
+kigamboni,dar es salaam,tanzania,africa,-6.8254559,39.3094094,-6.5247123,35.7878438,-6.8160837,39.2803583
+ubungo,dar es salaam,tanzania,africa,-6.7936233,39.2096611,-6.5247123,35.7878438,-6.8160837,39.2803583
+letchworth garden city,"",united kingdom of great britain & northern ireland,europe,,,,,,
+mamuju,"",indonesia,asia,-2.6756302,118.8847947,-2.4833826,117.8902853,-2.4833826,117.8902853
+ibiza benirras,"",spain,europe,,,39.3260685,-4.8379791,39.3260685,-4.8379791
+ametlla de mar,tarragona,spain,europe,40.8838957,0.8024645,39.3260685,-4.8379791,,
+kilimanjaro,moshi,tanzania,africa,-3.3376921,37.3267921,-6.5247123,35.7878438,,
+mbay,east nusa tenggara/nagekeo,indonesia,asia,-8.5665108,121.2654296,-2.4833826,117.8902853,,
+depok,west java,indonesia,asia,-6.40719,106.8158371,-2.4833826,117.8902853,-6.8891904,107.6404716
+sintok,"",malaysia,asia,6.449246,100.5014195,4.5693754,102.2656823,4.5693754,102.2656823
+njombe,"",tanzania,africa,-9.3380477,34.7694862,-6.5247123,35.7878438,-6.5247123,35.7878438
+lantau island,"",hong kong,asia,,,,,,
+ngaramtoni,arusha,tanzania,africa,-3.3140207,36.6397893,-6.5247123,35.7878438,-2.7170632,35.6812537
+kuta,badung,indonesia,asia,-8.7278354,115.1730049,-2.4833826,117.8902853,,
+kedonganan,badung,indonesia,asia,-8.7620233,115.1754182,-2.4833826,117.8902853,,
+mas,bali/ubud/gianyar,indonesia,asia,-8.5450345,115.2731894,-2.4833826,117.8902853,,
+nusa dua,bali,indonesia,asia,-8.8016122,115.2239813,-2.4833826,117.8902853,-8.3304977,115.0906401
+nagekeo,east nusa tenggara,indonesia,asia,,,-2.4833826,117.8902853,-8.5656787,120.6978581
+alcazar seguir playa,tanger-tã©touan-houciema,morocco,africa,,,31.1728205,-7.3362482,,
+tunis,belvedã¨re,tunisia,africa,,,33.8439408,9.400138,,
+tunis,gamarth,tunisia,africa,,,33.8439408,9.400138,,
+arnaudville,louisiana,united states of america,north america,30.3976485,-91.9316052,39.7837304,-100.445882,30.8703881,-92.007126
+nairobi,ruai,kenya,africa,,,1.4419683,38.4313975,,
+mamuju,west sulawasei,indonesia,asia,,,-2.4833826,117.8902853,,
+jakarta,dki jakarta,indonesia,asia,-6.26289085,106.882228946928,-2.4833826,117.8902853,-6.1753942,106.827183
+palangka raya,kalimantan tengah,indonesia,asia,-2.2072919,113.9164372,-2.4833826,117.8902853,-1.499583,113.2903307
+banda aceh,"aceh, sumatra",indonesia,asia,,,-2.4833826,117.8902853,,
+caloocan city,ncr,philippines,asia,14.651348,120.9724002,12.7503486,122.7312101,,
+gma,cavite,philippines,asia,14.2956484,121.0067732,12.7503486,122.7312101,14.2554073,120.8671503
+dar es salaam,sinza river,tanzania,africa,,,-6.5247123,35.7878438,,
+kinondoni,dar es salaam,tanzania,africa,-6.78406675,39.2700733855397,-6.5247123,35.7878438,-6.8160837,39.2803583
+medvode,"",slovenia,europe,46.1402285,14.4130728,46.1199444,14.8153333,46.1199444,14.8153333
+berkeley,"",united states of america,north america,37.8708393,-122.272863,39.7837304,-100.445882,39.7837304,-100.445882
+venice beach,ca,united states of america,north america,,,39.7837304,-100.445882,36.7014631,-118.755997
+pãƒâ£ã‚â¡tzcuaro,michoacãƒâ£ã‚â¡n,mexico,north america,,,23.6585116,-102.0077097,,
+gianyar,bali,indonesia,"",-8.5482357,115.326054015372,-2.4833826,117.8902853,-8.3304977,115.0906401
+"kpone, tema",greater accra metropolitan area,ghana,africa,,,8.0300284,-1.0800271,,
+pã¡tzcuaro,michoacã¡n,mexico,north america,,,23.6585116,-102.0077097,,
+legian,badung,indonesia,asia,-8.703338,115.1688432,-2.4833826,117.8902853,,
+malang,jawa timur,indonesia,asia,-7.9771206,112.6340291,-2.4833826,117.8902853,-7.6977397,112.4914199
+mas,ubud,indonesia,asia,-8.5450345,115.2731894,-2.4833826,117.8902853,,
+banyupoh,bali,indonesia,asia,,,-2.4833826,117.8902853,-8.3304977,115.0906401
+lemes,nusa tenggara timur,indonesia,asia,,,-2.4833826,117.8902853,-8.5656787,120.6978581
+klungkung,bali,indonesia,asia,-8.5352229,115.4037258,-2.4833826,117.8902853,-8.3304977,115.0906401
+kamianets-podilskyi,khmelnytsky,ukraine,europe,,,49.4871968,31.2718321,,
+payangan,gianyar,indonesia,asia,-8.4252668,115.2455213,-2.4833826,117.8902853,,
+"chicago - promontory point, hyde park (near soutside)",il,united states of america,north america,,,39.7837304,-100.445882,40.0796606,-89.4337288
+vecää·i,rä«ga,latvia,europe,,,56.8406494,24.7537645,,
+kennebunk,me,united states of america,north america,43.384092,-70.545273,39.7837304,-100.445882,45.709097,-68.8590201
+baratti,"",italy,europe,42.9986192,10.5166882,42.6384261,12.674297,42.6384261,12.674297
+wheat ridge,co,united states of america,north america,39.766098,-105.0772063,39.7837304,-100.445882,38.7251776,-105.607716
+holmen,wi,united states of america,north america,43.9632962,-91.2562539,39.7837304,-100.445882,44.4308975,-89.6884637
+savannah,ga,united states of america,north america,32.0564572,-81.0951271,39.7837304,-100.445882,32.3293809,-83.1137366
+abington,pa,united states of america,north america,40.1206656,-75.1179512,39.7837304,-100.445882,40.9699889,-77.7278831
+el houciema,"",morocco,africa,,,31.1728205,-7.3362482,31.1728205,-7.3362482
+st. petersburg,"",united states of america,north america,27.7703796,-82.6695085,39.7837304,-100.445882,39.7837304,-100.445882
+st. petersburg fl,"",united states of america,north america,,,39.7837304,-100.445882,39.7837304,-100.445882
+gili trawangan,"",indonesia,asia,-8.35033965,116.036262125064,-2.4833826,117.8902853,-2.4833826,117.8902853
+willow grove,"",united states of america,north america,40.1439985,-75.1157286,39.7837304,-100.445882,39.7837304,-100.445882
+san diego,"",united states of america,north america,32.7174202,-117.1627728,39.7837304,-100.445882,39.7837304,-100.445882
+pantai kuk cituis,"",indonesia,asia,,,-2.4833826,117.8902853,-2.4833826,117.8902853
+roskilde,zealand,denmark,europe,55.6433478,12.0819247,55.670249,10.3333283,,
+gimpo-si,gyeonggi-do,korea,asia,37.6155683,126.7157798,36.638392,127.6961188,37.2752,127.0095
+namyangju-si,gyeonggi-do,korea,asia,37.6359398,127.2165051,36.638392,127.6961188,37.2752,127.0095
+gowa,sulawesi selatan,indonesia,asia,-5.3290868,119.766027666291,-2.4833826,117.8902853,-3.6446718,119.9471906
+buford,georgia,united states of america,north america,34.1206564,-84.0043513,39.7837304,-100.445882,32.3293809,-83.1137366
+point reyes,"",united states of america,north america,,,39.7837304,-100.445882,39.7837304,-100.445882
+fonte da telha,almada,portugal,europe,38.5724871,-9.1949507,39.6621648,-8.1353519,,
+amsterdam,north holland,netherlands,europe,52.3730796,4.8924534,52.24764975,5.54124684940616,52.7212825,4.820665
+tamuning,"",guam,oceania,,,,,,
+alleroed,northern zealand,denmark,europe,,,55.670249,10.3333283,,
+malang,jawa timur/indonesia,indonesia,asia,,,-2.4833826,117.8902853,,
+kupang,nusa tenggara timur,indonesia,asia,-10.1632209,123.6017755,-2.4833826,117.8902853,-8.5656787,120.6978581
+freiburg,baden-wã¼rttemberg,germany,europe,,,51.1638175,10.4478313,,
+kuwait,shweikh/free zone,kuwait,asia,,,29.2733964,47.4979476,,
+"manta, santa marianita",manabi,ecuador,south america,,,-1.3397668,-79.3666965,-0.7588025,-80.0612131
+"copenhagen (noerrebro, soerne)",zealand,denmark,europe,,,55.670249,10.3333283,,
+moen island,islands south of zealand,denmark,europe,,,55.670249,10.3333283,,
+vor frue,zealand,denmark,europe,55.6111657,12.0962477,55.670249,10.3333283,,
+jimbaran,bali,indonesia,asia,-8.7724902,115.1723944,-2.4833826,117.8902853,-8.3304977,115.0906401
+bandung,jawa barat,indonesia,asia,-6.9344694,107.6049539,-2.4833826,117.8902853,-6.8891904,107.6404716
+san francisco,california,united states minor outlying islands,north america,,,,,,
+maumere,"",indonesia,asia,-8.6256456,122.2192885,-2.4833826,117.8902853,-2.4833826,117.8902853
+bogor,"",indonesia,asia,-6.5962986,106.7972421,-2.4833826,117.8902853,-2.4833826,117.8902853
+kendari,"",indonesia,asia,-3.9918068,122.5180066,-2.4833826,117.8902853,-2.4833826,117.8902853
+lewoleba,lembata,indonesia,asia,-8.3717836,123.4184039,-2.4833826,117.8902853,,
+ende,nusa tenggara timur,indonesia,"",-8.8439147,121.647964,-2.4833826,117.8902853,-8.5656787,120.6978581
+kupang,ntt,indonesia,asia,-10.1632209,123.6017755,-2.4833826,117.8902853,-8.5656787,120.6978581
+bogor,west java,indonesia,asia,-6.5962986,106.7972421,-2.4833826,117.8902853,-6.8891904,107.6404716
+ende,nusa tenggara timur,indonesia,asia,-8.8439147,121.647964,-2.4833826,117.8902853,-8.5656787,120.6978581
+sekayu,musi banyuasin,indonesia,asia,-2.8944809,103.8471293,-2.4833826,117.8902853,,
+kendari,southeast sulawesi,indonesia,asia,-3.9918068,122.5180066,-2.4833826,117.8902853,-3.5491199,121.7279646
+nagekeo,nusa tenggara timur,indonesia,asia,,,-2.4833826,117.8902853,-8.5656787,120.6978581
+depok,jawa barat,indonesia,asia,-6.40719,106.8158371,-2.4833826,117.8902853,-6.8891904,107.6404716
+payangan,bali,indonesia,asia,-8.4252668,115.2455213,-2.4833826,117.8902853,-8.3304977,115.0906401
+kendari,sulawesi tenggara,indonesia,asia,-3.9918068,122.5180066,-2.4833826,117.8902853,-3.5491199,121.7279646
+pacitan,jawa timur,indonesia,asia,-8.1947233,111.1035716,-2.4833826,117.8902853,-7.6977397,112.4914199
+sukawati,bali,indonesia,asia,-8.5961547,115.2820391,-2.4833826,117.8902853,-8.3304977,115.0906401
+surabaya,east java,indonesia,asia,-7.2459717,112.7378266,-2.4833826,117.8902853,-7.6977397,112.4914199
+malang,east java/indonesia,indonesia,asia,,,-2.4833826,117.8902853,,
+labuan bajo,east nusa tenggara,indonesia,asia,-8.4944201,119.8855688,-2.4833826,117.8902853,-8.5656787,120.6978581
+tulungagung,east java/indonesia,indonesia,asia,,,-2.4833826,117.8902853,,
+mbay,ntt,indonesia,asia,-8.5665108,121.2654296,-2.4833826,117.8902853,-8.5656787,120.6978581
+pacitan,east java,indonesia,asia,-8.1947233,111.1035716,-2.4833826,117.8902853,-7.6977397,112.4914199
+alor,nusa tenggara timur,indonesia,asia,-8.29114485,124.777716400096,-2.4833826,117.8902853,-8.5656787,120.6978581
+biak,papua,indonesia,asia,-1.1836086,136.0816321,-2.4833826,117.8902853,-2.4749149,138.08485
+saba,bali,indonesia,asia,-8.6001939,115.3061253,-2.4833826,117.8902853,-8.3304977,115.0906401
+gumicik,bali,indonesia,asia,,,-2.4833826,117.8902853,-8.3304977,115.0906401
+bangkalan,east java,indonesia,asia,-7.0294703,112.7473329,-2.4833826,117.8902853,-7.6977397,112.4914199
+muara angke & pulau g,"jakarta, indonesia",indonesia,asia,,,-2.4833826,117.8902853,,
+dhanmondi,"",bangladesh,asia,23.7479124,90.3745866,24.4769288,90.2934413,24.4769288,90.2934413
+ghaziabad,uttar pradesh,india,asia,28.6711527,77.4120356,22.3511148,78.6677428,27.1303344,80.859666
+bonamoussadi,douala,cameroon,africa,4.094354,9.7393663,4.6125522,13.1535811,,
+logpom,douala,cameroon,africa,4.0769067,9.7711838,4.6125522,13.1535811,,
+makepe kotto,douala,cameroon,africa,,,4.6125522,13.1535811,,
+malang,"east java, indonesia",indonesia,asia,,,-2.4833826,117.8902853,,
+chennai,tamil nadu,india,asia,13.0836939,80.270186,22.3511148,78.6677428,10.9094334,78.3665347
+lomã©,maritime,togo,africa,6.130419,1.215829,8.7800265,1.0199765,6.51751775,1.20458048140176
+adelaide,sa,australia,oceania,-34.9281805,138.5999312,-24.7761086,134.755,-30.5343665,135.6301212
+dar es salaam,tabata segerea,tanzania,africa,,,-6.5247123,35.7878438,,
+dar es salaam,"",tanzania,africa,-6.8160837,39.2803583,-6.5247123,35.7878438,-6.5247123,35.7878438
+unguja,"",tanzania,africa,-6.09994425,39.3209443171526,-6.5247123,35.7878438,-6.5247123,35.7878438
+coast,"",kenya,africa,,,1.4419683,38.4313975,1.4419683,38.4313975
+balmoral st. downtown winnipeg,manitoba,canada,north america,,,61.0666922,-107.991707,55.001251,-97.001038
+metapan,santa ana,el salvador,north america,14.332178,-89.4481035,13.8000382,-88.9140683,,
+st.petersburg,st.petersburg,russian federation,europe,59.938732,30.316229,64.6863136,97.7453061,59.9606739,30.1586551
+chelsea,ny,united states of america,north america,40.7464906,-74.0015283,39.7837304,-100.445882,43.1561681,-75.8449946
+dar es salaam,mto ng'ombe,tanzania,africa,,,-6.5247123,35.7878438,,
+dartmouth,ma,united states of america,north america,41.6332267,-70.9879928,39.7837304,-100.445882,42.3788774,-72.032366
+christenstead,st. croix,united states of america,north america,,,39.7837304,-100.445882,,
+ottawa,"",canada,north america,45.4208777,-75.6901106,61.0666922,-107.991707,61.0666922,-107.991707
+denver,colorado,united states of america,north america,39.7392364,-104.984862,39.7837304,-100.445882,38.7251776,-105.607716
+los angeles,california,united states of america,north america,34.0536909,-118.242766,39.7837304,-100.445882,36.7014631,-118.755997
+"",chaing rai,thailand,asia,,,14.8971921,100.83273,,
+ari,bangkok,thailand,asia,,,14.8971921,100.83273,13.8245796,100.6224463
+yogyakarta,"",indonesia,asia,-7.8011945,110.364917,-2.4833826,117.8902853,-2.4833826,117.8902853
+sekayu,sumatera selatan,indonesia,asia,-2.8944809,103.8471293,-2.4833826,117.8902853,-3.1266842,104.0930554
+belu,nusa tenggara timur,indonesia,asia,-8.427259,123.465631,-2.4833826,117.8902853,-8.5656787,120.6978581
+lampung,lampung,indonesia,asia,-5.4460713,105.2643742,-2.4833826,117.8902853,-4.8555039,105.0272986
+purbalingga,central of java,indonesia,asia,,,-2.4833826,117.8902853,,
+mumbai,"",india,asia,19.0785451,72.878176,22.3511148,78.6677428,22.3511148,78.6677428
+kuala lumpur,kuala lumpur,malaysia,asia,,,4.5693754,102.2656823,3.1516964,101.6942371
+florianãƒâ³polis,"",brazil,south america,,,-10.3333333,-53.2,-10.3333333,-53.2
+seattle,wa,united states of america,north america,47.6038321,-122.330062,39.7837304,-100.445882,47.2868352,-120.212613
+hong kong island,"",hong kong,asia,,,,,,
+alcãƒâ£ã‚âºdia,"",spain,europe,,,39.3260685,-4.8379791,39.3260685,-4.8379791
+marina,ca,united states of america,north america,36.6900986,-121.800629330262,39.7837304,-100.445882,36.7014631,-118.755997
+alcãºdia,"",spain,europe,,,39.3260685,-4.8379791,39.3260685,-4.8379791
+wayanad,kerala,india,asia,,,22.3511148,78.6677428,10.3528744,76.5120396
+perm,perm region,russian federation,europe,58.014965,56.246723,64.6863136,97.7453061,58.5951603,56.3159546
+sylt,schleswig-holstein,germany,europe,54.9017773,8.3313460317205,51.1638175,10.4478313,54.1853998,9.8220089
+munggu beach,"",indonesia,asia,,,-2.4833826,117.8902853,-2.4833826,117.8902853
+dar es salaam,magengani,tanzania,africa,,,-6.5247123,35.7878438,,
+morogoro,"",tanzania,africa,-6.8161626,37.6693891,-6.5247123,35.7878438,-6.5247123,35.7878438
+ende,"",indonesia,asia,-5.128956,119.4142779,-2.4833826,117.8902853,-2.4833826,117.8902853
+komodo,"",indonesia,asia,-8.4885865,119.5883272,-2.4833826,117.8902853,-2.4833826,117.8902853
+region vii,"",philippines,asia,,,12.7503486,122.7312101,12.7503486,122.7312101
+male,"",maldives,asia,4.1779879,73.5107387,3.7203503,73.2244152,3.7203503,73.2244152
+adelaide glengl beach,wa,australia,oceania,,,-24.7761086,134.755,-25.2303005,121.0187246
+owerri north,"",nigeria,africa,,,9.6000359,7.9999721,9.6000359,7.9999721
+"two harbors, catalina",california,united states of america,north america,,,39.7837304,-100.445882,36.7014631,-118.755997
+half moon bay,california,united states of america,north america,37.4635519,-122.428586,39.7837304,-100.445882,36.7014631,-118.755997
+koror,california,united states of america,north america,,,39.7837304,-100.445882,36.7014631,-118.755997
+sylt,schleswig holstein,germany,europe,54.9017773,8.3313460317205,51.1638175,10.4478313,54.1853998,9.8220089
+milwaukee,wi,united states of america,north america,43.0349931,-87.922497,39.7837304,-100.445882,44.4308975,-89.6884637
+albany,california,united states of america,north america,37.88687,-122.2977475,39.7837304,-100.445882,36.7014631,-118.755997
+richmond,california,united states of america,north america,37.9357576,-122.347748,39.7837304,-100.445882,36.7014631,-118.755997
+dar es saaam,"",tanzania,africa,,,-6.5247123,35.7878438,-6.5247123,35.7878438
+klungkung,klungkung,indonesia,asia,-8.5352229,115.4037258,-2.4833826,117.8902853,,
+mbeya,mbeya,tanzania,africa,-8.906508,33.468672,-6.5247123,35.7878438,-8.6131228,33.3341957
+baseco,"",philippines,asia,14.4354205,120.5214652,12.7503486,122.7312101,12.7503486,122.7312101
+mwnza,"",tanzania,africa,,,-6.5247123,35.7878438,-6.5247123,35.7878438
+iten,elgeyo marakwet county,kenya,africa,0.6730702,35.5102633,1.4419683,38.4313975,0.74221915,35.5618083135393
+peculiar,mo,united states of america,north america,38.7145481,-94.4611204,39.7837304,-100.445882,38.7604815,-92.5617875
+ceredigion,"",united kingdom of great britain & northern ireland,europe,,,,,,
+izola,"",slovenia,europe,45.5398936,13.65939,46.1199444,14.8153333,46.1199444,14.8153333
+pacific rim national park,bc,canada,north america,,,61.0666922,-107.991707,55.001251,-125.002441
+ajdovã…â¡ã„âina,"",slovenia,europe,,,46.1199444,14.8153333,46.1199444,14.8153333
+dar es salaam,mbezi river,tanzania,africa,,,-6.5247123,35.7878438,,
+chavannes prã¨s renens,vaud,switzerland,europe,,,46.7985624,8.2319736,46.6356963,6.5320717
+ahmedabad,gujarat,india,asia,23.0216238,72.5797068,22.3511148,78.6677428,22.3850051,71.745261
+ulju-gun,ulsan,korea,asia,35.5219,129.2426,36.638392,127.6961188,35.5391697,129.3119136
+richmond,ca,united states of america,north america,37.9357576,-122.347748,39.7837304,-100.445882,36.7014631,-118.755997
+broomfield,co,united states of america,north america,39.9403995,-105.05208,39.7837304,-100.445882,38.7251776,-105.607716
+victoria,british columbia,canada,north america,48.4283182,-123.3649533,61.0666922,-107.991707,55.001251,-125.002441
+washougal,wa,united states of america,north america,45.5819594,-122.3479921,39.7837304,-100.445882,47.2868352,-120.212613
+port coquitlam,"",canada,north america,49.2621643,-122.780542,61.0666922,-107.991707,61.0666922,-107.991707
+porto sant'elpidio,"",italy,europe,43.2563365,13.7593646,42.6384261,12.674297,42.6384261,12.674297
+anglet,aquitaine,france,europe,43.4813927,-1.5149935,46.603354,1.8883335,,
+rangpur,"",bangladesh,asia,25.7569808,89.241459,24.4769288,90.2934413,24.4769288,90.2934413
+dar es salaam,tandale kwatumbo,tanzania,africa,,,-6.5247123,35.7878438,,
+colombia,"",colombia,south america,5.5495156,-74.0046921,4.099917,-72.9088133,4.099917,-72.9088133
+zouk,"",lebanon,asia,33.94990755,35.6014268336031,33.8750629,35.843409,33.8750629,35.843409
+byron bay,nsw,australia,oceania,-28.6483333,153.6177778,-24.7761086,134.755,-31.8759835,147.2869493
+sandy bay- mangrove,bay islands/ roatan,honduras,north america,,,15.2572432,-86.0755145,,
+sandy bay reef,bay islands/ roatan,honduras,north america,,,15.2572432,-86.0755145,,
+florianopolis,south america,brazil,south america,,,-10.3333333,-53.2,,
+muir beach,ca,united states of america,north america,37.8621493,-122.5813667,39.7837304,-100.445882,36.7014631,-118.755997
+chicago,il,united states of america,north america,41.8755616,-87.6244212,39.7837304,-100.445882,40.0796606,-89.4337288
+veli,trivandrum,india,asia,8.5198295,76.8796552,22.3511148,78.6677428,,
+santa cruz,seabright sb,united states of america,north america,,,39.7837304,-100.445882,,
+mill valley,ca,united states of america,north america,37.9060368,-122.5449763,39.7837304,-100.445882,36.7014631,-118.755997
+carpentersville,il,united states of america,north america,42.1211364,-88.2578582,39.7837304,-100.445882,40.0796606,-89.4337288
+janes bay ningaloo,wa,australia,oceania,,,-24.7761086,134.755,-25.2303005,121.0187246
+yaounde,"",cameroon,africa,3.8689867,11.5213344,4.6125522,13.1535811,4.6125522,13.1535811
+san agustin,romblon,philippines,asia,12.5682679,122.1339744,12.7503486,122.7312101,12.5886411,122.1933517
+ibiza figuretas,"",spain,europe,,,39.3260685,-4.8379791,39.3260685,-4.8379791
+kajang,selangor,malaysia,asia,2.9948437,101.7896595,4.5693754,102.2656823,3.2083304,101.304146
+north lombok,"",indonesia,asia,,,-2.4833826,117.8902853,-2.4833826,117.8902853
+jimbaran,"",indonesia,asia,-8.7724902,115.1723944,-2.4833826,117.8902853,-2.4833826,117.8902853
+trivandrum,kerala,india,asia,8.4882267,76.947551,22.3511148,78.6677428,10.3528744,76.5120396
+pescadero,california,united states of america,north america,37.2516018,-122.3821927,39.7837304,-100.445882,36.7014631,-118.755997
+gentofte,zealand,denmark,europe,,,55.670249,10.3333283,,
+sausalito,california,united states of america,north america,37.8590272,-122.485469,39.7837304,-100.445882,36.7014631,-118.755997
+"two harbors, catalina",ca,united states of america,north america,,,39.7837304,-100.445882,36.7014631,-118.755997
+carcassonne,occitanie,france,europe,43.2130358,2.3491069,46.603354,1.8883335,43.6487851,2.3435684
+fire island,ny,united states of america,north america,40.7465507,-72.8226051757688,39.7837304,-100.445882,43.1561681,-75.8449946
+all over taiwan,"",taiwan,asia,,,23.9739374,120.9820179,23.9739374,120.9820179
+barcelona,"",spain,europe,41.3828939,2.1774322,39.3260685,-4.8379791,39.3260685,-4.8379791
+eco,trail at rhodopes mountain,bulgaria,europe,,,42.6073975,25.4856617,,
+houston,"",united states of america,north america,29.7589382,-95.3676974,39.7837304,-100.445882,39.7837304,-100.445882
+winterthur,"",switzerland,europe,47.4991723,8.7291498,46.7985624,8.2319736,46.7985624,8.2319736
+crescent city,california,united states of america,north america,41.755948,-124.201747,39.7837304,-100.445882,36.7014631,-118.755997
+seattle wa,"",united states of america,north america,,,39.7837304,-100.445882,39.7837304,-100.445882
+cedar crest,"",united states of america,north america,37.2466536,-119.1921794,39.7837304,-100.445882,39.7837304,-100.445882
+napoli,"",italy,europe,40.8358846,14.2487679,42.6384261,12.674297,42.6384261,12.674297
+ischia,"",italy,europe,40.734205,13.947125,42.6384261,12.674297,42.6384261,12.674297
+semarang,central java,indonesia,asia,-6.9903988,110.4229104,-2.4833826,117.8902853,-7.3032412,110.0044145
+pekanbaru,"",indonesia,asia,0.5262455,101.4515727,-2.4833826,117.8902853,-2.4833826,117.8902853
+tangerang,banten,indonesia,asia,-6.1761924,106.6382161,-2.4833826,117.8902853,-6.4453801,106.1375586
+indonesia,"",indonesia,asia,-8.1153337,115.1083287,-2.4833826,117.8902853,-2.4833826,117.8902853
+padang,west sumatera,indonesia,asia,-0.9247587,100.3632561,-2.4833826,117.8902853,,
+yogyakata,central java,indonesia,asia,,,-2.4833826,117.8902853,-7.3032412,110.0044145
+bandung,west java,indonesia,asia,-6.9344694,107.6049539,-2.4833826,117.8902853,-6.8891904,107.6404716
+dumaguete city,"",philippines,asia,9.3054777,123.3080446,12.7503486,122.7312101,12.7503486,122.7312101
+pett level beach,"",united kingdom of great britain & northern ireland,europe,,,,,,
+eugene oregon,"",united states of america,north america,,,39.7837304,-100.445882,39.7837304,-100.445882
+heidelberg,neckarwiese,germany,europe,,,51.1638175,10.4478313,,
+"noerrebro, copenhagen",zealand,denmark,europe,,,55.670249,10.3333283,,
+hongcheon-gun,gangwon-do,korea,asia,,,36.638392,127.6961188,37.885,127.7297
+sodam-dong,sejong city,korea,asia,36.4840143,127.3003994,36.638392,127.6961188,,
+jung-gu,incheon,korea,asia,37.4735389,126.6214081,36.638392,127.6961188,37.456,126.7052
+papar,sabah,malaysia,asia,5.7330227,115.9320971,4.5693754,102.2656823,5.4257359,117.0326392
+makassar,"",indonesia,asia,-5.1342962,119.4124282,-2.4833826,117.8902853,-2.4833826,117.8902853
+new york city,"",united states of america,north america,40.7127281,-74.0060152,39.7837304,-100.445882,39.7837304,-100.445882
+katerini,"",greece,europe,40.2713616,22.5087618,38.9953683,21.9877132,38.9953683,21.9877132
+roanoke,va,united states of america,north america,37.270973,-79.9414313,39.7837304,-100.445882,37.1232245,-78.4927721
+thiruvananthapuram,kerala,india,asia,8.4882267,76.947551,22.3511148,78.6677428,10.3528744,76.5120396
+bronx,new york,united states of america,north america,40.8466508,-73.8785937,39.7837304,-100.445882,43.1561681,-75.8449946
+"noerrebro, copenhagen","capital area, zealand",denmark,europe,,,55.670249,10.3333283,,
+roskilde (north-east),zealand,denmark,europe,,,55.670249,10.3333283,,
+sandy bay- plasticofera,bay islands/ roatan,honduras,north america,,,15.2572432,-86.0755145,,
+silver spring,maryland,united states of america,north america,38.9959461,-77.0276231,39.7837304,-100.445882,39.5162401,-76.9382069
+kollam,"",india,asia,8.8879509,76.5955013,22.3511148,78.6677428,22.3511148,78.6677428
+mburak,nusa tenggara timur,indonesia,asia,,,-2.4833826,117.8902853,-8.5656787,120.6978581
+hood river,or,united states of america,north america,45.7087902,-121.512372,39.7837304,-100.445882,43.9792797,-120.737257
+buea,"",cameroon,africa,4.1567995,9.2315519,4.6125522,13.1535811,4.6125522,13.1535811
+atlanta,ga,united states of america,north america,33.7489924,-84.3902644,39.7837304,-100.445882,32.3293809,-83.1137366
+bues,"",cameroon,africa,,,4.6125522,13.1535811,4.6125522,13.1535811
+watertown,wi,united states of america,north america,43.1948481,-88.7286352,39.7837304,-100.445882,44.4308975,-89.6884637
+carlisle,"",united kingdom of great britain & northern ireland,europe,,,,,,
+keelung city,"",taiwan,asia,,,23.9739374,120.9820179,23.9739374,120.9820179
+san francisco,"",united states of america,north america,37.7790262,-122.419906,39.7837304,-100.445882,39.7837304,-100.445882
+kinshasa,"",dr of congo,africa,,,,,,
+lung kwu tan,"",hong kong,asia,,,,,,
+zurich,"",switzerland,europe,47.3744489,8.5410422,46.7985624,8.2319736,46.7985624,8.2319736
+volketswil (zãƒâ£ã‚â¼rich),"",switzerland,europe,,,46.7985624,8.2319736,46.7985624,8.2319736
+volketswil (zã¼rich),"",switzerland,europe,,,46.7985624,8.2319736,46.7985624,8.2319736
+ãƒâ€žã‚â°stanbul,heybeliada,turkey,asia,,,38.9597594,34.9249653,,
+ä°stanbul,heybeliada,turkey,europe,,,38.9597594,34.9249653,,
+schiermonnikoog,"",netherlands,europe,53.4782844,6.1610076,52.24764975,5.54124684940616,52.24764975,5.54124684940616
+durban,"",south africa,africa,-29.861825,31.009909,-28.8166236,24.991639,-28.8166236,24.991639
+lowell,ma,united states of america,north america,42.6414437,-71.3085329,39.7837304,-100.445882,42.3788774,-72.032366
+new york,"",united states of america,north america,40.7127281,-74.0060152,39.7837304,-100.445882,39.7837304,-100.445882
+schaumburg,il,united states of america,north america,42.0333608,-88.083406,39.7837304,-100.445882,40.0796606,-89.4337288
+guelmim,"",morocco,africa,28.9863852,-10.0574351,31.1728205,-7.3362482,31.1728205,-7.3362482
+mohamedia,"",morocco,africa,33.6958383,-7.3893292,31.1728205,-7.3362482,31.1728205,-7.3362482
+ljubljana,beã…â¾igrad,slovenia,europe,,,46.1199444,14.8153333,,
+ezzahra,tunis,tunisia,africa,,,33.8439408,9.400138,36.81776455,10.2126837229603
+reno,nv,united states of america,north america,39.5261206,-119.8126581,39.7837304,-100.445882,39.5158825,-116.8537227
+shenzhen,guangdong,china,asia,22.5445741,114.0545429,35.000074,104.999927,23.1357694,113.1982688
+istanbul,"",turkey,europe,41.0091982,28.9662187,38.9597594,34.9249653,38.9597594,34.9249653
+newport beach,"",united states of america,north america,33.6170092,-117.9294401,39.7837304,-100.445882,39.7837304,-100.445882
+fuzhou,fujian,china,asia,26.0774954,119.2918215,35.000074,104.999927,26.5450001,117.842778
+xiamen,fujian,china,asia,24.4801069,118.0853479,35.000074,104.999927,26.5450001,117.842778
+shanghai,"",china,asia,31.2322758,121.4692071,35.000074,104.999927,35.000074,104.999927
+zhoushan,zhejiang,china,asia,29.9873344,122.2030363,35.000074,104.999927,29.0000001,119.9999999
+yantai,shandong,china,asia,37.461928,121.4425255,35.000074,104.999927,36.0000001,118.9999999
+zhuhai,guangdong,china,asia,22.273734,113.5721327,35.000074,104.999927,23.1357694,113.1982688
+huludao,liaoning,china,asia,40.7515443,120.8404789,35.000074,104.999927,40.9975197,122.9955469
+abidjan,"",cote d'ivoire,africa,5.320357,-4.016107,7.9897371,-5.5679458,7.9897371,-5.5679458
+denpasar,"",indonesia,asia,-8.6524973,115.2191175,-2.4833826,117.8902853,-2.4833826,117.8902853
+vevey,vd,switzerland,europe,46.4602978,6.8418655,46.7985624,8.2319736,46.6356963,6.5320717
+songkhla,"",thailand,asia,7.1973429,100.593205,14.8971921,100.83273,14.8971921,100.83273
+santa catalina,morelos,mexico,north america,,,23.6585116,-102.0077097,18.75,-99
+semarang,"",indonesia,asia,-6.9903988,110.4229104,-2.4833826,117.8902853,-2.4833826,117.8902853
+portoviejo,manabi,ecuador,south america,-1.0528066,-80.4534269,-1.3397668,-79.3666965,-0.7588025,-80.0612131
+wonju-si,gangwon-do,korea,asia,37.3420996,127.9197603,36.638392,127.6961188,37.885,127.7297
+dongguan,guangdong,china,asia,23.0205969,113.7457788,35.000074,104.999927,23.1357694,113.1982688
+bar,"",montenegro,europe,42.0979745,19.0954528,42.9868853,19.5180992,42.9868853,19.5180992
+maoming,guangdong,china,asia,21.6656961,110.9209511,35.000074,104.999927,23.1357694,113.1982688
+sierre,suisse,switzerland,europe,,,46.7985624,8.2319736,,
+zhongshan,guangdong,china,asia,22.5196895,113.3870834,35.000074,104.999927,23.1357694,113.1982688
+santarua,live oak beach,united states of america,north america,,,39.7837304,-100.445882,,
+moss landing,n. zmdowski,united states of america,north america,,,39.7837304,-100.445882,,
+moss landing,zmudowski beach,united states of america,north america,,,39.7837304,-100.445882,,
+davenport,waddell creek beach,united states of america,north america,,,39.7837304,-100.445882,,
+santa cruz beaches (mostly main beach),"",united states of america,north america,,,39.7837304,-100.445882,39.7837304,-100.445882
+monterrey,ca - del monte beach,united states of america,north america,,,39.7837304,-100.445882,,
+capitola beach,"",united states of america,north america,,,39.7837304,-100.445882,39.7837304,-100.445882
+capitola beach,ca,united states of america,north america,,,39.7837304,-100.445882,36.7014631,-118.755997
+abbotsford,victoria,australia,oceania / australia,-37.8045508,144.9988542,-24.7761086,134.755,-36.5986096,144.6780052
+abbotsford,victoria,australia,oceania,-37.8045508,144.9988542,-24.7761086,134.755,-36.5986096,144.6780052
+los ï¿½ï¿½ngeles,california,united states of america,north america,,,39.7837304,-100.445882,36.7014631,-118.755997
+clarkesville,georgia,united states of america,north america,34.6125971,-83.5248933,39.7837304,-100.445882,32.3293809,-83.1137366
+malang,jawa timur/ indonesia/ malang,indonesia,asia,,,-2.4833826,117.8902853,,
+simiyu,"",tanzania,africa,,,-6.5247123,35.7878438,-6.5247123,35.7878438
+dunkerque,"",france,europe,51.0347708,2.3772525,46.603354,1.8883335,46.603354,1.8883335
+limassol,"",cyprus,asia,34.6852901,33.0332657,34.9823018,33.1451285,34.9823018,33.1451285
+usk,sir fynwy,united kingdom of great britain & northern ireland,europe,,,,,,
+gualala,california,united states of america,north america,38.7674439,-123.529828,39.7837304,-100.445882,36.7014631,-118.755997
+bergamo,lombadia,italy,europe,,,42.6384261,12.674297,,
+bracciano,"",italy,europe,42.1010951,12.1738573,42.6384261,12.674297,42.6384261,12.674297
+portharcourt,portharcourt,nigeria,africa,,,9.6000359,7.9999721,,
+nuevo leã³n,monterrey,mexico,north america,,,23.6585116,-102.0077097,,
+seabright sb - santa cruz,ca,united states of america,north america,,,39.7837304,-100.445882,36.7014631,-118.755997
+koh phi phi,"",thailand,asia,7.7522403,98.7766433666744,14.8971921,100.83273,14.8971921,100.83273
+battaramulla,"",sri lanka,asia,6.9021809,79.9195776,7.5554942,80.7137847,7.5554942,80.7137847
+loomis,"",united states of america,north america,38.8212889,-121.193004,39.7837304,-100.445882,39.7837304,-100.445882
+kilyos,ãƒâ€žã‚â°stanbul,turkey,asia,,,38.9597594,34.9249653,,
+kilyos,ä°stanbul,turkey,europe,,,38.9597594,34.9249653,,
+zanzibar,zanzibar,tanzania,africa,-6.1664908,39.2074312,-6.5247123,35.7878438,,
+monterey,"",united states of america,north america,36.600256,-121.8946388,39.7837304,-100.445882,39.7837304,-100.445882
+boston,ma,united states of america,north america,42.3554334,-71.060511,39.7837304,-100.445882,42.3788774,-72.032366
+moogoro muncipality,"",tanzania,africa,,,-6.5247123,35.7878438,-6.5247123,35.7878438
+torino,"",italy,europe,45.0677551,7.6824892,42.6384261,12.674297,42.6384261,12.674297
+lima,lima,peru,south america,-12.0621065,-77.0365256,-6.8699697,-75.0458515,-12.2001093,-76.2850579
+culver city,"",united states of america,north america,34.0211224,-118.396466,39.7837304,-100.445882,39.7837304,-100.445882
+crater lake,or,united states of america,north america,,,39.7837304,-100.445882,43.9792797,-120.737257
+fort collins,co,armenia,europe,,,40.7696272,44.6736646,,
+santa monuca,ca,united states of america,north america,,,39.7837304,-100.445882,36.7014631,-118.755997
+istanbul,"",turkey,asia,41.0091982,28.9662187,38.9597594,34.9249653,38.9597594,34.9249653
+witzenberg municipality,cape winelands district region,south africa,africa,,,-28.8166236,24.991639,,
+ras al khamai,"",united arab emirates,asia,,,24.0002488,53.9994829,24.0002488,53.9994829
+maresias,sãƒâ£ã†â€™o paulo,brazil,south america,,,-10.3333333,-53.2,,
+davao city,region 11,philippines,asia,7.0648306,125.6080623,12.7503486,122.7312101,,
+tallinn,"",estonia,europe,59.4372155,24.7453688,58.7523778,25.3319078,58.7523778,25.3319078
+los angeles,ca,china,asia,,,35.000074,104.999927,,
+ranisankail,thakurgaon,bangladesh,asia,25.9015206,88.2543889,24.4769288,90.2934413,,
+kona,hawaii,united states of america,north america,19.641941,-155.996933,39.7837304,-100.445882,19.5938015,-155.428370097169
+kenai fjords national park,alaska,united states of america,north america,,,39.7837304,-100.445882,64.4459613,-149.680909
+orem,utah,united states of america,north america,40.2981599,-111.6944313,39.7837304,-100.445882,39.4225192,-111.714358
+riverside,ca,united states of america,north america,33.9533546,-117.3961623,39.7837304,-100.445882,36.7014631,-118.755997
+yosemite national park,ca,united states of america,north america,,,39.7837304,-100.445882,36.7014631,-118.755997
