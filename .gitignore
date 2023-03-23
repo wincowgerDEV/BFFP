@@ -44,6 +44,8 @@ vignettes/*.pdf
 .Renviron
 
 # Ignoring data until final ok
-*.csv
+private_data/
 *.txt
 *.xlsx
+
+*raw_processed_data_event_ag_2.csv
