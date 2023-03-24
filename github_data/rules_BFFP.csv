@@ -1,0 +1,32 @@
+﻿name,description,dataset,valid_example
+brand_name,The brand name input by collaborators. This has been transformed to be all lower case and removed any trailing white space. ,raw_processed_data,coca cola
+parent_company_name,The parent company name input by collaborators or dervied through data cleaning. This is the top most parent company that owns the brand. ,raw_processed_data,the coca cola company
+id,A unique identifier for the parent company that is either the wikidata id a url address or the company or brand name input by BFFP collaborators. ,raw_processed_data,Q3295867
+validated,The level of validation that has occurred for the data point id. False means only minimal validation has occurred. True means the data point id has been manually verified. Attempted means the data point verification has been attempted but is still somewhat uncertian. ,raw_processed_data,TRUE
+submission_type,A identifier for the submission type made to the BFFP data portal. Unique names are unique data sources or formats. ,raw_processed_data,ThirdParty 2022
+submission_id,A unique identifier for each submission in integer format.  ,raw_processed_data,1
+year,The year that the survey took place. ,raw_processed_data,2020
+item_description,More information about the trash object characterized. This is not standardized yet beyond controlling for it being a character type and therefore should be used carefully. ,raw_processed_data,beverage bottles
+type_product,The type of product that the trash object is by use or sector. Null means there was no input. ,raw_processed_data,food packaging
+type_material,The type of material that the object is by polymer type. ,raw_processed_data,pet
+layer,The number of layers that the plastic material has. ,raw_processed_data,single-layer
+name_of_lead,A unique identifier for the person in charge of the survey. Names have been converted into numbers but numbers correspond across rows. ,raw_processed_data,2
+is_trained,A description on whether the surveyor was trained (yes) or not (no).,raw_processed_data,yes
+organization,A unique identifier for the organization submitting the data. ,raw_processed_data,6
+volunteer,The number of volunteers involved in the brand audit. ,raw_processed_data,23
+start_of_audit,The date the brand audit began. ,raw_processed_data,9/10/2022
+end_of_audit,The date the brand audit ended. ,raw_processed_data,9/11/2022
+time_spent,The amount of time spent on the audit in hours. ,raw_processed_data,10
+city,The name of the city where the audit took place. ,raw_processed_data,benicia
+province,The name of the province where the audit took place. ,raw_processed_data,california
+country,The name of the country where the audit took place. ,raw_processed_data,united states of america
+continent,The name of the continent where the audit took place. ,raw_processed_data,north america
+type_of_audit,The type of audit. ,raw_processed_data,outdoor
+specifics_of_audit,What land type the audit took place on. ,raw_processed_data,inland
+event_total_count,The total number of pieces of trash recorded in the audit. ,raw_processed_data,268
+event_id,A unique identifier for each audit event. ,raw_processed_data,ThirdParty 2022_1_2020
+longitude_most_specific,The most specific latitude coordinate we could come up with in decimal degrees. ,raw_processed_data,39.7
+latitude_most_specific,The most specific longitude coordinate we could come up with in decimal degrees. ,raw_processed_data,43.6
+location_specificity,The location specificity. ,raw_processed_data,city
+total_count,The total number of pieces of trash during the audit that were found of the type listed in this row including all descriptors. ,raw_processed_data,2
+proportion,The proportion of the total trash from the event of the type described in this row. ,raw_processed_data,0.00746
