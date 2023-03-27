@@ -170,6 +170,16 @@ elen_data <- fread("github_data/2022-Progress-Report-Data-Sheet-Final2_WC.csv") 
 
 population_data_2019 <- read.csv("github_data/country_population_data/API_SP.POP.TOTL_DS2_en_csv_v2_4902028_WC.csv")
 
+event_list <- fread("github_data/event_list.csv")
+
+raw_processed_data_event_ag <- fread("github_data/raw_processed_data_event_ag.csv")
+
+raw_prop_id_event <- fread("github_data/raw_prop_id_event.csv")
+
+raw_processed_data_event_ag_2 <- fread("github_data/raw_processed_data_event_ag_2.csv")
+
+brand_company_id <- fread("github_data/brand_company_id.csv")
+
 #Clean Data ----
 ##Cleanup Events to Anon Data ----
 #events <- read.csv("EventsCombined_2022.csv", encoding = "UTF-8", #quote = "", comment.char = "\\",
@@ -240,7 +250,7 @@ str(joined_clean)
 
 fwrite(joined_clean, "github_data/joined_clean.csv")
 
-#Harvest wikidata names ----
+##Harvest wikidata names ----
 #wikidata_ids <- brands_validated %>%
 #  distinct(id) %>%
 #  filter(grepl("q(\\d{2,})", id) & !grepl("http", id)) #%>%
@@ -258,7 +268,7 @@ fwrite(joined_clean, "github_data/joined_clean.csv")
 
 #fwrite(wikidata_ids2, "github_data/wikidata_ids2.csv")
 
-#Harvest locations ----
+##Harvest locations ----
 #locations_to_code <- brands_validated %>%
 #  distinct(city, province, country, continent) %>%
 #  mutate(across(everything(), ~gsub("null", "", .x))) %>%
@@ -411,6 +421,8 @@ all(unique(raw_processed_data$location_specificity) %in% c("city",    "country",
 
 all(raw_processed_data$proportion > 0 & raw_processed_data$proportion <= 1)
 
+lapply(raw_processed_data, function(x){sum(is.na(x))})
+
 # Type checks
 is.character(raw_processed_data$brand_name)
 is.character(raw_processed_data$parent_company_name)
@@ -505,7 +517,7 @@ raw_processed_data_event_ag_2 <- right_join(event_list, proportion_grid) %>%
 fwrite(raw_processed_data_event_ag_2, "github_data/raw_processed_data_event_ag_2.csv")
 
 brand_company_id <- raw_processed_data %>%
-  distinct(brand_name, parent_company_name, id) %>%
+  distinct(brand_name, parent_company_name, id, validated) %>%
   distinct(id, .keep_all = T)
 
 fwrite(brand_company_id, "github_data/brand_company_id.csv")
@@ -533,9 +545,8 @@ raw_processed_data_event_ag %>%
   theme_bw(base_size = 15) +
   labs(y = "Mean Event Count", x = "Year")
 
-
 #possibly a count bias per year. 
-raw_processed_data_event_ag %>%
+event_list %>%
   distinct(event_id, year) %>%
   group_by(year) %>%
   summarise(count = n()) %>%
@@ -546,7 +557,7 @@ raw_processed_data_event_ag %>%
   labs(y = "Number of Events", x = "Year")
 
 #summary stats, some countries have more events than others which would rate them lower. 
-raw_processed_data_event_ag_2 %>%
+event_list %>%
             distinct(event_id, country) %>%
             group_by(country) %>%
             summarise(count = n()) %>%
@@ -613,19 +624,26 @@ ggplot(elen_data %>%
   geom_smooth(method = "lm") +
   facet_grid(.~ `Sector (EMF input)`)
 
-#library(ggrepel)
+library(ggrepel)
+library(ggtext)
 
 ggplot(elen_data, aes(x = mass, y = mean)) +
-  geom_point() +
-  #geom_text( aes(x = mass, y = mean, label = `Company name`), hjust = 0) +
-  #geom_label_repel(aes(x = mass, y = mean, label = `Company name`), max.overlaps = 100) +
+  geom_text_repel(aes(label = gsub("[^[:alnum:]]", " ", `Company name`)), size = 2)+
+  geom_point(aes(color = factor(`Sector (EMF input)`))) +
+  geom_smooth(method = "lm") +
+  coord_fixed() +
   scale_x_log10() +
   scale_y_log10() +
   labs(x = "2021 Total Plastic Weight Produced (metric tonnes)", y = "Mean Proportion of Total Branded Waste") +
-  theme_classic(base_size = 15) +
-  #theme(legend.position = "none") +
-  geom_smooth(method = "lm") +
-  coord_fixed() 
+  theme_classic(base_size = 15) 
+  
+
+p <- ggplot(mtcars,
+            aes(wt, mpg, label = rownames(mtcars), colour = factor(cyl))) +
+  geom_point()
+
+# Avoid overlaps by repelling text labels
+p + geom_text_repel()
 
 hist(log10(elen_data$mean))
 hist(log10(elen_data$mass))
