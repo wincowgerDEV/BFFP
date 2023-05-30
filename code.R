@@ -14,6 +14,8 @@ library(WikidataR)
 library(tidygeocoder)
 library(mapview)
 library(sf)  
+library(ggrepel)
+library(ggtext)
 
 
 #Functions ----
@@ -70,13 +72,14 @@ brand_to_parent <- read.csv("github_data/cleanup_brand_to_parent.csv") %>%
 joined_clean <- read.csv("github_data/joined_clean.csv")
 
 brands_validated <- read.csv("github_data/brands_validated.csv") %>%
+  #filter(!(brand_name == "lotus" & validated == "FALSE")) %>%
   select(brand_name, parent_company_name, id, validated) %>%
-  distinct(brand_name, .keep_all = T) %>%
+  distinct(brand_name, .keep_all = T) %>% #Takes care of potential duplicate brands. 
   right_join(joined_clean %>% select(-id) %>% rename(parent_company_name_old = parent_company_name)) %>%
+  mutate(validated = ifelse(is.na(validated), FALSE, validated)) %>%
   mutate(validated = ifelse(is.na(parent_company_name) & parent_company == "Unbranded", TRUE, validated)) %>%
   mutate(parent_company_name = ifelse(is.na(parent_company_name) & parent_company == "Unbranded", "unbranded", parent_company_name)) %>%
   mutate(parent_company_name = ifelse(is.na(parent_company_name), parent_company, parent_company_name)) %>%
-  mutate(validated = ifelse(is.na(validated), FALSE, validated)) %>%
   mutate(parent_company_name = ifelse(parent_company_name == "NULL", brand_name, parent_company_name)) %>%
   mutate(parent_company_name = trimws(tolower(parent_company_name))) %>%
   mutate(id = ifelse(id == "" | is.na(id), parent_company_name, id)) %>%
@@ -159,7 +162,7 @@ wikidata_ids2 <- fread("github_data/wikidata_ids2.csv")
 
 locations_to_code <- fread("github_data/locations_to_code.csv")
 
-raw_processed_data <- fread("github_data/raw_processed_data.csv")
+load(file = "github_data/raw_processed_data.RData")
 
 boot_name <- fread("github_data/brand_name.csv")
 
@@ -179,6 +182,7 @@ raw_prop_id_event <- fread("github_data/raw_prop_id_event.csv")
 raw_processed_data_event_ag_2 <- fread("github_data/raw_processed_data_event_ag_2.csv")
 
 brand_company_id <- fread("github_data/brand_company_id.csv")
+
 
 #Clean Data ----
 ##Cleanup Events to Anon Data ----
@@ -280,7 +284,17 @@ fwrite(joined_clean, "github_data/joined_clean.csv")
   
 #fwrite(locations_to_code, "github_data/locations_to_code.csv")
 
+#check that brands are either validated or not, not both. 
+test_one <- brands_validated |>
+  distinct(brand_name, validated) |>
+  group_by(brand_name) |> 
+  summarise(validated_concat = toString(validated)) |>
+  filter(!validated_concat %in% c("true", "attempted", "false"))
+
+table(test_one$validated_concat)
+
 raw_processed_data <- brands_validated %>%
+  mutate(validated = ifelse(brand_name %in% test_one$brand_name, "false", validated)) %>%
   mutate(volunteer = as.integer(volunteer)) %>%
   mutate(across(city:continent, ~gsub("null", "", .x))) %>%
   left_join(locations_to_code) %>%
@@ -302,7 +316,8 @@ raw_processed_data <- brands_validated %>%
   summarise(total_count = sum(total_count)) %>%
   ungroup() %>%
   mutate(proportion = total_count/event_total_count) %>%
-  mutate_if(is.character, ~ifelse(.x == "null" | .x == "", NA, .x))
+  mutate_if(is.character, ~ifelse(.x %in% c("null", ""), NA, .x)) %>%
+  select(-time_spent)
 
 summary(raw_processed_data$latitude_most_specific) #Still 4k NAs
 
@@ -314,17 +329,7 @@ Samples_Map <- raw_processed_data %>%
 mapview(Samples_Map,  legend = FALSE)
 
 # Validate raw data ----
-valid_all <- expand.grid(event_id = unique(brands_validated$event_id), validated = unique(brands_validated$validated))
 
-test_mean_percent_valid <- brands_validated %>%
-  right_join(valid_all) %>%
-  mutate(proportion = ifelse(is.na(proportion), 0, proportion)) %>%
-  group_by(event_id, validated) %>%
-  summarise(sum_prop = sum(proportion)) %>%
-  group_by(validated) %>%
-  summarise(mean_prop = mean(sum_prop))
-
-sum(test_mean_percent_valid$mean_prop)
 table(brands_validated$layer)
 table(brands_validated$is_trained)
 table(brands_validated$type_material)
@@ -337,6 +342,15 @@ table(brands_validated$continent)
 table(brands_validated$country)
 table(brands_validated$specifics_of_audit)
 table(brands_validated$end_of_audit)
+
+#brands are only validated or not. 
+raw_processed_data |>
+  distinct(brand_name, validated) |>
+  group_by(brand_name) |> 
+  summarise(validated_concat = toString(validated)) |>
+  filter(!validated_concat %in% c("true", "attempted", "false")) |>
+  nrow() == 0
+
 
 sum(is.na(raw_processed_data$parent_company_name)) == 0 #No NA parent_company names
 sum(is.na(raw_processed_data$id)) == 0 #No NA IDs
@@ -391,8 +405,6 @@ all(raw_processed_data$total_count > 0)
 
 all(unique(raw_processed_data$is_trained) %in% c("no", "yes") | is.na(unique(raw_processed_data$is_trained)))
 
-all((raw_processed_data$time_spent > 0 & raw_processed_data$time_spent < 1500) | is.na(raw_processed_data$time_spent))
-
 unique(raw_processed_data$type_of_audit) == "outdoor" 
 
 all(unique(raw_processed_data$specifics_of_audit) %in% c("inland",
@@ -400,7 +412,6 @@ all(unique(raw_processed_data$specifics_of_audit) %in% c("inland",
                                                    "freshwater",
                                                    "other") | is.na(unique(raw_processed_data$specifics_of_audit)))
 
-all(unique(raw_processed_data$is_trained) %in% c("yes","no") | is.na(unique(raw_processed_data$is_trained)))
 
 all(raw_processed_data$event_total_count >= raw_processed_data$total_count)
 
@@ -441,7 +452,6 @@ is.integer(raw_processed_data$volunteer)
 is.character(raw_processed_data$is_trained)
 inherits(raw_processed_data$start_of_audit, "Date")
 inherits(raw_processed_data$end_of_audit, "Date")
-is.numeric(raw_processed_data$time_spent)
 is.character(raw_processed_data$city)
 is.character(raw_processed_data$country)
 is.character(raw_processed_data$province)
@@ -457,6 +467,20 @@ is.character(raw_processed_data$location_specificity)
 
 #Write after validation
 fwrite(raw_processed_data, "github_data/raw_processed_data.csv")
+save(raw_processed_data, file = "github_data/raw_processed_data.RData")
+
+#Test percent validated ----
+valid_all <- expand.grid(event_id = unique(raw_processed_data$event_id), validated = unique(raw_processed_data$validated))
+
+test_mean_percent_valid <- raw_processed_data %>%
+  right_join(valid_all) %>%
+  mutate(proportion = ifelse(is.na(proportion), 0, proportion)) %>%
+  group_by(event_id, validated) %>%
+  summarise(sum_prop = sum(proportion)) %>%
+  group_by(validated) %>%
+  summarise(mean_prop = mean(sum_prop))
+
+sum(test_mean_percent_valid$mean_prop)
 
 #New york
 
@@ -516,11 +540,20 @@ raw_processed_data_event_ag_2 <- right_join(event_list, proportion_grid) %>%
   
 fwrite(raw_processed_data_event_ag_2, "github_data/raw_processed_data_event_ag_2.csv")
 
-brand_company_id <- raw_processed_data %>%
-  distinct(brand_name, parent_company_name, id, validated) %>%
-  distinct(id, .keep_all = T)
+brand_company_id_count <- raw_processed_data %>%
+  group_by(brand_name, parent_company_name, id, validated) %>%
+  summarise(brand_total_count = sum(total_count), brand_frequency = n()) %>%
+  ungroup() 
 
+brand_company_id <- brand_company_id_count %>%
+  group_by(id) %>%
+  filter(brand_frequency == max(brand_frequency)) %>%
+  ungroup() %>%
+  select(brand_name, parent_company_name, id, validated)
+  
 fwrite(brand_company_id, "github_data/brand_company_id.csv")
+
+fwrite(brand_company_id_count, "github_data/brand_company_id_count.csv")
 
 #Counts are log normally distributed meaning a few of the larger surveys could gobble up the smaller ones. 
 #Definitely a count bias per country. 
@@ -588,8 +621,10 @@ boot_name <- raw_processed_data_event_ag_2 %>%
     summarize(high = BootMean(proportion)[2], mean = mean(proportion), low = BootMean(proportion)[1])
     
 small_boot_name <- boot_name %>%
-    slice_max(mean, n = 20) %>%
+    slice_max(mean, n = 100) %>%
     left_join(brand_company_id)
+
+fwrite(small_boot_name %>% distinct(parent_company_name, id, mean), "github_data/small_brand_name.csv")
 
 sum(boot_name$mean)
     
@@ -607,7 +642,7 @@ ggplot(boot_name_sorted) +
 fwrite(boot_name, "github_data/brand_name.csv")
 
 #Returns decrease exponentially for including more companies. 
-ggplot(small_boot_name, aes(y = reorder(parent_company_name, mean), x = mean)) +
+ggplot(small_boot_name %>% filter(mean > 0.01), aes(y = reorder(parent_company_name, mean), x = mean)) +
   geom_point() +
   geom_errorbar(aes(xmin=low, xmax=high)) + 
   theme_classic(base_size = 20) +
@@ -624,9 +659,6 @@ ggplot(elen_data %>%
   geom_smooth(method = "lm") +
   facet_grid(.~ `Sector (EMF input)`)
 
-library(ggrepel)
-library(ggtext)
-
 ggplot(elen_data, aes(x = mass, y = mean)) +
   geom_text_repel(aes(label = gsub("[^[:alnum:]]", " ", `Company name`)), size = 2)+
   geom_point(aes(color = factor(`Sector (EMF input)`))) +
@@ -637,14 +669,6 @@ ggplot(elen_data, aes(x = mass, y = mean)) +
   labs(x = "2021 Total Plastic Weight Produced (metric tonnes)", y = "Mean Proportion of Total Branded Waste") +
   theme_classic(base_size = 15) 
   
-
-p <- ggplot(mtcars,
-            aes(wt, mpg, label = rownames(mtcars), colour = factor(cyl))) +
-  geom_point()
-
-# Avoid overlaps by repelling text labels
-p + geom_text_repel()
-
 hist(log10(elen_data$mean))
 hist(log10(elen_data$mass))
 full_model = lm(log10(mean)~log10(mass), data = elen_data)
@@ -652,6 +676,34 @@ summary(full_model)
 
 fwrite(elen_data, "github_data/elen_data.csv")
 #Interpretation https://kenbenoit.net/assets/courses/ME104/logmodels2.pdf
+
+mass_count_conversion <- fread("github_data/mass_count_conversion.csv") |>
+  filter(Material_TT %in% c("plastic", "rubber", "hard plastics", "foam"))
+
+hist(log10(mass_count_conversion$weigth_estimate_g))
+
+typical_object_mass_grams <- BootMean(mass_count_conversion$weigth_estimate_g)
+
+mean_object_mass_grams <- mean(mass_count_conversion$weigth_estimate_g)
+
+#https://www.nature.com/articles/s41599-018-0212-7
+total_mismanaged_waste_metric_tonnes <- 65000000
+
+total_mismanaged_count <- total_mismanaged_waste_metric_tonnes/(typical_object_mass_grams/10^6)
+
+coca_cola_percent <- 0.11
+
+coca_cola_count <- coca_cola_percent * total_mismanaged_count
+
+typical_bottle_mass_g <- 24
+
+conversion <- mean_object_mass_grams/typical_bottle_mass_g
+
+coca_cola_mass_metric_tonnes <- 3224395
+
+total_count_coca_cola_bottles <- 100000000000
+
+percent_mismanaged <- coca_cola_count/total_count_coca_cola_bottles*conversion
 
 ##Country population boot ----
 #Is this necessary? basically produces the result, complicates the analysis, and there is already decent spatial coverage. 
@@ -752,5 +804,30 @@ ggplot(company_cumsum) +
     scale_x_log10() + 
     theme_classic()
 
+# Stats reported in paper ----
+
+# percent of count not validated. 
+raw_processed_data %>%
+  group_by(validated) %>%
+  summarise(sum = sum(total_count)) %>%
+  ungroup() %>%
+  mutate(percent_total = sum/sum(sum))
+
+# total number of events
+nrow(event_list)
+
+# total number of countries
+unique(event_list$country)
+
+# total number of brands
+nrow(brand_company_id)
+
+# verified < 100
+brand_to_parent %>%
+  mutate(greater_than_100 = sum > 100) %>%
+  group_by(greater_than_100) %>%
+  summarise(total = sum(sum), n = n()) %>%
+  ungroup() %>%
+  mutate(percent_total = total/sum(total))
 
 

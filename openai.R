@@ -42,9 +42,11 @@ cross_product <- crossprod(data.matrix(material_dotprod))
 fwrite(material_embeddings, "G:/My Drive/MooreInstitute/Projects/TrashTaxonomy_2/material_embeddings.csv")
 
 #Search for new embedding. 
-new_term <- "toxic/biohazard"
+new_term <- "plastic coca cola bottle"
 
-embeddings_new <- lapply(new_term, function(name){
+#Check if we already have it. 
+if(!new_term %in% material_embeddings$name){
+  embeddings_new <- lapply(new_term, function(name){
   input = name
   
   parameter_list = list(input = input, model = model)
@@ -59,13 +61,25 @@ embeddings_new <- lapply(new_term, function(name){
   names(embedding_raw) = 1:1536
   data.table::as.data.table(as.list(embedding_raw)) %>%
     mutate(name = input)
-})
+  })
+}
+
+else{
+  #Input standard trash taxonomy system here. 
+}
 
 material_embeddings_new <- rbindlist(embeddings_new)
 
 material_dotprod_new <- data.table::transpose(material_embeddings_new, make.names = "name")
 
 cross_product <- crossprod(data.matrix(material_dotprod), material_dotprod_new[[1]])
+
+#Top match for alias
+top_alias = row.names(cross_product)[apply(cross_product, MARGIN = 2, FUN = which.max)]
+
+#Top match for key
+top_key = materials$Material[materials$Alias == top_alias]
+
 
 
 ## Brands ----
