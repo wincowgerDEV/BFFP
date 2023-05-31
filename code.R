@@ -32,25 +32,8 @@ BootMean <- function(data) {
     return(quantile(mean, c(0.025,  0.975), na.rm = T))
 }
 
-BootMean_prob <- function(data, prob) {
-  B <- 100 #Change to 10k for full run
-  mean <- numeric(B)
-  n = length(data)
-  
-  set.seed(3437)
-  for (i in 1:B) {
-    boot <- sample(1:n, size=n, prob = prob, replace = TRUE)
-    mean[i] <- mean(data[boot], na.rm = T)
-  }
-  return(quantile(mean, c(0.025,  0.975), na.rm = T))
-}
-
 
 #Read Data ----
-
-dat2019 <- read.csv("github_data/Forbes Global 2000 - 2019.csv") %>%
-    mutate(parent_company = tolower(gsub("[[:punct:] ]+", "", Company)))
-
 
 events <- read.csv("github_data/events_scrubbed.csv", encoding = "UTF-8", #quote = "", comment.char = "\\",
                    row.names = NULL, 
@@ -73,6 +56,7 @@ joined_clean <- read.csv("github_data/joined_clean.csv")
 
 brands_validated_raw <- read.csv("github_data/brands_validated.csv") 
 
+unique(brands_validated_raw$brand_name) |> length()
 
 wikidata_ids2 <- fread("github_data/wikidata_ids2.csv")
 
@@ -99,22 +83,7 @@ raw_processed_data_event_ag_2 <- fread("github_data/raw_processed_data_event_ag_
 
 brand_company_id <- fread("github_data/brand_company_id.csv")
 
-
 #Clean Data ----
-##Cleanup Events to Anon Data ----
-#events <- read.csv("EventsCombined_2022.csv", encoding = "UTF-8", #quote = "", comment.char = "\\",
-#                   row.names = NULL, 
-#                   stringsAsFactors = FALSE)
-
-#event_scrub <- events %>%
-#    select(-first_name, -last_name, -email, -phone) %>%
-#    mutate(organization = as.numeric(as.factor(organization)), name_of_lead = as.numeric(as.factor(name_of_lead)))
-
-#write.csv(event_scrub, "events_scrubbed.csv")
-
-#dat2018 <- read.csv("Forbes Global 2000 - 2018.csv") %>%
-#    mutate(year = 2018) %>%
-
 ##Brand Key Creation -----
 brand_key <- brands %>% 
   mutate(brand_name = 
@@ -166,42 +135,27 @@ joined_clean <- joined %>%
     mutate(event_id = paste0(submission_type, "_", submission_id, "_", year)) %>%
     select(-file_name) 
 
+
+#Test diff between brand_to_parent and joined_clean sums
+test_joined <- joined_clean %>%
+  group_by(brand_name) %>%
+  summarise(total_sum_joined_clean = sum(as.numeric(total_count))) %>%
+  full_join(brand_to_parent) %>%
+  ungroup() %>%
+  mutate(is_equal = total_sum_joined_clean == sum) %>%
+  mutate(difference = total_sum_joined_clean - sum)
+
+#I think brand to parent was actually from before 2022, that explains why the values are almost always less and why there are new brands not present from before. I started the analysis in 2022 before the new data came on board. 
+  
+table(test_joined$is_equal)
+summary(test_joined$difference)
+
 #Proportion with ids
 sum(as.numeric(joined_clean$total_count)[joined_clean$id != ""], na.rm = T)/sum(as.numeric(joined_clean$total_count), na.rm = T)
 
 str(joined_clean)
 
 fwrite(joined_clean, "github_data/joined_clean.csv")
-
-##Harvest wikidata names ----
-#wikidata_ids <- brands_validated %>%
-#  distinct(id) %>%
-#  filter(grepl("q(\\d{2,})", id) & !grepl("http", id)) #%>%
-
-#for(row in 143:nrow(wikidata_ids)){
-#  print(row)
-#  try(
-#    wikidata_ids[row, "name"] <- paste(vapply(unlist(str_extract_all(wikidata_ids[row, "id"], "q(\\d{2,})")), function(x) {trimws(tolower(WikidataR::find_item(x)[[1]]$label))}, FUN.VALUE = character(1)), collapse = ", "),
-#    silent = T
-#  )
-#}  
-
-#wikidata_ids2 <- wikidata_ids %>%
-#  mutate(name = ifelse(is.na(name), id, name))
-
-#fwrite(wikidata_ids2, "github_data/wikidata_ids2.csv")
-
-##Harvest locations ----
-#locations_to_code <- brands_validated %>%
-#  distinct(city, province, country, continent) %>%
-#  mutate(across(everything(), ~gsub("null", "", .x))) %>%
-#  geocode(city = city, state = province, country = country, method = 'osm', lat = latitude_specific, long = longitude_specific) %>%
-#  geocode(country = country, method = 'osm', lat = latitude_country, long = longitude_country)  
-
-#locations_to_code <- locations_to_code %>%
-#  geocode(state = province, country = country, method = 'osm', lat = latitude_state, long = longitude_state)
-  
-#fwrite(locations_to_code, "github_data/locations_to_code.csv")
 
 #check that brands are either validated or not, not both. 
 
@@ -212,7 +166,8 @@ brands_validated <- brands_validated_raw %>%
   select(brand_name, parent_company_name, id, validated) %>%
   distinct(brand_name, .keep_all = T) %>% #Takes care of potential duplicate brands. 
   right_join(joined_clean %>% select(-id) %>% rename(parent_company_name_old = parent_company_name)) %>%
-  mutate(total_count = as.numeric(total_count)) %>%
+  mutate(total_count = as.integer(total_count)) %>%
+  mutate(event_total_count = as.integer(event_total_count)) %>%
   mutate(validated = ifelse(is.na(validated), FALSE, validated)) %>%
   mutate(validated = ifelse(is.na(parent_company_name) & parent_company == "Unbranded", TRUE, validated)) %>%
   mutate(parent_company_name = ifelse(is.na(parent_company_name) & parent_company == "Unbranded", "unbranded", parent_company_name)) %>%
@@ -329,6 +284,7 @@ raw_processed_data <- brands_validated %>%
   mutate_if(is.character, ~ifelse(.x %in% c("null", ""), NA, .x)) %>%
   select(-time_spent)
 
+#Check for missing lat/long
 summary(raw_processed_data$latitude_most_specific) #Still 4k NAs
 
 Samples_Map <- raw_processed_data %>%
@@ -360,7 +316,6 @@ raw_processed_data |>
   summarise(validated_concat = toString(validated)) |>
   filter(!validated_concat %in% c("true", "attempted", "false")) |>
   nrow() == 0
-
 
 sum(is.na(raw_processed_data$parent_company_name)) == 0 #No NA parent_company names
 sum(is.na(raw_processed_data$id)) == 0 #No NA IDs
@@ -479,26 +434,6 @@ is.character(raw_processed_data$location_specificity)
 fwrite(raw_processed_data, "github_data/raw_processed_data.csv")
 save(raw_processed_data, file = "github_data/raw_processed_data.RData")
 
-#Test percent validated ----
-valid_all <- expand.grid(event_id = unique(raw_processed_data$event_id), validated = unique(raw_processed_data$validated))
-
-test_mean_percent_valid <- raw_processed_data %>%
-  right_join(valid_all) %>%
-  mutate(proportion = ifelse(is.na(proportion), 0, proportion)) %>%
-  group_by(event_id, validated) %>%
-  summarise(sum_prop = sum(proportion)) %>%
-  group_by(validated) %>%
-  summarise(mean_prop = mean(sum_prop))
-
-sum(test_mean_percent_valid$mean_prop)
-
-#New york
-
-#new_york <- raw_processed_data %>%
-#  filter(province == "new york" | city == "new york")
-
-#fwrite(new_york, "github_data/new_york.csv")
-
 # Data Analysis ----
 
 ## Unbranded metrics ----
@@ -550,20 +485,34 @@ raw_processed_data_event_ag_2 <- right_join(event_list, proportion_grid) %>%
   
 fwrite(raw_processed_data_event_ag_2, "github_data/raw_processed_data_event_ag_2.csv")
 
-brand_company_id_count <- raw_processed_data %>%
+
+brand_company_id <- raw_processed_data %>%
   group_by(brand_name, parent_company_name, id, validated) %>%
   summarise(brand_total_count = sum(total_count), brand_frequency = n()) %>%
-  ungroup() 
-
-brand_company_id <- brand_company_id_count %>%
+  ungroup() %>%
   group_by(id) %>%
   filter(brand_frequency == max(brand_frequency)) %>%
   ungroup() %>%
-  select(brand_name, parent_company_name, id, validated)
+  group_by(brand_name, validated) %>%
+  mutate(brand_parent_occurances = n()) %>%
+  group_by(brand_name, validated, brand_parent_occurances) %>%
+  summarise(parent_company_name = toString(parent_company_name),
+            id = toString(id),
+            brand_total_count = sum(brand_total_count),
+            brand_frequency = sum(brand_frequency)) %>%
+  ungroup()
   
-fwrite(brand_company_id, "github_data/brand_company_id.csv")
+# Some of these have multiple parent companies or ids for one company, that is because they weren't in the brand cleanup dataset. I think that is ok for now. The brand_count column can be used to identify the ones that need to be collapsed. 
 
-fwrite(brand_company_id_count, "github_data/brand_company_id_count.csv")
+#test if brands are uniquely matched. 
+unique(brand_company_id$brand_name) |> length() == length(brand_company_id$brand_name)
+
+#test number to re-analyze
+number <- brand_company_id %>% 
+  mutate(priority = brand_frequency >= 10 & validated == "false" & brand_total_count > 100) %>%
+  filter(priority)
+
+fwrite(brand_company_id, "github_data/brand_company_id.csv")
 
 #Counts are log normally distributed meaning a few of the larger surveys could gobble up the smaller ones. 
 #Definitely a count bias per country. 
@@ -687,134 +636,7 @@ summary(full_model)
 fwrite(elen_data, "github_data/elen_data.csv")
 #Interpretation https://kenbenoit.net/assets/courses/ME104/logmodels2.pdf
 
-mass_count_conversion <- fread("github_data/mass_count_conversion.csv") |>
-  filter(Material_TT %in% c("plastic", "rubber", "hard plastics", "foam"))
-
-hist(log10(mass_count_conversion$weigth_estimate_g))
-
-typical_object_mass_grams <- BootMean(mass_count_conversion$weigth_estimate_g)
-
-mean_object_mass_grams <- mean(mass_count_conversion$weigth_estimate_g)
-
-#https://www.nature.com/articles/s41599-018-0212-7
-total_mismanaged_waste_metric_tonnes <- 65000000
-
-total_mismanaged_count <- total_mismanaged_waste_metric_tonnes/(typical_object_mass_grams/10^6)
-
-coca_cola_percent <- 0.11
-
-coca_cola_count <- coca_cola_percent * total_mismanaged_count
-
-typical_bottle_mass_g <- 24
-
-conversion <- mean_object_mass_grams/typical_bottle_mass_g
-
-coca_cola_mass_metric_tonnes <- 3224395
-
-total_count_coca_cola_bottles <- 100000000000
-
-percent_mismanaged <- coca_cola_count/total_count_coca_cola_bottles*conversion
-
-##Country population boot ----
-#Is this necessary? basically produces the result, complicates the analysis, and there is already decent spatial coverage. 
-table(event_list$continent)
-table(event_list$year)
-
-unique(raw_processed_data_event_ag_2$country)[!unique(raw_processed_data_event_ag_2$country) %in% unique(population_data_2019$Country.Name)]
-
-population_weighted_data <- raw_processed_data_event_ag_2 %>%
-  inner_join(population_data_2019, by = c("country" = "Country.Name")) 
-
-boot_name_pop_weighted <- population_weighted_data %>%
-  group_by(id) %>% 
-  summarize(high = BootMean_prob(proportion, prob = X2019)[2], mean = mean(proportion), low = BootMean_prob(proportion, prob = X2019)[1])
-
-
-small_boot_name <- boot_name_pop_weighted %>%
-  slice_max(high, n = 20) %>%
-  left_join(brand_company_id)
-
-ggplot(small_boot_name, aes(y = reorder(parent_company_name, high), x = high)) +
-  #geom_point() +
-  geom_errorbar(aes(xmin=low, xmax=high)) + 
-  theme_classic(base_size = 20) +
-  labs(x = "Proportion", y = "Company")
-
-# Change through time for top 10. 
-
-top_change <-  joined_clean_3 %>%
-    filter(name %in% small_boot_name$name) %>%
-    mutate(year = gsub(".{1,}_", "", event_id))
-
-boot_name_top_year <- top_change %>%
-    group_by(name, year) %>% 
-    summarize(high = BootMean(proportion)[2], mean = mean(proportion), low = BootMean(proportion)[1])
-
-
-ggplot(boot_name_top_year, aes(x = year, y = mean, color = name)) +
-    geom_point() +
-    geom_errorbar(aes(ymin=low, ymax=high)) +
-    scale_color_viridis_d() +
-    facet_wrap(.~name) + 
-    theme_classic()
-
-##Profits analysis ----
-profit_join <- inner_join(boot_name, dat2019)
-
-ggplot(profit_join, aes(x = mean, y = Profits, color = Sector)) +
-    geom_point() + 
-    scale_x_log10() + 
-    geom_smooth(method = "lm") + 
-    facet_wrap(.~Sector, scales = "free") +
-    theme_classic()
-
-ggplot(profit_join, aes(x = mean, y = Market.Value, color = Sector)) +
-    geom_point() + 
-    scale_x_log10() + 
-    geom_smooth(method = "lm") + 
-    facet_wrap(.~Sector, scales = "free") +
-    theme_classic()
-
-
-ggplot(profit_join, aes(x = mean, y = Revenue, color = Sector)) +
-    geom_point() + 
-    scale_x_log10() + 
-    geom_smooth(method = "lm") + 
-    facet_wrap(.~Sector, scales = "free") +
-    theme_classic()
-
-ggplot(profit_join, aes(x = mean, y = Assets, color = Sector)) +
-    geom_point() + 
-    scale_x_log10() + 
-    geom_smooth(method = "lm") + 
-    facet_wrap(.~Sector, scales = "free") +
-    theme_classic()
-
-ggplot(profit_join, aes(x = mean, y = Rank, color = Sector)) +
-    geom_point() + 
-    scale_x_log10() + 
-    geom_smooth(method = "lm") + 
-    facet_wrap(.~Sector, scales = "free") +
-    theme_classic()
-
-consumer_only_market.val <- profit_join %>%
-    filter(Sector == "Consumer Staples")
-
-#Pretty small amount, probably good for modeling that sector but not good for the overal 
-sum(consumer_only_market.val$mean)
-
-company_cumsum <- boot_name %>%
-    arrange(desc(mean)) %>%
-    mutate(percent_smaller = 1- 1:nrow(.)/nrow(.)) %>%
-    mutate(rank = 1:nrow(.)) %>%
-    mutate(cumsum_mean = cumsum(mean))
-
-ggplot(company_cumsum) +
-    geom_line(aes(x = rank, y = cumsum_mean)) + 
-    scale_x_log10() + 
-    theme_classic()
-
-# Stats reported in paper ----
+# Stats reported in paper and other validation checks ----
 
 # percent of count not validated. 
 raw_processed_data %>%
@@ -847,9 +669,10 @@ brand_to_parent %>%
   ungroup() %>%
   mutate(percent_total = total/sum(total))
 
+## Test percent validated ----
 #Check for similarities in datasets. 
-test <- brands_validated %>%
-  group_by(brand_name, validated) %>%
+brands_validated %>%
+  group_by(brand_name, id, validated) %>%
   summarise(total = sum(total_count), n = n())  %>%
   filter(total > 100) %>%
   arrange(desc(total)) %>%
@@ -861,9 +684,15 @@ brand_to_parent_2 %>%
   filter(total > 100) %>%
   arrange(desc(total))
 
+cleanup_brand_to_parent %>%
+  group_by(brand_name) %>%
+  summarise(total = sum(sum), n = n()) %>%
+  filter(total > 100) %>%
+  arrange(desc(total))
+
 joined_clean %>%
   group_by(brand_name) %>%
-  summarise(total = sum(total_count), n = n()) %>%
+  summarise(total = sum(as.numeric(total_count)), n = n()) %>%
   filter(total > 100) %>%
   arrange(desc(total))
 
@@ -880,7 +709,7 @@ sum(as.numeric(joined_clean$total_count)) == 1873634
 sum(as.numeric(raw_processed_data$total_count)) == 1873634
 
 brands_validated %>%
-  group_by(id, validated) %>%
+  group_by(brand_name, id, validated) %>%
   summarise(total = sum(total_count), n = n())  %>%
   filter(total > 100) %>%
   arrange(desc(total)) %>%
@@ -888,7 +717,7 @@ brands_validated %>%
   filter(validated == "false")
 
 brands_validated_raw %>%
-  group_by(id, validated) %>%
+  group_by(brand_name, id, validated) %>%
   summarise(total = sum(sum), n = n())  %>%
   filter(total > 100) %>%
   arrange(desc(total)) %>%
@@ -897,7 +726,7 @@ brands_validated_raw %>%
 
 #totals, all three pretty similar. 
 brands_validated %>%
-  group_by(validated) %>%
+  group_by(brand_name, id, validated) %>%
   summarise(total = sum(total_count), n = n()) %>%
   mutate(prop = total/sum(total))
 
@@ -910,3 +739,77 @@ raw_processed_data %>%
   group_by(validated) %>%
   summarise(total = sum(total_count), n = n()) %>%
   mutate(prop = total/sum(total))
+
+valid_all <- expand.grid(event_id = unique(raw_processed_data$event_id), validated = unique(raw_processed_data$validated))
+
+test_mean_percent_valid <- raw_processed_data %>%
+  right_join(valid_all) %>%
+  mutate(proportion = ifelse(is.na(proportion), 0, proportion)) %>%
+  group_by(event_id, validated) %>%
+  summarise(sum_prop = sum(proportion)) %>%
+  group_by(validated) %>%
+  summarise(mean_prop = mean(sum_prop))
+
+sum(test_mean_percent_valid$mean_prop)
+
+# Extra Data Cleaning/Creation Scripts ----
+##Cleanup Events to Anon Data ----
+#events <- read.csv("EventsCombined_2022.csv", encoding = "UTF-8", #quote = "", comment.char = "\\",
+#                   row.names = NULL, 
+#                   stringsAsFactors = FALSE)
+
+#event_scrub <- events %>%
+#    select(-first_name, -last_name, -email, -phone) %>%
+#    mutate(organization = as.numeric(as.factor(organization)), name_of_lead = as.numeric(as.factor(name_of_lead)))
+
+#write.csv(event_scrub, "events_scrubbed.csv")
+
+#dat2018 <- read.csv("Forbes Global 2000 - 2018.csv") %>%
+#    mutate(year = 2018) %>%
+
+##Harvest wikidata names ----
+#wikidata_ids <- brands_validated %>%
+#  distinct(id) %>%
+#  filter(grepl("q(\\d{2,})", id) & !grepl("http", id)) #%>%
+
+#for(row in 143:nrow(wikidata_ids)){
+#  print(row)
+#  try(
+#    wikidata_ids[row, "name"] <- paste(vapply(unlist(str_extract_all(wikidata_ids[row, "id"], "q(\\d{2,})")), function(x) {trimws(tolower(WikidataR::find_item(x)[[1]]$label))}, FUN.VALUE = character(1)), collapse = ", "),
+#    silent = T
+#  )
+#}  
+
+#wikidata_ids2 <- wikidata_ids %>%
+#  mutate(name = ifelse(is.na(name), id, name))
+
+#fwrite(wikidata_ids2, "github_data/wikidata_ids2.csv")
+
+##Harvest locations ----
+#locations_to_code <- brands_validated %>%
+#  distinct(city, province, country, continent) %>%
+#  mutate(across(everything(), ~gsub("null", "", .x))) %>%
+#  geocode(city = city, state = province, country = country, method = 'osm', lat = latitude_specific, long = longitude_specific) %>%
+#  geocode(country = country, method = 'osm', lat = latitude_country, long = longitude_country)  
+
+#locations_to_code <- locations_to_code %>%
+#  geocode(state = province, country = country, method = 'osm', lat = latitude_state, long = longitude_state)
+
+#fwrite(locations_to_code, "github_data/locations_to_code.csv")
+
+
+#Other data for unilever sachets
+unilever_sacets <- raw_processed_data %>%
+  filter(grepl("sachet", item_description) & id == "q157062")
+
+fwrite(unilever_sacets, "C:/Users/winco/OneDrive/Documents/unilever_sachets.csv")
+
+unilever_mean <- unilever_sacets %>%
+  group_by(country, event_id) %>%
+  summarise(proportion = sum(proportion)) %>%
+  ungroup() %>%
+  group_by(country) %>%
+  summarise(mean_prop = mean(proportion), low_prop = BootMean(proportion)[1], high_prop = BootMean(proportion)[2]) %>%
+  ungroup()
+
+fwrite(unilever_mean, "C:/Users/winco/OneDrive/Documents/unilever_mean.csv")
