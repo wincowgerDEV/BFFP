@@ -73,7 +73,8 @@ boot_name <- fread("github_data/brand_name.csv")
 elen_data <- fread("github_data/2022-Progress-Report-Data-Sheet-Final2_WC.csv") %>%
   mutate(ID = tolower(ID)) %>%
   inner_join(boot_name, by = c("ID" = "id")) %>%
-  mutate(mass = as.numeric(gsub(",", "", `2021 total weight of new packaging (metric tonnes)`))) 
+  mutate(mass = as.numeric(gsub(",", "", `2021 total weight of new packaging (metric tonnes)`))) %>%
+  mutate(`Company name` = ifelse(stringi::stri_enc_isutf8(elen_data$`Company name`), `Company name`, "Loreal"))
 
 population_data_2019 <- read.csv("github_data/country_population_data/API_SP.POP.TOTL_DS2_en_csv_v2_4902028_WC.csv")
 
@@ -289,7 +290,6 @@ fwrite(wikidata_ids2, "github_data/wikidata_ids2.csv")
 
 #fwrite(locations_to_code, "github_data/locations_to_code.csv")
 
-
 test_one <- brands_validated |>
   distinct(brand_name, validated) |>
   group_by(brand_name) |> 
@@ -339,9 +339,6 @@ brand_company_id <- raw_processed_data %>%
   group_by(brand_name, parent_company_name, id, validated) %>%
   summarise(brand_total_count = sum(total_count), brand_frequency = n()) %>%
   ungroup() %>%
-  group_by(id) %>%
-  filter(brand_frequency == max(brand_frequency)) %>%
-  ungroup() %>%
   group_by(brand_name, validated) %>%
   mutate(brand_parent_occurances = n()) %>%
   group_by(brand_name, validated, brand_parent_occurances) %>%
@@ -357,13 +354,33 @@ number <- brand_company_id %>%
   filter(priority)
 
 fwrite(brand_company_id, "github_data/brand_company_id.csv")
+fwrite(number, "github_data/todo2.csv")
+
+event_list <- raw_processed_data %>%
+  distinct(event_id, city, province, country, continent, year, specifics_of_audit, event_total_count)
+
+fwrite(event_list, "github_data/event_list.csv")
+
+raw_prop_id_event <- raw_processed_data %>%
+  select(event_id, id,  proportion)
+
+fwrite(raw_prop_id_event, "github_data/raw_prop_id_event.csv")
 
 # Validate raw data ----
+
+#check that number of brand names in raw processed and brand_company_id are the same. 
+length(unique(raw_processed_data$brand_name)) == nrow(brand_company_id)
+
+#Test that counts haven't changed. 
+sum(brand_to_parent$sum) == 681918 #Definitely different. Smaller by a lot. Due to unknowns being gone. 
+sum(brands_validated$total_count) == 1873634
+sum(as.numeric(joined_clean$total_count)) == 1873634
+sum(as.numeric(raw_processed_data$total_count)) == 1873634
 
 #test if reanalysis is needed. 
 nrow(number) == 0
 
-#test if brands are uniquely matched. 
+#test if brands are uniquely matched in brand company id. 
 unique(brand_company_id$brand_name) |> length() == length(brand_company_id$brand_name)
 
 #brands are only validated or not. 
@@ -377,20 +394,24 @@ raw_processed_data |>
 sum(is.na(raw_processed_data$parent_company_name)) == 0 #No NA parent_company names
 sum(is.na(raw_processed_data$id)) == 0 #No NA IDs
 
+#No null ids
 !any(raw_processed_data$id == "null")
 !any(raw_processed_data$id == "NULL")
 !any(raw_processed_data$id == "")
 
-event_sum_1 <- raw_processed_data %>%
+#counts add up to one. 
+raw_processed_data %>%
   group_by(event_id) %>%
   summarise(proportion_sum = sum(proportion)) %>%
   ungroup() %>%
-  mutate(is_one = round(proportion_sum, 3) == 1) #Check that proportions add up to 1. 
+  mutate(is_one = round(proportion_sum, 3) == 1) %>%
+  pull(is_one) %>%
+  all()
 
-all(event_sum_1$is_one)
-
+#valid inputs for controlled character values. 
 all(unique(raw_processed_data$validated) %in% c("attempted", "true", "false")) #Only allowed values for validated. 
 
+#Check to make sure no new weird types. 
 all(unique(raw_processed_data$submission_type) %in% c("Excel Template Old",
                                                   "Excel Template 2020",
                                                   "Excel Template 2021",
@@ -398,9 +419,10 @@ all(unique(raw_processed_data$submission_type) %in% c("Excel Template Old",
                                                   "123Forms New",
                                                   "Trashblitz New",
                                                   "ThirdParty 2022",
-                                                  "ThirdParty 2020")) #Check to make sure no new weird types. 
+                                                  "ThirdParty 2020")) 
 
-all(raw_processed_data$year > 2017 & raw_processed_data$year < 2023) #Valid years
+#Valid years
+all(raw_processed_data$year > 2017 & raw_processed_data$year < 2023) 
 
 all(unique(raw_processed_data$type_product) %in% c(
                                                "other",
@@ -454,7 +476,6 @@ all(unique(raw_processed_data$location_specificity) %in% c("city",    "country",
 
 all(raw_processed_data$proportion > 0 & raw_processed_data$proportion <= 1)
 
-lapply(raw_processed_data, function(x){sum(is.na(x))})
 
 # Type checks
 is.character(raw_processed_data$brand_name)
@@ -486,6 +507,18 @@ is.character(raw_processed_data$event_id)
 is.numeric(raw_processed_data$longitude_most_specific)
 is.numeric(raw_processed_data$latitude_most_specific)
 is.character(raw_processed_data$location_specificity)
+
+#warning/quality checks
+lapply(raw_processed_data, function(x){sum(is.na(x))})
+#unique match between brands and ids in raw_processed_data, allowed if the count and occurance of the brand is small. 
+test_unique_brand_id_match <- raw_processed_data %>%
+  distinct(brand_name, id) %>%
+  group_by(brand_name) %>%
+  summarise(count = n()) %>%
+  filter(count > 1)
+
+nrow(test_unique_brand_id_match) == 0
+
 
 #Write after validation
 fwrite(raw_processed_data, "github_data/raw_processed_data.csv")
@@ -521,15 +554,6 @@ raw_processed_data_event_ag <- raw_processed_data %>%
 
 fwrite(raw_processed_data_event_ag, "github_data/raw_processed_data_event_ag.csv")
 
-event_list <- raw_processed_data_event_ag %>%
-  distinct(event_id, city, province, country, continent, year, specifics_of_audit, event_total_count_no_unbrand)
-
-fwrite(event_list, "github_data/event_list.csv")
-
-raw_prop_id_event <- raw_processed_data_event_ag %>%
-  select(event_id, id,  proportion)
-
-fwrite(raw_prop_id_event, "github_data/raw_prop_id_event.csv")
 
 proportion_grid <- expand.grid(event_id = unique(raw_processed_data_event_ag$event_id), 
                                id = unique(raw_processed_data_event_ag$id))
@@ -599,7 +623,7 @@ boot_name_sorted <- boot_name %>%
   mutate(cumulative = cumsum(mean))
 
 ggplot(boot_name_sorted) +
-  geom_line(aes(y = cumulative, x = rank), linewidth = 3) +
+  geom_line(aes(y = cumulative*100, x = rank), linewidth = 3) +
   scale_x_log10() + 
   theme_classic(base_size = 20) +
   labs(x = "Number of Companies", y = "Cumulative Percent Contribution")
@@ -607,11 +631,11 @@ ggplot(boot_name_sorted) +
 fwrite(boot_name, "github_data/brand_name.csv")
 
 #Returns decrease exponentially for including more companies. 
-ggplot(small_boot_name %>% filter(mean > 0.01), aes(y = reorder(parent_company_name, mean), x = mean)) +
+ggplot(small_boot_name %>% filter(mean > 0.01), aes(y = reorder(parent_company_name, mean), x = mean*100)) +
   geom_point() +
-  geom_errorbar(aes(xmin=low, xmax=high)) + 
+  geom_errorbar(aes(xmin=low*100, xmax=high*100)) + 
   theme_classic(base_size = 20) +
-  labs(x = "Proportion", y = "Company")
+  labs(x = "Mean Percent of Total Branded Waste", y = "Company")
 
 ## Correlation Elen ----
 ggplot(elen_data %>%
@@ -624,14 +648,15 @@ ggplot(elen_data %>%
   geom_smooth(method = "lm") +
   facet_grid(.~ `Sector (EMF input)`)
 
-ggplot(elen_data, aes(x = mass, y = mean)) +
-  geom_text_repel(aes(label = gsub("[^[:alnum:]]", " ", `Company name`)), size = 2)+
-  geom_point(aes(color = factor(`Sector (EMF input)`))) +
+
+ggplot(elen_data, aes(x = mass, y = mean*100)) +
+  geom_text_repel(aes(label = `Company name`), size = 2, max.overlaps = 100)+
+  geom_point() +
   geom_smooth(method = "lm") +
   coord_fixed() +
-  scale_x_log10() +
-  scale_y_log10() +
-  labs(x = "2021 Total Plastic Weight Produced (metric tonnes)", y = "Mean Proportion of Total Branded Waste") +
+  scale_x_log10(limits = c(1000,10000000)) +
+  scale_y_log10(breaks = 10^(-5:2), limits = c(0.000001, 100)) +
+  labs(x = "2021 Total Plastic Mass Produced (metric tonnes)", y = "Mean Percent of Total Branded Waste") +
   theme_classic(base_size = 15) 
   
 hist(log10(elen_data$mean))
@@ -644,18 +669,11 @@ fwrite(elen_data, "github_data/elen_data.csv")
 
 # Stats reported in paper and other validation checks ----
 
+#total number of items recorded
+sum(raw_processed_data$total_count)
+
 #total number of branded items recorded
-sum(event_list$event_total_count_no_unbrand)
-
-#total number of events 
-nrow(event_list)
-
-# percent of count not validated. 
-raw_processed_data %>%
-  group_by(validated) %>%
-  summarise(sum = sum(total_count)) %>%
-  ungroup() %>%
-  mutate(percent_total = sum/sum(sum))
+sum(raw_processed_data_event_ag$company_sum)
 
 # total number of events
 nrow(event_list)
@@ -664,105 +682,28 @@ nrow(event_list)
 unique(event_list$country)
 
 # total number of brands
+length(unique(raw_processed_data$brand_name))
+
 nrow(brand_company_id)
 
-# verified > 100
-brand_to_parent %>%
-  mutate(greater_than_100 = sum > 100) %>%
-  group_by(greater_than_100) %>%
-  summarise(total = sum(sum), n = n()) %>%
-  ungroup() %>%
-  mutate(percent_total = total/sum(total))
-
-brand_to_parent %>%
-  mutate(greater_than_100 = sum > 100) %>%
-  group_by(greater_than_100) %>%
-  summarise(total = sum(sum), n = n()) %>%
-  ungroup() %>%
-  mutate(percent_total = total/sum(total))
-
-## Test percent validated ----
-#Check for similarities in datasets. 
-brands_validated %>%
-  group_by(brand_name, id, validated) %>%
-  summarise(total = sum(total_count), n = n())  %>%
-  filter(total > 100) %>%
-  arrange(desc(total)) %>%
-  ungroup()
-
-brand_to_parent_2 %>%
-  group_by(brand_name) %>%
-  summarise(total = sum(sum), n = n()) %>%
-  filter(total > 100) %>%
-  arrange(desc(total))
-
-cleanup_brand_to_parent %>%
-  group_by(brand_name) %>%
-  summarise(total = sum(sum), n = n()) %>%
-  filter(total > 100) %>%
-  arrange(desc(total))
-
-joined_clean %>%
-  group_by(brand_name) %>%
-  summarise(total = sum(as.numeric(total_count)), n = n()) %>%
-  filter(total > 100) %>%
-  arrange(desc(total))
-
-raw_processed_data %>%
-  group_by(brand_name) %>%
-  summarise(total = sum(total_count), n = n()) %>%
-  filter(total > 100) %>%
-  arrange(desc(total))
-
-#Check that counts are all the same. 
-sum(brand_to_parent$sum) == 681918 #Definitely different. Smaller by a lot. Due to unknowns being gone. 
-sum(brands_validated$total_count) == 1873634
-sum(as.numeric(joined_clean$total_count)) == 1873634
-sum(as.numeric(raw_processed_data$total_count)) == 1873634
-
-brands_validated %>%
-  group_by(brand_name, id, validated) %>%
-  summarise(total = sum(total_count), n = n())  %>%
-  filter(total > 100) %>%
-  arrange(desc(total)) %>%
-  ungroup() %>%
-  filter(validated == "false")
-
-brands_validated_raw %>%
-  group_by(brand_name, id, validated) %>%
-  summarise(total = sum(sum), n = n())  %>%
-  filter(total > 100) %>%
-  arrange(desc(total)) %>%
-  ungroup() %>%
-  filter(validated == "FALSE")
-
-#totals, all three pretty similar. 
-brands_validated %>%
-  group_by(brand_name, id, validated) %>%
-  summarise(total = sum(total_count), n = n()) %>%
-  mutate(prop = total/sum(total))
-
-brands_validated_raw %>%
+# total number and proportions of validated brands 
+brand_company_id %>%
   group_by(validated) %>%
-  summarise(total = sum(sum), n = n())  %>%
-  mutate(prop = total/sum(total))
+  summarise(total = sum(brand_total_count), n = sum(brand_frequency)) %>%
+  mutate(prop_count = total/sum(total), prop_n = n/sum(n)) |>
+  pull(total) |>
+  sum()
+
+#total number of locations specificities
+raw_processed_data |>
+  distinct(event_id, location_specificity) |>
+  pull(location_specificity) |>
+  table() 
 
 raw_processed_data %>%
   group_by(validated) %>%
   summarise(total = sum(total_count), n = n()) %>%
   mutate(prop = total/sum(total))
-
-valid_all <- expand.grid(event_id = unique(raw_processed_data$event_id), validated = unique(raw_processed_data$validated))
-
-test_mean_percent_valid <- raw_processed_data %>%
-  right_join(valid_all) %>%
-  mutate(proportion = ifelse(is.na(proportion), 0, proportion)) %>%
-  group_by(event_id, validated) %>%
-  summarise(sum_prop = sum(proportion)) %>%
-  group_by(validated) %>%
-  summarise(mean_prop = mean(sum_prop))
-
-sum(test_mean_percent_valid$mean_prop)
 
 # Extra Data Cleaning/Creation Scripts ----
 ##Cleanup Events to Anon Data ----
