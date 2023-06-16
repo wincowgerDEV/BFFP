@@ -64,9 +64,6 @@ if(!new_term %in% material_embeddings$name){
   })
 }
 
-else{
-  #Input standard trash taxonomy system here. 
-}
 
 material_embeddings_new <- rbindlist(embeddings_new)
 

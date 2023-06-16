@@ -1,0 +1,50 @@
+brand_name,validated,brand_parent_occurances,parent_company_name,id,brand_total_count,brand_frequency
+?,TRUE,1,other brand,other brand,103,25
+always,TRUE,1,procter & gamble,Q212405,329,19
+best choice,TRUE,1,associated wholesale grocers,Q4809259,118,11
+biskuat,TRUE,1,mondelez international,Q12857502,110,46
+caprisun,TRUE,1,capri-sun ,Q969761,109,18
+carlsberg,TRUE,1,carlsberg foundation,Q1043358,113,18
+cheese balls,TRUE,1,zubee international co.,https://ng-check.com/zubee-international-company-ltd/613641.html,265,11
+chippy,TRUE,1,jg summit holdings,Q6108205,121,19
+coop,attempted,1,coop schweiz,Q432564,228,79
+dubic,TRUE,1,diageo plc,Q161140,283,18
+fruit tea,TRUE,1,rekso group,Q97236799,139,56
+gold flake,TRUE,1,itc limited,Q1655008,1947,11
+green cross,TRUE,1,mitsubishi group,Q183275,102,11
+hope,TRUE,1,wl foods,https://www.facebook.com/WLFOODS/photos/,102,11
+ichitan,TRUE,1,ichitan group,Q11286748,229,59
+lemon square,TRUE,1,big e food corp.,https://lemonsquare.com.ph/main/,113,15
+lucozade,TRUE,1,suntory,Q1345267,143,33
+mang juan,TRUE,1,jg summit holdings,Q6108205,248,20
+marimas,TRUE,1,pt marimas putera kencana,https://marimas.com/,114,31
+newport,TRUE,1,British American Tobacco,Q856411,101,34
+nips,TRUE,1,jg summit holdings,Q6108205,108,23
+no name,TRUE,1,unbranded,unbranded,3960,34
+oishi tea,TRUE,1,thaibev,Q15304350,152,33
+pipas,TRUE,1,argensun,https://www.argensun.com.ar/,110,18
+plastic bags,TRUE,1,"plastic bags, plastic bags","plastic bags, plastic bags",2312,19
+plastic cup,TRUE,1,unbranded,unbranded,271,13
+plastic straw,TRUE,1,unbranded,unbranded,2263,35
+rebisco,TRUE,1,Republic Biscuit Corporation,Q7314390,555,25
+rothmans,TRUE,1,british american tobacco,Q856411,173,28
+sea master,attempted,1,sea master,q105968851,307,26
+sky flakes,TRUE,1,monde nissin,Q6898690,110,18
+snow bear,attempted,1,the candymaker inc,https://www.facebook.com/982940978428393/photos/snow-bearmenthol-ball-candy1-case-x-40-packs-x-50-pcs/1669014396487711/?paipv=0&eav=AfYhXLlZXjjb67LsKuosgwGJ7aI9GrCYS8IE_wu2QZh8BqULnqPOLye95X-0GZGfhjE&_rdr,104,12
+spix,TRUE,1,siantar top,q12514216,119,32
+sunfeast,TRUE,1,itc limited,Q1655008,156,12
+swan,TRUE,1,uac nigeria plc,https://www.uacnplc.com/about/,172,11
+sweet corn,TRUE,1,"alenter food inc, regal international snack food corp",https://www.regentfoods.com.ph/about-us,149,11
+tesco,TRUE,1,tesco,q487494,131,32
+tiwi,TRUE,1,tiwi foods,https://www.tiwifoods.com/about-3/,166,13
+tuborg,TRUE,1,carlsberg group,q113215,103,24
+uk,TRUE,1,unbranded,unbranded,482,53
+unknwn,TRUE,4,unbranded,unbranded,742,15
+v fresh,TRUE,1,"columbia international food products, inc",https://www.columbiafood.com.ph/,114,11
+wai wai,TRUE,1,chaudhary group,q13181043,4123,14
+west,TRUE,1,imperial brands,q1471161,122,21
+yen yen,TRUE,1,ichitan group,q20586312,101,29
+youpi,TRUE,1,michoc,http://www.michoc.com/en/produits/youpi-lollippop/,418,12
+zonrox,TRUE,1,green cross inc.,https://greencross.com.ph/who-we-are/,166,21
+å†œå¤«å±±æ³‰/nongfu spring,attempted,1,nongfu spring,q10895089,131,19
+неизвестно,attempted,1,неизвестно,неизвестно,116,18
