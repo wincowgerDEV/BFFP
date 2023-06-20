@@ -334,7 +334,7 @@ Samples_Map <- raw_processed_data %>%
   filter(!is.na(longitude_most_specific) & !is.na(latitude_most_specific)) %>% 
   st_as_sf(coords = c("longitude_most_specific", "latitude_most_specific"), crs = 4326, remove = FALSE)
 
-mapview(Samples_Map,  legend = FALSE)
+mapview(Samples_Map,  legend = T, alpha = 0.1, cex = 3, color = "black")
 
 brand_company_id <- raw_processed_data %>%
   group_by(brand_name, parent_company_name, id, validated) %>%
@@ -557,14 +557,20 @@ raw_processed_data_event_ag <- raw_processed_data %>%
                     ungroup() %>%
                     mutate(proportion = company_sum/event_total_count_no_unbrand) 
 
+raw_prop_id_event %>% filter(id == "unbranded" & proportion > 0.9)
 fwrite(raw_processed_data_event_ag, "github_data/raw_processed_data_event_ag.csv")
 
+event_list2 <- raw_processed_data_event_ag %>%
+  distinct(event_id, city, province, country, continent, year, specifics_of_audit, event_total_count_no_unbrand)
+
+raw_prop_id_event2 <- raw_processed_data_event_ag %>%
+  select(event_id, id,  proportion)
 
 proportion_grid <- expand.grid(event_id = unique(raw_processed_data_event_ag$event_id), 
                                id = unique(raw_processed_data_event_ag$id))
 
-raw_processed_data_event_ag_2 <- right_join(event_list, proportion_grid) %>%
-    left_join(raw_prop_id_event) %>%
+raw_processed_data_event_ag_2 <- right_join(event_list2, proportion_grid) %>%
+    left_join(raw_prop_id_event2) %>%
     mutate(proportion = ifelse(is.na(proportion), 0, proportion)) %>%
     ungroup()
   
@@ -580,7 +586,7 @@ event_list %>%
   ggplot() +
   geom_point(aes(y = count, x = year), size = 4) +
   scale_x_log10() +
-  theme_bw(base_size = 15) +
+  theme_bw(base_size = 18) +
   labs(y = "Number of Events", x = "Year")
 
 #summary stats, some countries have more events than others which would rate them lower. 
@@ -593,6 +599,13 @@ event_list %>%
         scale_x_log10() +
         theme_bw(base_size = 9) +
         labs(y = "Country", x = "Number of Events")
+
+#Check count
+event_list %>%
+  distinct(event_id, country) %>%
+  group_by(country) %>%
+  summarise(count = n()) %>%
+  nrow()
 
 #nrow(distinct(joined_clean, event_id, brand_name))
 #nrow(distinct(events, submission_type, submission_id, year))
@@ -640,19 +653,25 @@ ggplot(small_boot_name %>% filter(mean > 0.01), aes(y = reorder(parent_company_n
   geom_point() +
   geom_errorbar(aes(xmin=low*100, xmax=high*100)) + 
   theme_classic(base_size = 20) +
-  labs(x = "Mean Percent of Total Branded Waste", y = "Company")
+  scale_x_continuous(breaks = 0:13, limits = c(0,13)) +
+  labs(x = "Mean Percent of Global Branded Waste", y = "Company")
+
+unique(raw_processed_data_event_ag_2$event_id) |> length()
 
 ## Correlation Elen ----
 ggplot(elen_data %>%
-         bind_rows(mutate(., `Sector (EMF input)` = "All")), aes(x = mass, y = mean, color = `Sector (EMF input)`, label = "Company name")) +
-  geom_point() +
-  scale_x_log10() +
-  scale_y_log10() +
-  theme_classic(base_size = 15) +
-  theme(legend.position = "none") +
+         bind_rows(mutate(., `Sector (EMF input)` = "All")) %>%
+         mutate(`Sector (EMF input)` = ifelse(`Sector (EMF input)` %in% c("beverages", "food"), "Food and Beverage", ifelse(`Sector (EMF input)` == "All", "All", "Household and Retail"))) %>%
+         mutate(`Sector (EMF input)` = factor(x = `Sector (EMF input)`, levels = c("Food and Beverage", "All", "Household and Retail"))), 
+       aes(x = mass, y = mean*100, color = `Sector (EMF input)`, label = "Company name")) +
   geom_smooth(method = "lm") +
-  facet_grid(.~ `Sector (EMF input)`)
-
+  geom_point() +
+  geom_text_repel(aes(label = `Company name`), size = 2, max.overlaps = 100)+
+  coord_fixed() +
+  scale_x_log10(limits = c(1000,10000000)) +
+  scale_y_log10(breaks = 10^(-5:2), limits = c(0.000001, 100)) +
+  labs(x = "2021 Total Plastic Mass Produced (metric tonnes)", y = "Mean Percent of Total Branded Waste") +
+  theme_classic(base_size = 15) 
 
 ggplot(elen_data, aes(x = mass, y = mean*100)) +
   geom_text_repel(aes(label = `Company name`), size = 2, max.overlaps = 100)+
@@ -680,8 +699,11 @@ sum(raw_processed_data$total_count)
 #total number of branded items recorded
 sum(raw_processed_data_event_ag$company_sum)
 
-# total number of events
+# total number of events before dropping unbranded. 
 nrow(event_list)
+
+# total number of events after dropping unbranded waste. 
+nrow(event_list2)
 
 # total number of countries
 unique(event_list$country)
@@ -695,9 +717,7 @@ nrow(brand_company_id)
 brand_company_id %>%
   group_by(validated) %>%
   summarise(total = sum(brand_total_count), n = sum(brand_frequency)) %>%
-  mutate(prop_count = total/sum(total), prop_n = n/sum(n)) |>
-  pull(total) |>
-  sum()
+  mutate(prop_count = total/sum(total), prop_n = n/sum(n)) 
 
 #total number of locations specificities
 raw_processed_data |>
@@ -705,10 +725,28 @@ raw_processed_data |>
   pull(location_specificity) |>
   table() 
 
-raw_processed_data %>%
-  group_by(validated) %>%
-  summarise(total = sum(total_count), n = n()) %>%
-  mutate(prop = total/sum(total))
+#Number that needed to be assessed. 
+brand_company_id %>% 
+  filter(brand_total_count > 100 & brand_frequency > 10) %>%
+  nrow()
+
+#Number of companies greater than 50%
+boot_name_sorted %>%
+  filter(cumulative < 0.5) %>%
+  nrow() + 1
+
+#number of companies total
+boot_name_sorted %>%
+  top_n(wt = mean,n =  5) 
+
+#Number of companies
+nrow(boot_name_sorted)
+
+#number of companies for ELen 
+nrow(elen_data)
+
+#total compant
+#Assessed 
 
 # Extra Data Cleaning/Creation Scripts ----
 ##Cleanup Events to Anon Data ----
