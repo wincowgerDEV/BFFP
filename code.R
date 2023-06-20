@@ -55,12 +55,14 @@ brand_to_parent <- read.csv("github_data/cleanup_brand_to_parent.csv") %>%
 joined_clean <- read.csv("github_data/joined_clean.csv")
 
 brands_validated2 <- read.csv("github_data/todo1.csv") 
+brands_validated3 <- read.csv("github_data/todo2.csv") 
 
 brands_validated_raw <- read.csv("github_data/brands_validated.csv") %>%
-  filter(!brand_name %in% brands_validated2$brand_name) %>%
-  bind_rows(brands_validated2 %>% select(-brand_total_count, -brand_frequency))
+  filter(!brand_name %in% c(brands_validated2$brand_name, brands_validated3$brand_name)) %>%
+  bind_rows(brands_validated2, brands_validated3) %>%
+  select(-brand_total_count, -brand_frequency)
 
-unique(brands_validated_raw$brand_name) |> length()
+unique(brands_validated_raw$brand_name) |> length() 
 
 wikidata_ids2 <- fread("github_data/wikidata_ids2.csv")
 
@@ -74,7 +76,7 @@ elen_data <- fread("github_data/2022-Progress-Report-Data-Sheet-Final2_WC.csv") 
   mutate(ID = tolower(ID)) %>%
   inner_join(boot_name, by = c("ID" = "id")) %>%
   mutate(mass = as.numeric(gsub(",", "", `2021 total weight of new packaging (metric tonnes)`))) %>%
-  mutate(`Company name` = ifelse(stringi::stri_enc_isutf8(elen_data$`Company name`), `Company name`, "Loreal"))
+  mutate(`Company name` = ifelse(stringi::stri_enc_isutf8(.data$`Company name`), `Company name`, "Loreal"))
 
 population_data_2019 <- read.csv("github_data/country_population_data/API_SP.POP.TOTL_DS2_en_csv_v2_4902028_WC.csv")
 
@@ -176,15 +178,12 @@ brands_validated <- brands_validated_raw %>%
   right_join(joined_clean %>% select(-id) %>% rename(parent_company_name_old = parent_company_name)) %>%
   mutate(total_count = as.integer(total_count)) %>%
   mutate(event_total_count = as.integer(event_total_count)) %>%
-  mutate(validated = ifelse(is.na(validated), FALSE, validated)) %>%
-  mutate(validated = ifelse(is.na(parent_company_name) & parent_company == "Unbranded", TRUE, validated)) %>%
-  mutate(parent_company_name = ifelse(is.na(parent_company_name) & parent_company == "Unbranded", "unbranded", parent_company_name)) %>%
+  mutate(validated = ifelse(is.na(validated), "false", validated)) %>%
+  mutate(validated = ifelse(is.na(parent_company_name) & parent_company == "Unbranded", "true", validated)) %>%
+  mutate(parent_company_name = ifelse(is.na(parent_company_name) & parent_company == "Unbranded", "Unbranded", parent_company_name)) %>%
   mutate(parent_company_name = ifelse(is.na(parent_company_name), parent_company, parent_company_name)) %>%
   mutate(parent_company_name = ifelse(parent_company_name == "NULL", brand_name, parent_company_name)) %>%
-  mutate(parent_company_name = trimws(tolower(parent_company_name))) %>%
   mutate(id = ifelse(id == "" | is.na(id), parent_company_name, id)) %>%
-  mutate(country = ifelse(country == "mexico", "Mexico", country),
-         country = ifelse(country == "United Kingdom", "United Kingdom of Great Britain & Northern Ireland", country)) %>%
   mutate_at(c("brand_name", 
               "parent_company_name", 
               "id", 
@@ -201,6 +200,8 @@ brands_validated <- brands_validated_raw %>%
               "type_of_audit", 
               'specifics_of_audit', 
               "parent_company_name_old"), ~ trimws(tolower(.))) %>%
+  mutate(country = ifelse(country == "mexico", "mexico", country),
+         country = ifelse(country == "united kingdom", "united kingdom of great britain & northern ireland", country)) %>%
   mutate(type_product = case_when(
     type_product == "pp"  ~  "null",     
     type_product == "fg"  ~  "fishing gear",       
@@ -260,22 +261,22 @@ brands_validated <- brands_validated_raw %>%
 
 ##Harvest wikidata names ----
 #Needs to be run if there are any new wikidata ids
-wikidata_ids <- brands_validated %>%
-  distinct(id) %>%
-  filter(grepl("q(\\d{2,})", id) & !grepl("http", id)) #%>%
+#wikidata_ids <- brands_validated %>%
+#  distinct(id) %>%
+#  filter(grepl("q(\\d{2,})", id) & !grepl("http", id)) #%>%
 
-for(row in 1:nrow(wikidata_ids)){
-  print(row)
-  try(
-    wikidata_ids[row, "name"] <- paste(vapply(unlist(str_extract_all(wikidata_ids[row, "id"], "q(\\d{2,})")), function(x) {trimws(tolower(WikidataR::find_item(x)[[1]]$label))}, FUN.VALUE = character(1)), collapse = ", "),
-    silent = T
-  )
-}  
+#for(row in 1:nrow(wikidata_ids)){
+#  print(row)
+#  try(
+#    wikidata_ids[row, "name"] <- paste(vapply(unlist(str_extract_all(wikidata_ids[row, "id"], "q(\\d{2,})")), function(x) {trimws(tolower(WikidataR::find_item(x)[[1]]$label))}, FUN.VALUE = character(1)), collapse = ", "),
+#    silent = T
+#  )
+#}  
 
-wikidata_ids2 <- wikidata_ids %>%
-  mutate(name = ifelse(is.na(name), id, name))
+#wikidata_ids2 <- wikidata_ids %>%
+#  mutate(name = ifelse(is.na(name), id, name))
 
-fwrite(wikidata_ids2, "github_data/wikidata_ids2.csv")
+#fwrite(wikidata_ids2, "github_data/wikidata_ids2.csv")
 
 ##Harvest locations ----
 # Needs to be run if there are any new locations
@@ -354,7 +355,7 @@ number <- brand_company_id %>%
   filter(priority)
 
 fwrite(brand_company_id, "github_data/brand_company_id.csv")
-fwrite(number, "github_data/todo2.csv")
+#fwrite(number, "github_data/todo3.csv")
 
 event_list <- raw_processed_data %>%
   distinct(event_id, city, province, country, continent, year, specifics_of_audit, event_total_count)
@@ -383,6 +384,9 @@ nrow(number) == 0
 #test if brands are uniquely matched in brand company id. 
 unique(brand_company_id$brand_name) |> length() == length(brand_company_id$brand_name)
 
+#test that event list is unique events
+length(unique(event_list$event_id)) == length(event_list$event_id)
+
 #brands are only validated or not. 
 raw_processed_data |>
   distinct(brand_name, validated) |>
@@ -399,7 +403,7 @@ sum(is.na(raw_processed_data$id)) == 0 #No NA IDs
 !any(raw_processed_data$id == "NULL")
 !any(raw_processed_data$id == "")
 
-#counts add up to one. 
+#proportions add up to one. 
 raw_processed_data %>%
   group_by(event_id) %>%
   summarise(proportion_sum = sum(proportion)) %>%
@@ -510,7 +514,8 @@ is.character(raw_processed_data$location_specificity)
 
 #warning/quality checks
 lapply(raw_processed_data, function(x){sum(is.na(x))})
-#unique match between brands and ids in raw_processed_data, allowed if the count and occurance of the brand is small. 
+
+#unique match between brands and ids in raw_processed_data, allowed if the count and occurrence of the brand is small which is checked previously. 
 test_unique_brand_id_match <- raw_processed_data %>%
   distinct(brand_name, id) %>%
   group_by(brand_name) %>%
@@ -615,7 +620,7 @@ small_boot_name <- boot_name %>%
 
 fwrite(small_boot_name %>% distinct(parent_company_name, id, mean), "github_data/small_brand_name.csv")
 
-sum(boot_name$mean)
+sum(boot_name$mean) == 1
     
 boot_name_sorted <- boot_name %>%
   mutate(rank = nrow(.) - rank(mean) + 1) %>%
