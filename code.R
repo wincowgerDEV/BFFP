@@ -706,7 +706,7 @@ nrow(event_list)
 nrow(event_list2)
 
 # total number of countries
-unique(event_list$country)
+unique(event_list$country) |> length()
 
 # total number of brands
 length(unique(raw_processed_data$brand_name))
@@ -729,6 +729,28 @@ raw_processed_data |>
 brand_company_id %>% 
   filter(brand_total_count > 100 & brand_frequency > 10) %>%
   nrow()
+
+#Number that were assessed below threshold.
+brand_company_id %>% 
+  filter(brand_total_count <= 100 & brand_frequency <= 10 & validated %in% c("true", "attempted")) %>%
+  nrow()
+
+#Number that were assessed.
+brand_company_id %>% 
+  filter(validated %in% c("true", "attempted")) %>%
+  nrow() - brand_company_id %>% 
+  filter(brand_total_count > 100 & brand_frequency > 10) %>%
+  nrow()
+
+#Number that needed to be assessed by percent. 
+brand_company_id %>% 
+  mutate(priority = brand_total_count > 100 & brand_frequency > 10) %>%
+  group_by(priority) %>%
+  summarise(sum_count = sum(brand_total_count), 
+            sum_freq = sum(brand_frequency)) %>%
+  ungroup() %>%
+  mutate(prop_count = sum_count/sum(sum_count), prop_freq = sum_freq/sum(sum_freq))
+
 
 #Number of companies greater than 50%
 boot_name_sorted %>%
