@@ -1,0 +1,48 @@
+brand_name,validated,brand_parent_occurances,parent_company_name,id,brand_total_count,brand_frequency,priority
+5 alive,TRUE,1,the coca-cola company,q3295867,116,11,TRUE
+activia,TRUE,1,danone,q329426,109,20,TRUE
+ades,TRUE,1,the coca-cola company,q3295867,111,19,TRUE
+alpenliebe,TRUE,1,perfetti van melle,q612524,219,25,TRUE
+cal cheese,TRUE,1,mayora indah,q12497654,127,16,TRUE
+chitato,TRUE,1,salim group,q905963,112,40,TRUE
+desconocido,TRUE,1,unbranded,unbranded,3163,87,TRUE
+extra,TRUE,1,"mars, incorporated",q695087,110,15,TRUE
+frito lay,TRUE,1,pepsico,q334800,105,26,TRUE
+jas jus,TRUE,1,wings,q12524596,105,19,TRUE
+jolly rancher,TRUE,1,the hershey company,q1056637,147,46,TRUE
+keratin,attempted,2,"keratin complex, unbranded","keratin complex, unbranded",649,13,TRUE
+lighter,TRUE,1,unbranded,unbranded,163,22,TRUE
+lion,TRUE,1,nestlé,q160746,253,29,TRUE
+lm,TRUE,1,altria,q445007,104,11,TRUE
+magic chips,attempted,1,jg summit holdings,q6108205,179,11,TRUE
+malboro,TRUE,1,altria,q445007,1316,33,TRUE
+maltina,TRUE,1,nigerian breweries,q11108502,152,11,TRUE
+monde nissin,TRUE,1,monde nissin,q6898690,151,11,TRUE
+nescafã©,TRUE,1,nestlé,q160746,103,18,TRUE
+nestlé,TRUE,1,nestlé,q160746,147,22,TRUE
+nova,attempted,1,jg summit holdings,q6108205,105,23,TRUE
+orbit,TRUE,1,"mars, incorporated",q695087,151,40,TRUE
+plastic spoon,TRUE,2,unbranded,unbranded,510,22,TRUE
+poland springs,TRUE,1,nestlé,q160746,122,11,TRUE
+power f,TRUE,1,wings,q12524596,103,15,TRUE
+prince,TRUE,1,british american tobacco,q856411,126,24,TRUE
+procter & gamble,TRUE,1,procter & gamble,q212405,133,12,TRUE
+pure life,TRUE,1,nestlé,q160746,167,54,TRUE
+quaker,TRUE,1,pepsico,q334800,101,26,TRUE
+richeese,TRUE,1,nabati group,q19727082,107,16,TRUE
+ruffles,TRUE,1,pepsico,q334800,105,48,TRUE
+sabritas,TRUE,1,pepsico,q334800,111,16,TRUE
+straw,TRUE,1,unbranded,unbranded,2802,36,TRUE
+straws,TRUE,1,unbranded,unbranded,2215,17,TRUE
+superstar,TRUE,1,mayora indah,q12497654,116,40,TRUE
+tops,TRUE,1,unbranded,unbranded,131,11,TRUE
+unbranded,TRUE,4,unbranded,unbranded,68675,725,TRUE
+unidentified,TRUE,1,unbranded,unbranded,6675,36,TRUE
+unkown,TRUE,1,unbranded,unbranded,3639,193,TRUE
+urc,TRUE,1,jg summit holdings,q6108205,262,30,TRUE
+vaseline,TRUE,1,unilever,q157062,108,23,TRUE
+vigor,TRUE,1,group lala,q2855873,156,12,TRUE
+walkers,TRUE,1,pepsico,q334800,204,26,TRUE
+walmart,TRUE,1,walmart,q483551,139,45,TRUE
+wings,TRUE,1,wings,q12524596,146,22,TRUE
+zinc,attempted,1,jab holding company,q1691896,136,19,TRUE

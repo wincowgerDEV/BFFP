@@ -633,7 +633,7 @@ small_boot_name <- boot_name %>%
 
 fwrite(small_boot_name %>% distinct(parent_company_name, id, mean), "github_data/small_brand_name.csv")
 
-sum(boot_name$mean) == 1
+round(sum(boot_name$mean), 2) == 1
     
 boot_name_sorted <- boot_name %>%
   mutate(rank = nrow(.) - rank(mean) + 1) %>%
@@ -687,11 +687,19 @@ hist(log10(elen_data$mean))
 hist(log10(elen_data$mass))
 full_model = lm(log10(mean)~log10(mass), data = elen_data)
 summary(full_model)
+plot(full_model)
+full_model_raw = lm(mean~mass, data = elen_data)
+plot(full_model_raw)
 
 fwrite(elen_data, "github_data/elen_data.csv")
 #Interpretation https://kenbenoit.net/assets/courses/ME104/logmodels2.pdf
 
 # Stats reported in paper and other validation checks ----
+
+#number of brand audits each year
+event_list %>%
+  group_by(year) %>%
+  summarise(count = n())
 
 #total number of items recorded
 sum(raw_processed_data$total_count)
@@ -757,11 +765,11 @@ boot_name_sorted %>%
   filter(cumulative < 0.5) %>%
   nrow() + 1
 
-#number of companies total
+#top 5 companies
 boot_name_sorted %>%
   top_n(wt = mean,n =  5) 
 
-#Number of companies
+#Number of companies total
 nrow(boot_name_sorted)
 
 #number of companies for ELen 

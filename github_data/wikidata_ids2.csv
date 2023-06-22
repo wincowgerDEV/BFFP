@@ -15,7 +15,7 @@ q27961785,bakhresa group
 q106689208,various artists
 q17227901,ok food industry
 q248711,frieslandcampina
-q607272,woolworths limited
+q607272,woolworths group
 q688082,bata limited
 q905963,salim group
 q1190881,reckitt
@@ -173,52 +173,37 @@ q3296092,marwa
 q3532857,kerala co-operative milk marketing federation
 q55074808,inspire brands
 q712034,schwarz gruppe
-q115972938,lemon square
-q12514216,siantar top
 q380022,grupo arcor
 q194297,guinness
 q1099075,cedevita
 q946370,fonterra
 q188115,saba
-q3500302q212405,"always, procter & gamble"
-q113215q18354260,"carlsberg group, lion brewery"
-q392451q856411,"0, british american tobacco"
 q17086814,united spirits limited
 q610492,spar
 q15938385,hongta group
-q632694q969761,"archer daniels midland, capri-sun"
-q6898690q12857502,"monde nissin, mondelez international"
 q392451,0
-q6108205q160746q18341667,"jg summit holdings, nestlé, nissin foods holdings"
 q109433683,q109433683
-q217583q329426q12857502q905963q96100690,"berkshire hathaway, danone, mondelez international, salim group, ultra jaya milk industry"
 q125054,aldi
 q947718,reynolds american
-q10895089,nongfu spring
 q240711,hotel chelsea
 q17110512,naya waters
 q7884615,uni-president enterprises corporation
-q113215,carlsberg group
-q487494,tesco
 q856411q947718,"british american tobacco, reynolds american"
 q12071257,q12071257
 q16994973,intafact beverages limited
 q1799920,vöslauer
-q97236799q97236799,"rekso group, rekso group"
 q6108205q947718,"jg summit holdings, reynolds american"
-q11286748q20586312,"ichitan, ichitan group"
+q97236799q97236799,"rekso group, rekso group"
+q12514216,siantar top
 q18341667,nissin foods holdings
-q334800q1345267,"pepsico, suntory"
-q4809259,associated wholesale grocers
+q6898690q12857502,"monde nissin, mondelez international"
 q108574767,linea aeropostal venezolana
-q183275q212405,"mitsubishi group, procter & gamble"
 q566814,august storck kg
 q31174144,nutrifood
 q4646960,a-z
 q55625166,niagara bottling
 q910541,topps
 q1364176,wipro
-q183275,mitsubishi group
 q674575,arla foods
 q6898690q12857502q18341667,"monde nissin, mondelez international, nissin foods holdings"
 q11687605,la casera
@@ -244,7 +229,6 @@ q2575851,spunk.nl
 q28498925,q28498925
 q334800q157062,"pepsico, unilever"
 q6888604,modern dairy
-q105968851,sea master
 q43709,rfm corporation
 q573266,rewe group
 q7271953,quiktrip
@@ -268,7 +252,6 @@ q934489q18636682,"san miguel corporation, san miguel food and beverage, inc."
 q2035375,sonae
 q2289193,sierra nevada brewing company
 q4081738q1967898,"beldziarzhkharchpram, neman"
-q445007q6108205,"altria, jg summit holdings"
 q7234413,postobón
 q97236799,rekso group
 q898568q526505,"japan tobacco, sobranie"
@@ -290,6 +273,7 @@ q96100268,garudafood putra putri jaya
 q1691896q334800,"jab holding company, pepsico"
 q5204857,desa
 q110730268,fruna
+q115972938,lemon square
 q13120120,marico
 q329426q905963,"danone, salim group"
 q5510683,future group
@@ -302,6 +286,7 @@ q12435810,nirma
 q3131210,natura cosméticos s.a.
 q7452379,septwolves
 q5647768,hanesbrands
+q113215,carlsberg group
 q52855,swedish match
 q5595046,grand river enterprises
 q591001,chery
@@ -318,11 +303,12 @@ q902855q157062,"kao corporation, unilever"
 q6108205q43305333,"jg summit holdings, tivoli"
 q110167603,fini
 q11326190,hi-lex
-q54850298,q54850298
+q54850298,colombina
 q917701q12071257,q917701q12071257
 q12643718q15043910,"tommy, yıldız holding"
 q1619375,hindustan petroleum
 q60750543,gandour
+q183275,mitsubishi group
 q113464990,molkerei alois müller gmbh & co. kg
 q1200552,marvel entertainment
 q30258643,biopharma
@@ -338,11 +324,10 @@ q5132493,clif bar
 q550258,wendy's
 q7907085,"vit, c.a."
 q6745593,mamee double-decker
-q13181043,chaudhary group
 q17047180,splash corporation
 q2611646,ceres
 q2836957q7827581,"alimentation couche-tard, tosco corporation"
-q2924068,société des brasseries du maroc
+q2924068,société des boissons du maroc
 q521499,ricola
 q6108205q18341667,"jg summit holdings, nissin foods holdings"
 q902855,kao corporation
@@ -427,7 +412,6 @@ q6960266,nakanihon air service
 q7360876,the wonderful company
 q7735821,garden
 q10315203q12857502,"lacta, mondelez international"
-q20586312,ichitan group
 q3295867q7739717,"the coca-cola company, the himalaya drug company"
 q4258608,lenta
 q624375,cvs health
@@ -494,7 +478,6 @@ q145168q244457q483551,"dollar general, subway, walmart"
 q1653981,iki
 q2305872,utz certified
 q2836957,alimentation couche-tard
-q38076q244457,"mcdonald’s, subway"
 q4344840,paradise
 q4633377q160746q17985053,"2 sisters food group, nestlé, valeo foods"
 q54937048,petra
@@ -510,6 +493,7 @@ q1359568,alibaba group
 q156238q3088656,"exxonmobil, mobil"
 q306764,abbott laboratories
 q315068,bahlsen
+q487494,tesco
 q5101731,chips group
 q5921060,yeo hiap seng
 q6972090,national dairy development board
@@ -561,8 +545,9 @@ q926699,"crocs, inc."
 q996907,fazer
 q16338095,financière pinault
 q108922555,hw
+q10895089,nongfu spring
 q1143685,cumberland farms
-q114556760,q114556760
+q114556760,cisarua mountain dairy (cimory)
 q12148818,q12148818
 q12163926,q12163926
 q206921,pfizer
@@ -570,11 +555,10 @@ q2139745,euro shopper/ah basic
 q28208953,njoy
 q30938280,essity
 q3133469,latvijas balzams
-q4356134,ingman
+q4356134,arla oy
 q4822010,auntie anne's
 q5222470,dare foods
 q566814q701755,"august storck kg, edeka"
-q6108205q934489,"jg summit holdings, san miguel corporation"
 q6939094,murray & roberts
 q701338q1820565q1364603,"c&a, les mousquetaires, tedi"
 q7072617,okko
@@ -618,7 +602,7 @@ q4787513,arctic glacier
 q5368876,emami
 q5397235q1030544,"arnolds, campbell soup company"
 q5433101,family dollar
-q54850298q18341667,q54850298q18341667
+q54850298q18341667,"colombina, nissin foods holdings"
 q549181,mol group
 q6155612,jantzen
 q7414,the walt disney company
@@ -672,7 +656,7 @@ q1374315,eurazeo
 q1522721,giant eagle
 q158205,sanofi
 q17071847,manikchand group
-q1888452q334800,q1888452q334800
+q1888452q334800,"mamut, pepsico"
 q1915049,mccormick & company
 q1952722,mundipharma
 q21190510,didi
@@ -699,7 +683,7 @@ q996907q157062,"fazer, unilever"
 q23809797,costa
 q107074885,warner bros. discovery
 q106500005,seventh-day adventist church
-q10374737,q10374737
+q10374737,sukita
 q10390533,vieira de castro
 q11063580q12857502,"khong guan, mondelez international"
 q12492160,q12492160
@@ -1039,7 +1023,7 @@ q5694616,heaven
 q5743846,herr's snacks
 q57446406,gorila
 q576340,maspex
-q5795169,q5795169
+q5795169,cuétara
 q5820749,el pozo
 q5877762,georgalos
 q5888229,home bargains
@@ -1069,7 +1053,7 @@ q728185,shiseido
 q735562,soriana
 q7503826,shri mahila griha udyog lijjat papad
 q7615681,stewart's
-q762787,barilla
+q762787,barilla group
 q7738224,the greenbrier companies
 q7903503,utz quality foods
 q7968887,warburtons
@@ -1373,6 +1357,7 @@ q4749048,amy's kitchen
 q47519819,tcl communication
 q4789707,argos
 q4795598,arotech corporation
+q4809259,associated wholesale grocers
 q4822807,aussie
 q4830635,axium foods
 q4849261,bakers delight
@@ -1552,4 +1537,11 @@ q9684,the new york times
 q98525713,q98525713
 q1089081,fiorucci
 q11309073,js
+q20992639,oscar mayer
 q2843227,amica chips
+q969761,capri-sun
+q432564,coop switzerland
+q11286748,ichitan
+q105968851,sea master
+q13181043,chaudhary group
+q20586312,q20586312
