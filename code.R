@@ -76,7 +76,7 @@ elen_data <- fread("github_data/2022-Progress-Report-Data-Sheet-Final2_WC.csv") 
   mutate(ID = tolower(ID)) %>%
   inner_join(boot_name, by = c("ID" = "id")) %>%
   mutate(mass = as.numeric(gsub(",", "", `2021 total weight of new packaging (metric tonnes)`))) %>%
-  mutate(`Company name` = ifelse(stringi::stri_enc_isutf8(.data$`Company name`), `Company name`, "Loreal"))
+  mutate(`Company name` = ifelse(stringi::stri_enc_isutf8(.data$`Company name`), `Company name`, c("Loreal", "Nestle")))
 
 population_data_2019 <- read.csv("github_data/country_population_data/API_SP.POP.TOTL_DS2_en_csv_v2_4902028_WC.csv")
 
