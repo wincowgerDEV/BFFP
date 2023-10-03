@@ -72,11 +72,13 @@ load(file = "github_data/raw_processed_data.RData")
 
 boot_name <- fread("github_data/brand_name.csv")
 
+#Global_mass from https://www.statista.com/statistics/282732/global-production-of-plastics-since-1950/#:~:text=The%20worldwide%20production%20of%20plastics,production%20has%20soared%20since%201950s.
 elen_data <- fread("github_data/2022-Progress-Report-Data-Sheet-Final2_WC.csv") %>%
   mutate(ID = tolower(ID)) %>%
   inner_join(boot_name, by = c("ID" = "id")) %>%
   mutate(mass = as.numeric(gsub(",", "", `2021 total weight of new packaging (metric tonnes)`))) %>%
-  mutate(`Company name` = ifelse(stringi::stri_enc_isutf8(.data$`Company name`), `Company name`, c("Loreal", "Nestle")))
+  #mutate(`Company name` = ifelse(stringi::stri_enc_isutf8(.data$`Company name`), `Company name`, c("Loreal", "Nestle"))) %>%
+  mutate(global_percent = mass/390700000)
 
 population_data_2019 <- read.csv("github_data/country_population_data/API_SP.POP.TOTL_DS2_en_csv_v2_4902028_WC.csv")
 
@@ -663,32 +665,35 @@ ggplot(elen_data %>%
          bind_rows(mutate(., `Sector (EMF input)` = "All")) %>%
          mutate(`Sector (EMF input)` = ifelse(`Sector (EMF input)` %in% c("beverages", "food"), "Food and Beverage", ifelse(`Sector (EMF input)` == "All", "All", "Household and Retail"))) %>%
          mutate(`Sector (EMF input)` = factor(x = `Sector (EMF input)`, levels = c("Food and Beverage", "All", "Household and Retail"))), 
-       aes(x = mass, y = mean*100, color = `Sector (EMF input)`, label = "Company name")) +
+       aes(x = global_percent*100, y = mean*100, color = `Sector (EMF input)`, label = "Company name")) +
   geom_smooth(method = "lm") +
   geom_point() +
   geom_text_repel(aes(label = `Company name`), size = 2, max.overlaps = 100)+
   coord_fixed() +
-  scale_x_log10(limits = c(1000,10000000)) +
+  scale_x_log10(breaks = 10^(-4:1), limits = c(0.0001, 10)) +
   scale_y_log10(breaks = 10^(-5:2), limits = c(0.000001, 100)) +
-  labs(x = "2021 Total Plastic Mass Produced (metric tonnes)", y = "Mean Percent of Total Branded Waste") +
+  labs(x = "2021 Percent of Total Plastic Mass Produced", y = "Mean Percent of Branded Plastic Pollution") +
+  scale_color_viridis_d() +
   theme_classic(base_size = 15) 
 
-ggplot(elen_data, aes(x = mass, y = mean*100)) +
+ggplot(elen_data, aes(x = global_percent*100, y = mean*100)) +
   geom_text_repel(aes(label = `Company name`), size = 2, max.overlaps = 100)+
   geom_point() +
   geom_smooth(method = "lm") +
   coord_fixed() +
-  scale_x_log10(limits = c(1000,10000000)) +
+  scale_x_log10(breaks = 10^(-4:1), limits = c(0.0001, 10)) +
   scale_y_log10(breaks = 10^(-5:2), limits = c(0.000001, 100)) +
-  labs(x = "2021 Total Plastic Mass Produced (metric tonnes)", y = "Mean Percent of Total Branded Waste") +
+  labs(x = "2021 Percent of Total Plastic Mass Produced", y = "Mean Percent of Total Branded Waste") +
   theme_classic(base_size = 15) 
   
 hist(log10(elen_data$mean))
-hist(log10(elen_data$mass))
-full_model = lm(log10(mean)~log10(mass), data = elen_data)
+hist(log10(elen_data$global_percent))
+full_model = lm(log10(elen_data$mean)~log10(elen_data$global_percent))
 summary(full_model)
 plot(full_model)
 full_model_raw = lm(mean~mass, data = elen_data)
+summary(full_model_raw)
+
 plot(full_model_raw)
 
 fwrite(elen_data, "github_data/elen_data.csv")
