@@ -672,7 +672,7 @@ ggplot(elen_data %>%
   coord_fixed() +
   scale_x_log10(breaks = 10^(-4:1), limits = c(0.0001, 10)) +
   scale_y_log10(breaks = 10^(-5:2), limits = c(0.000001, 100)) +
-  labs(x = "2021 Percent of Total Plastic Mass Produced", y = "Mean Percent of Branded Plastic Pollution") +
+  labs(x = "2021 Percent of Global Plastic Mass Produced", y = "Mean Percent of Branded Plastic Pollution") +
   scale_color_viridis_d() +
   theme_classic(base_size = 15) 
 
