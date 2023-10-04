@@ -1,7 +1,6 @@
 
 #Libraries ----
 
-library(safejoin)
 library(dplyr)
 library(data.table)
 library(readr)
@@ -596,6 +595,7 @@ event_list %>%
             distinct(event_id, country) %>%
             group_by(country) %>%
             summarise(count = n()) %>%
+            mutate(country = str_to_title(country)) %>%
         ggplot() +
         geom_point(aes(x = count, y = reorder(country, count))) +
         scale_x_log10() +
@@ -645,18 +645,20 @@ boot_name_sorted <- boot_name %>%
 ggplot(boot_name_sorted) +
   geom_line(aes(y = cumulative*100, x = rank), linewidth = 3) +
   scale_x_log10() + 
-  theme_classic(base_size = 20) +
-  labs(x = "Number of Companies", y = "Cumulative Percent Contribution")
+  theme_classic(base_size = 15) +
+  labs(x = "Number of Companies", y = "Cumulative Percent of Branded Plastic Pollution")
 
 fwrite(boot_name, "github_data/brand_name.csv")
 
 #Returns decrease exponentially for including more companies. 
-ggplot(small_boot_name %>% filter(mean > 0.01), aes(y = reorder(parent_company_name, mean), x = mean*100)) +
+
+small_boot_name %>% filter(mean > 0.01) %>% mutate(parent_company_name = str_to_title(parent_company_name)) %>%
+ggplot(aes(y = reorder(parent_company_name, mean), x = mean*100)) +
   geom_point() +
   geom_errorbar(aes(xmin=low*100, xmax=high*100)) + 
-  theme_classic(base_size = 20) +
+  theme_classic(base_size = 18) +
   scale_x_continuous(breaks = 0:13, limits = c(0,13)) +
-  labs(x = "Mean Percent of Global Branded Waste", y = "Company")
+  labs(x = "Mean Percent of Global Branded Plastic Pollution", y = "Company")
 
 unique(raw_processed_data_event_ag_2$event_id) |> length()
 
@@ -669,10 +671,10 @@ ggplot(elen_data %>%
   geom_smooth(method = "lm") +
   geom_point() +
   geom_text_repel(aes(label = `Company name`), size = 2, max.overlaps = 100)+
-  coord_fixed() +
+  coord_equal() +
   scale_x_log10(breaks = 10^(-4:1), limits = c(0.0001, 10)) +
   scale_y_log10(breaks = 10^(-5:2), limits = c(0.000001, 100)) +
-  labs(x = "2021 Percent of Global Plastic Mass Produced", y = "Mean Percent of Branded Plastic Pollution") +
+  labs(x = "Percent of Global Plastic Mass Produced", y = "Mean Percent of Branded Plastic Pollution") +
   scale_color_viridis_d() +
   theme_classic(base_size = 15) 
 
