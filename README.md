@@ -13,4 +13,5 @@ All datasets currently implimented in the code.R script. Datasets for other scri
 ## [raw_processed_data.csv](https://github.com/wincowgerDEV/BFFP/blob/main/raw_processed_data.csv)
 The most complete and rawest form of the dataset that can be used to reproduce all results.
 
-## [data_descriptions.csv]()
+## [data_descriptions.csv](https://github.com/wincowgerDEV/BFFP/blob/main/data_descriptions.csv)
+Full descriptions of the fields of raw_processed_data and other datasets taht live in github_data.
