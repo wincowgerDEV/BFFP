@@ -527,8 +527,8 @@ nrow(test_unique_brand_id_match) == 0
 
 
 #Write after validation
-fwrite(raw_processed_data, "github_data/raw_processed_data.csv")
-save(raw_processed_data, file = "github_data/raw_processed_data.RData")
+fwrite(raw_processed_data, "raw_processed_data.csv")
+save(raw_processed_data, file = "raw_processed_data.RData")
 
 # Data Analysis ----
 ## Unbranded metrics ----
@@ -782,9 +782,6 @@ nrow(boot_name_sorted)
 #number of companies for ELen 
 nrow(elen_data)
 
-#total compant
-#Assessed 
-
 # Extra Data Cleaning/Creation Scripts ----
 ##Cleanup Events to Anon Data ----
 #events <- read.csv("EventsCombined_2022.csv", encoding = "UTF-8", #quote = "", comment.char = "\\",
@@ -797,8 +794,6 @@ nrow(elen_data)
 
 #write.csv(event_scrub, "events_scrubbed.csv")
 
-#dat2018 <- read.csv("Forbes Global 2000 - 2018.csv") %>%
-#    mutate(year = 2018) %>%
 
 
 
