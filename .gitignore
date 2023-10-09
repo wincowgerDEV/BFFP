@@ -47,5 +47,6 @@ vignettes/*.pdf
 private_data/
 *.txt
 *.xlsx
+*.png
 
 *raw_processed_data_event_ag_2.csv
