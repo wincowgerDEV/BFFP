@@ -67,7 +67,7 @@ wikidata_ids2 <- fread("github_data/wikidata_ids2.csv")
 
 locations_to_code <- fread("github_data/locations_to_code.csv")
 
-load(file = "github_data/raw_processed_data.RData")
+load(file = "raw_processed_data.RData")
 
 boot_name <- fread("github_data/brand_name.csv")
 
