@@ -48,5 +48,6 @@ private_data/
 *.txt
 *.xlsx
 *.png
+*.svg
 
 *raw_processed_data_event_ag_2.csv
