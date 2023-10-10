@@ -30,3 +30,175 @@ latitude_most_specific,The most specific longitude coordinate we could come up w
 location_specificity,The location specificity. ,raw_processed_data,city
 total_count,The total number of pieces of trash during the audit that were found of the type listed in this row including all descriptors. ,raw_processed_data,2
 proportion,The proportion of the total trash from the event of the type described in this row. ,raw_processed_data,0.00746
+X,Unique identifier for each observation.,events_scrubbed,1
+file_name,Name of the file from which data was extracted.,events_scrubbed,NULL
+submission_type,Type of template through which the data was submitted.,events_scrubbed,Excel Template Old
+submission_id,Unique identifier for each submission.,events_scrubbed,1
+year,Year when the event took place.,events_scrubbed,2018
+name_of_lead,Unique identifier for the lead person of the event.,events_scrubbed,942
+is_trained,Indicator of whether the lead is trained or not.,events_scrubbed,NULL
+organization,Unique identifier for the organization conducting the event.,events_scrubbed,195
+volunteer,Number of volunteers participated in the event.,events_scrubbed,1
+start_of_audit,Start date of the audit.,events_scrubbed,5/6/2018
+end_of_audit,End date of the audit.,events_scrubbed,5/6/2018
+time_spent,Time spent on the audit (this could be in hours or days).,events_scrubbed,NULL
+city,City where the event took place.,events_scrubbed,Fiumicino
+province,Province or state where the event took place.,events_scrubbed,Roma
+country,Country where the event took place.,events_scrubbed,Italy
+continent,Continent where the event took place.,events_scrubbed,Europe
+type_of_audit,Type of location where the audit took place.,events_scrubbed,Outdoor
+specifics_of_audit,Specific nature of the audit location.,events_scrubbed,Coast / Ocean / Estuary
+total_count,Total count of items audited during the event.,events_scrubbed,129
+row_id,Unique identifier for each observation.,brands,1
+submission_type,Type of template through which the data was submitted.,brands,Excel Template Old
+submission_id,Unique identifier for each submission.,brands,1
+year,Year when the waste data was recorded.,brands,2018
+brand_name,Name of the brand associated with the waste.,brands,Blues
+parent_company,Name of the parent company that owns the brand.,brands,Eurospin
+item_description,Description of the waste item.,brands,Tennis Balls
+type_product,Type or category of the product the waste came from.,brands,SM
+type_material,Type of material that the waste is made up of.,brands,PVC
+layer,Number of layers of the waste item.,brands,ML
+total_count,Total count of this specific waste item recorded.,brands,5
+Company name,Name of the company reported in the dataset.,2022_Progress_Report_Data...,A.S. Watson Group
+ID,Unique identifier for each company or entity.,2022_Progress_Report_Data...,Q20539261
+Category,Category under which the company or entity falls (e.g. Retailers, Packaging producers, etc.).,2022_Progress_Report_Data...,Retailers
+Sector (EMF input),Sector as input by the Ellen MacArthur Foundation (EMF).,2022_Progress_Report_Data...,Retail
+2021 total weight of new packaging (metric tonnes),Total weight of new packaging introduced by the company in the year 2021 (measured in metric tonnes).,2022_Progress_Report_Data...,42,968
+brand_name,Name of the brand.,brand_company_id,cocacola
+validated,Indicator specifying if the brand name has been validated (true/false).,brand_company_id,true
+brand_parent_occurances,Number of times a specific parent company name appears in association with different brands.,brand_company_id,1
+parent_company_name,Name of the parent company associated with the brand.,brand_company_id,unbranded
+id,Final identification of the brand.,brand_company_id,unbranded
+brand_total_count,Total count of the brand's occurrence in the dataset.,brand_company_id,8
+brand_frequency,Frequency of the brand appearing across various contexts or data points.,brand_company_id,2
+id,Unique identifier or descriptor related to the brand or parent company.,brand_name,q3295867
+high,Highest estimate or proportion related to the brand or parent company.,brand_name,7.87e-06
+mean,Mean or average estimate or proportion related to the brand or parent company.,brand_name,2.62e-06
+low,Lowest estimate or proportion related to the brand or parent company.,brand_name,0
+brand_name,Name of the brand.,brands_validated,la doo waters nig
+parent_company_name,Name of the parent company associated with the brand.,brands_validated,la doo
+id,Unique identifier associated with the brand or parent company wikidata id (if available).,brands_validated,Q3295867
+link,Link to an external website that provides more information about the brand or parent company.,brands_validated,https://www.wikidata.org/wiki/Q3295867
+country,Countries where the brand or the specific product is prevalent or sold.,brands_validated,Nigeria, Nigeria
+sum,Aggregate or total number representing the brand's occurrence, relevance, or any other significant metric in the dataset.,brands_validated,28742
+validated,Indicator specifying the validation status of the brand (e.g. TRUE, ATTEMPTED, etc.).,brands_validated,ATTEMPTED
+row_id,Unique identifier for each record.,BrandsCombined_2022,1
+submission_type,Type of submission template used for data input.,BrandsCombined_2022,Excel Template Old
+submission_id,Unique identifier for the submission.,BrandsCombined_2022,1
+year,Year of the data record or when the survey was conducted.,BrandsCombined_2022,2018
+brand_name,Name of the brand associated with the waste item.,BrandsCombined_2022,Blues
+parent_company,Name of the parent company associated with the brand.,BrandsCombined_2022,Eurospin
+item_description,Description of the waste item.,BrandsCombined_2022,NULL
+type_product,Type or category of the product.,BrandsCombined_2022,NULL
+type_material,Material type of the waste item.,BrandsCombined_2022,SL
+layer,Number of layers of the waste item.,BrandsCombined_2022,NULL
+total_count,Total count or occurrence of the brand or waste item in the dataset.,BrandsCombined_2022,5
+brand_name,Name of the brand associated with the waste item.,cleanup_brand_to_parent,"Cocacola"
+parent_company_name,Name of the parent company associated with the brand.,cleanup_brand_to_parent,"The Coca-Cola Company"
+id,Unique identifier or code associated with the brand or parent company.,cleanup_brand_to_parent,"Q3295867"
+sum,Total occurrence or count of a specific brand or waste item in the dataset.,cleanup_brand_to_parent,9
+country,Country where the waste survey or event took place.,cleanup_brand_to_parent,"United States of America"
+Country Name,Name of the country or region.,Population Dataset,"Aruba"
+Country Code,Unique code associated with each country or region.,Population Dataset,"ABW"
+Indicator Name,Name of the statistical indicator being reported.,Population Dataset,"Population, total"
+Indicator Code,Unique code associated with the statistical indicator.,Population Dataset,"SP.POP.TOTL"
+2019,Population value for the year 2019.,Population Dataset,106000
+Company name,Name of the company,Elen Dataset,"Ahold Delhaize"
+ID,Unique identifier associated with each company,Elen Dataset,"q20539261"
+Category,Category to which the company belongs,Elen Dataset,"Retailers"
+Sector (EMF input),Sector of operation for the company based on EMF's classification,Elen Dataset,"Retail"
+2021 total weight of new packaging (metric tonnes),Weight of the new packaging introduced by the company in 2021 (in metric tonnes),Elen Dataset,159189
+high,Highest estimated value for plastic pollution,Elen Dataset,3.54e-05
+mean,Mean or average value for plastic pollution,Elen Dataset,1.34e-05
+low,Lowest estimated value for plastic pollution,Elen Dataset,0
+mass,Mass or weight metric (redundant with the 2021 packaging column),Elen Dataset,159189
+event_id,Unique identifier for each event,Event List,"Excel Template Old_93_2018"
+city,City where the event occurred,Event List,"pulo nasi"
+province,Province or region where the event took place,Event List,"aceh island"
+country,Country where the event took place,Event List,"indonesia"
+continent,Continent of the event location,Event List,"asia"
+year,Year of the event,Event List,2018
+specifics_of_audit,Specifics or type of audit for the event (e.g., coastal or inland),Event List,"coastal"
+event_total_count,Total count or measurement associated with the event, the number of items,Event List,1096
+row_id,Unique row identifier,joined_clean,1
+submission_type,Type of submission used,joined_clean,"Excel Template Old"
+submission_id,Unique identifier for each submission,joined_clean,1
+year,Year of the data submission or audit,joined_clean,2018
+brand_name,Name of the brand,joined_clean,"blues"
+parent_company,Parent company of the brand,joined_clean,"Eurospin"
+item_description,Description of the item,joined_clean,"NULL"
+type_product,Product type,joined_clean,"NULL"
+type_material,Material type of the item,joined_clean,"SL"
+layer,Layer detail of the item,joined_clean,"NULL"
+total_count,Count of the specific item,joined_clean,5
+X,Unspecified column,joined_clean,1
+name_of_lead,Lead identifier or lead's name,joined_clean,942
+is_trained,Training status of the lead,joined_clean,"NULL"
+organization,Organization identifier or name,joined_clean,195
+volunteer,Indicator if the audit was done by a volunteer,joined_clean,"1"
+start_of_audit,Start date of the audit,joined_clean,"5/6/2018"
+end_of_audit,End date of the audit,joined_clean,"5/6/2018"
+time_spent,Time spent on the audit,joined_clean,"NULL"
+city,City where the audit took place,joined_clean,"Fiumicino"
+province,Province or region of the audit location,joined_clean,"Roma"
+country,Country where the audit took place,joined_clean,"Italy"
+continent,Continent of the audit location,joined_clean,"Europe"
+type_of_audit,Type of the audit (e.g., Outdoor, Indoor),joined_clean,"Outdoor"
+specifics_of_audit,Specifics or category of the audit,joined_clean,"Coast / Ocean / Estuary"
+event_total_count,Total count associated with the audit event,joined_clean,129
+parent_company_name,Extended name of the parent company,joined_clean,"blues, eurospin"
+id,Unique ID associated with the parent company,joined_clean,", Q1374674"
+proportion,Proportional value (purpose unspecified),joined_clean,0.0388
+sum,Summation value (purpose unspecified),joined_clean,1
+event_id,Unique identifier for each event,joined_clean,"Excel Template Old_1_2018"
+Column,Column index or identifier,key_for_review_2,1
+brand_name,Name of the brand,key_for_review_2,"-"
+name,Alternative or previous name of the brand,key_for_review_2,"-"
+new_name,New or updated name for the brand,key_for_review_2,"unbranded"
+id,Unique ID associated with the brand,key_for_review_2,NA
+sum,Aggregated count value,key_for_review_2,446
+city,Name of the city,locations_to_code,"gboko"
+province,Name of the province or state,locations_to_code,"d.c."
+country,Name of the country,locations_to_code,"nigeria"
+continent,Name of the continent,locations_to_code,"africa"
+latitude_specific,Specific latitude of the city or location,locations_to_code,7.32
+longitude_specific,Specific longitude of the city or location,locations_to_code,9
+latitude_country,Latitude corresponding to the centroid of the country,locations_to_code,9.6
+longitude_country,Longitude corresponding to the centroid of the country,locations_to_code,8
+latitude_state,Latitude corresponding to the centroid of the province or state,locations_to_code,9.6
+longitude_state,Longitude corresponding to the centroid of the province or state,locations_to_code,8
+event_id,Unique identifier for the event,raw_processed_data_event_ag,"123Forms New_100_2021"
+id,Identifier for the data item,raw_processed_data_event_ag,"air space"
+city,Name of the city,raw_processed_data_event_ag,"arnaudville"
+province,Name of the province or state,raw_processed_data_event_ag,"louisiana"
+country,Name of the country,raw_processed_data_event_ag,"united states of america"
+continent,Name of the continent,raw_processed_data_event_ag,"north america"
+year,Year the data was collected,raw_processed_data_event_ag,2021
+specifics_of_audit,Specifics about the audit type,raw_processed_data_event_ag,"freshwater"
+company_sum,Total count for a specific company in an event,raw_processed_data_event_ag,1
+event_total_count_no_unbrand,Total count of events excluding unbranded,raw_processed_data_event_ag,29
+proportion,Proportion of the company count to the total count,raw_processed_data_event_ag,0.0345
+event_id,Unique identifier for the event,raw_prop_id_event,"Excel Template Old_93_2018"
+id,Identifier for the data item,raw_prop_id_event,"unbranded"
+proportion,Proportion value associated with the id for a specific event,raw_prop_id_event,0.00365
+parent_company_name,Name of the parent company,small_brand_name,"the coca-cola company"
+id,Unique identifier associated with the company,small_brand_name,"q3295867"
+mean,Mean proportion associated with the parent company,small_brand_name,0.1106
+brand_name,Name of the brand,todo1,"always"
+validated,Whether the brand name has been validated (as TRUE or FALSE),todo1,"TRUE"
+brand_parent_occurances,Number of occurrences of the parent company for the brand,todo1,1
+parent_company_name,Name of the parent company of the brand,todo1,"procter & gamble"
+id,Unique identifier associated with the company or brand,todo1,"Q212405"
+brand_total_count,Total count associated with the brand,todo1,329
+brand_frequency,Frequency or number of times the brand appears,todo1,19
+brand_name,Name of the brand,todo2,"5 alive"
+validated,Whether the brand name has been validated (as TRUE or FALSE),todo2,"TRUE"
+brand_parent_occurances,Number of occurrences of the parent company for the brand,todo2,1
+parent_company_name,Name of the parent company of the brand,todo2,"the coca-cola company"
+id,Unique identifier associated with the company or brand,todo2,"q3295867"
+brand_total_count,Total count associated with the brand,todo2,116
+brand_frequency,Frequency or number of times the brand appears,todo2,11
+priority,Indicates if the record is of priority (as TRUE or FALSE),todo2,TRUE
+id,Unique identifier associated with the company or brand,wikidata_ids2,"q3295867"
+name,Name of the company or brand,wikidata_ids2,"the coca-cola company"
